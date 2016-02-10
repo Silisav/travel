@@ -1,26 +1,435 @@
 @import "bootstrap";
+// custom mixins
+@import 'mixins';
 /* add site style here */
 
-h4 {
-  margin-top: 25px;
-}
-.row {
-  margin-bottom: 20px;
-}
-.row .row {
-  margin-top: 10px;
-  margin-bottom: 0;
-}
-[class*="col-"] {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-color: #eee;
-  background-color: rgba(86,61,124,.15);
-  border: 1px solid #ddd;
-  border: 1px solid rgba(86,61,124,.2);
+// colors
+$blue-base: #092539;
+$yellow-base: #dfa903;
+$yellow-dark: #bcbb81;
+$white: #fff;
+$grey-bg: #f2f2f2;
+$grey-text: #545454;
+$grey-line: #dddddd;
+$grey-circle: #7d7d7d;
+
+// animation
+
+$animation-duration: 0.7s;
+
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+
+*, *::after, *::before {
+  @include box-sizing(border-box);
 }
 
-hr {
-  margin-top: 40px;
-  margin-bottom: 40px;
+html {
+  font-size: 62.5%;
+
+  * {
+    @include font-smoothing;
+  }
 }
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* -------------------------------- 
+
+Header and nav styles
+
+-------------------------------- */
+@import 'header';
+
+/* -------------------------------- 
+
+Main Components 
+
+-------------------------------- */
+
+
+
+/*  ------------------------------- */
+
+main {
+  position: relative;
+  z-index: 2;
+
+  /* fix bug on iOS */
+  /*height: 100vh;
+  overflow-y: auto;*/
+  
+  -webkit-overflow-scrolling: touch;
+  background-color: $grey-bg;
+  
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-transform: translatez(0);
+  -moz-transform: translatez(0);
+  -ms-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform $animation-duration;
+  -moz-transition: -moz-transform $animation-duration;
+  transition: transform $animation-duration;
+  -webkit-transition-timing-function: cubic-bezier(.91,.01,.6,.99);
+  -moz-transition-timing-function: cubic-bezier(.91,.01,.6,.99);
+  transition-timing-function: cubic-bezier(.91,.01,.6,.99); 
+
+  h1, h2, h3 {
+    text-align: center;
+  }
+  
+  h1, h2 {
+    font-family: $font-family-sans-serif;
+    color: $white;    
+  }
+
+  h3, p {
+    font-family: $font-family-serif;
+    color: $grey-text;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 2rem;
+    letter-spacing: 4px;
+  }
+  h3 {
+    font-size: 2.3rem;
+    margin: 0;
+  } 
+
+  @media only screen and (min-width: $screen-sm) {
+    h1 {
+      font-size: 5.5rem;
+    }
+    h2 {
+      font-size: 2.5rem;
+      letter-spacing: 5px;
+    }
+  }
+
+  @media only screen and (min-width: $screen-lg) {
+    h1 {
+      font-size: 7rem;
+    }
+    h2 {
+      font-size: 3.5rem;
+      letter-spacing: 7px;
+    }
+  }
+
+  .navigation-is-open & {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+
+.no-js main {
+  height: auto;
+  overflow: visible;
+}  
+
+/*  ------------------------------- */
+
+.counter {
+  position: absolute;
+  bottom: 20px;
+  right: 5%;
+  color: $white;
+  text-transform: uppercase;
+
+  @media only screen and (min-width: $screen-lg) {
+    bottom: 50px;
+    font-size: 1.8rem;
+  }
+}
+
+.intro-text {
+    text-align: center;
+    font-style: italic;
+    font-size: 1.5rem;
+  @media only screen and (min-width: $screen-sm) {
+    font-size: 2rem;
+  }
+  @media only screen and (min-width: $screen-lg) {
+    font-size: 2.3rem;
+  }
+}
+
+.btn-default {
+  background-color: transparent;
+  color: $white;
+  border: 3px solid $white;
+  border-radius: 0px;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 2.5rem;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .btn-default:active:hover, .btn-default:active:focus, .btn-default:active.focus, .btn-default.active:hover, .btn-default.active:focus, .btn-default.active.focus {
+    color: $grey-text;
+    background-color: $white;
+    border-color: $white;
+    webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.home-banner {  
+  position: relative;
+  background: 
+    linear-gradient(
+      rgba($blue-base, .8), 
+      rgba($blue-base, .8)
+    ),
+    url('http://cdn-media-1.lifehack.org/wp-content/files/2015/01/Halong-Bay.jpg');  
+    background-position: 50% 90%;
+    background-size: cover;
+    padding: 90px 0 30px;
+
+    h1 {
+      font-family: $font-family-serif;
+    }
+
+    h2 {  
+      text-transform: uppercase;
+      font-weight: bold;
+      color: $yellow-base;
+    }  
+
+  @media only screen and (min-width: $screen-sm) {
+    padding: 130px 0 70px;
+  }
+  @media only screen and (min-width: $screen-lg) {
+    padding: 180px 0;
+  }
+}
+
+.map-cta {
+  background: 
+  linear-gradient(
+    rgba($yellow-dark, .6),
+    rgba($yellow-dark, .6)
+  ),
+  url('http://www.motochan.com/wp-content/uploads/2012/12/gmap_southeast_asia.jpg');
+  background-size: cover;
+  background-position: 50% 70%;
+  padding: 100px 0;
+  text-align: center;
+  
+  @media only screen and (min-width: $screen-sm) {
+    padding: 130px 0;
+  }
+  @media only screen and (min-width: $screen-lg) {
+    padding: 160px 0;
+  }
+}
+
+.white-stripe {
+  background: $white;
+  padding: 35px 0;
+
+  p {
+    margin-bottom: 0;
+  }   
+}
+
+.white-stripe.arrow {
+  position: relative;
+
+  &::after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid $white;
+    clear: both;
+    margin-left: -20px;
+    z-index: 10;
+  }
+}
+
+.timeline {
+  position: relative;
+  padding: 100px 0; 
+  text-align: center;
+  
+  .row {
+    margin-bottom: 30px;
+  }
+
+  &::before {
+    /* this is the vertical line */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -2px;
+    height: 100%;
+    width: 3px;
+    background: $grey-line;
+  }
+
+  .country-block {
+    width: 48%;
+    margin-right: 2%;
+    background: 
+    linear-gradient(
+      rgba($grey-text, .6), 
+      rgba($grey-text, .6)
+    ),
+    url('http://www.chehobo.com/Assets/Upload/japan.jpg');  
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    padding: 50px 0;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: $white;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    -moz-transform: scale(1,1);
+    -webkit-transform: scale(1,1);
+    transform: scale(1,1);
+
+    &::before, &::after {
+      content:'';
+      position: absolute;
+      right: 0;
+      height: 50%;
+      padding-left:30px;
+      background: $grey-bg;
+    }
+    &::before {
+      top: 0;
+      -ms-transform-origin: 100% 100%;
+      -webkit-transform-origin: 100% 100%;
+      transform-origin: 100% 100%;
+      -ms-transform: skewY(45deg);
+      -webkit-transform: skewY(45deg);
+      transform: skewY(45deg);
+    }
+    &::after {
+      top: 70%;
+      -ms-transform-origin: 0 100%;
+      -webkit-transform-origin: 0 100%;
+      transform-origin: 0 100%;
+      -ms-transform: skewY(-45deg);
+      -webkit-transform: skewY(-45deg);
+      transform: skewY(-45deg);
+    }    
+    &.reverse {
+      margin-left: 2%;
+      margin-right: 0;
+    }
+    &.reverse::before, &.reverse::after {
+      left: 0;
+      right: auto;
+      padding-left:30px;
+    }
+    &.reverse::before {
+      top: -30px;
+      -ms-transform: skewY(-45deg);
+      -webkit-transform: skewY(-45deg);
+      transform: skewY(-45deg);
+    }
+    &.reverse::after {
+      top: 50%;
+      -ms-transform: skewX(45deg);
+      -webkit-transform: skewX(45deg);
+      transform: skewY(45deg);
+    }    
+  }
+
+  a:hover .country-block {
+    background: 
+    linear-gradient(
+      rgba($blue-base, .8), 
+      rgba($blue-base, .8)
+    ),
+    url('http://www.chehobo.com/Assets/Upload/japan.jpg'); 
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover; 
+    color: $yellow-base;   
+  }
+
+  .date-block {
+    span {
+      font-family: $font-family-serif;
+      background: #fff;
+      padding: 10px 30px;
+      border: 2px solid $grey-circle;
+      display: inline-block;
+      margin-top: 50px;    
+    }
+    &::before {
+      content:'';
+      position: absolute;
+      top: 60px;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 4px solid $grey-circle;
+      background: $grey-bg;
+      box-shadow: 0 0 0 5px $grey-bg;
+      z-index: 10;
+    }
+
+    &::after {
+      content:'';
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background: $grey-line;
+      z-index: -1;
+    }
+    &.reverse::before {
+      right: -10px;
+      left: auto;
+    }
+
+    &.reverse::after {
+      right: 0;
+      left: auto;
+    }
+  }
+}
+
+footer {
+  background: $blue-base;
+  text-align: center;  
+  padding: 20px 0;
+  p {    
+    font-family: $font-family-sans-serif;
+    color: $white;
+    margin: 0;
+  }
+}
+
