@@ -44,6 +44,15 @@ a {
   text-decoration: none;
 }
 
+::-moz-selection { 
+  color: $blue-base;
+  background: $yellow-base;
+}
+::selection { 
+  color: $blue-base;
+  background: $yellow-base;
+}
+
 /* -------------------------------- 
 
 Header and nav styles
@@ -153,19 +162,30 @@ main {
   position: absolute;
   bottom: 20px;
   right: 5%;
+  padding-left: 32px;
   color: $white;
   text-transform: uppercase;
 
   @media only screen and (min-width: $screen-lg) {
     bottom: 50px;
+    padding-left: 40px;
     font-size: 1.8rem;
+  }
+
+  &.days {
+    @media only screen and (min-width: $screen-sm) {
+     font-size: 2rem;
+    } 
+    @media only screen and (min-width: $screen-lg) {
+     font-size: 2.5rem;
+    } 
   }
 }
 
 .intro-text {
-    text-align: center;
-    font-style: italic;
-    font-size: 1.5rem;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.5rem;
   @media only screen and (min-width: $screen-sm) {
     font-size: 2rem;
   }
@@ -179,10 +199,16 @@ main {
   color: $white;
   border: 3px solid $white;
   border-radius: 0px;
-  padding: 10px 30px;
+  padding: 8px 25px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 1.7rem;
+  @media only screen and (min-width: $screen-sm) {
+    padding: 10px 30px;
+    letter-spacing: 2px;
+    font-size: 2.5rem;
+  }
 }
 
 .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .btn-default:active:hover, .btn-default:active:focus, .btn-default:active.focus, .btn-default.active:hover, .btn-default.active:focus, .btn-default.active.focus {
@@ -200,10 +226,10 @@ main {
       rgba($blue-base, .8), 
       rgba($blue-base, .8)
     ),
-    url('http://cdn-media-1.lifehack.org/wp-content/files/2015/01/Halong-Bay.jpg');  
+    url('../img/homepage-vietnam.jpg');  
     background-position: 50% 90%;
     background-size: cover;
-    padding: 90px 0 30px;
+    padding: 90px 0 50px;
 
     h1 {
       font-family: $font-family-serif;
@@ -213,33 +239,56 @@ main {
       text-transform: uppercase;
       font-weight: bold;
       color: $yellow-base;
-    }  
+    }
+
+    .numbers-count {
+      font-family: $font-family-sans-serif;
+      color: $white;
+      font-size: 2rem;
+      text-align: center;
+      span {
+        display: block;
+        font-size: 3rem;
+      }
+    }
 
   @media only screen and (min-width: $screen-sm) {
     padding: 130px 0 70px;
+    .numbers-count {
+      font-size: 2.5rem;
+      span {
+        font-size: 4rem;
+      }
+    }
   }
   @media only screen and (min-width: $screen-lg) {
-    padding: 180px 0;
+    padding: 160px 0 130px;
+    .numbers-count {
+      font-size: 3rem;
+      span {
+        font-size: 5rem;
+      }
+    }
   }
 }
 
 .map-cta {
   background: 
   linear-gradient(
-    rgba($yellow-dark, .6),
-    rgba($yellow-dark, .6)
+    rgba($yellow-dark, .7),
+    rgba($yellow-dark, .7)
   ),
-  url('http://www.motochan.com/wp-content/uploads/2012/12/gmap_southeast_asia.jpg');
+  url('../img/gmap-southeast-asia.jpg');
   background-size: cover;
   background-position: 50% 70%;
-  padding: 100px 0;
+  padding: 80px 0;
   text-align: center;
   
   @media only screen and (min-width: $screen-sm) {
-    padding: 130px 0;
+    padding: 120px 0;
   }
   @media only screen and (min-width: $screen-lg) {
-    padding: 160px 0;
+    padding: 140px 0;
   }
 }
 
@@ -277,7 +326,10 @@ main {
   text-align: center;
   
   .row {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
+    @media only screen and (min-width: $screen-sm) {
+      margin-bottom: 30px;
+    }
   }
 
   &::before {
@@ -292,134 +344,314 @@ main {
     background: $grey-line;
   }
 
-  .country-block {
-    width: 48%;
-    margin-right: 2%;
-    background: 
-    linear-gradient(
-      rgba($grey-text, .6), 
-      rgba($grey-text, .6)
-    ),
-    url('http://www.chehobo.com/Assets/Upload/japan.jpg');  
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
+  .country-block {           
     padding: 50px 0;
     font-size: 3rem;
     text-transform: uppercase;
-    color: $white;
+    color: $white;    
+    background-position: center;      
+    background-size: 100%; 
     -moz-transition: all .5s;
     -webkit-transition: all .5s;
     transition: all .5s;
-    -moz-transform: scale(1,1);
-    -webkit-transform: scale(1,1);
-    transform: scale(1,1);
 
-    &::before, &::after {
-      content:'';
-      position: absolute;
-      right: 0;
-      height: 50%;
-      padding-left:30px;
-      background: $grey-bg;
+    &.jp {
+      background-image: 
+      linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+      url('../img/japan-small.jpg');
+      
     }
-    &::before {
-      top: 0;
-      -ms-transform-origin: 100% 100%;
-      -webkit-transform-origin: 100% 100%;
-      transform-origin: 100% 100%;
-      -ms-transform: skewY(45deg);
-      -webkit-transform: skewY(45deg);
-      transform: skewY(45deg);
+    &.vt {
+      background-image: 
+      linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+      url('../img/vietnam-small.jpg');    
     }
-    &::after {
-      top: 70%;
-      -ms-transform-origin: 0 100%;
-      -webkit-transform-origin: 0 100%;
-      transform-origin: 0 100%;
-      -ms-transform: skewY(-45deg);
-      -webkit-transform: skewY(-45deg);
-      transform: skewY(-45deg);
-    }    
-    &.reverse {
-      margin-left: 2%;
-      margin-right: 0;
+    &.cb {
+      background-image: 
+      linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+      url('../img/cambodia-small.jpg');  
     }
-    &.reverse::before, &.reverse::after {
-      left: 0;
-      right: auto;
-      padding-left:30px;
+    &.th {
+      background-image: 
+      linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+      url('../img/thailand-small.jpg');  
     }
-    &.reverse::before {
-      top: -30px;
-      -ms-transform: skewY(-45deg);
-      -webkit-transform: skewY(-45deg);
-      transform: skewY(-45deg);
+    &.ml {
+      background-image: 
+      linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+      url('../img/malaysia-small.jpg');  
     }
-    &.reverse::after {
-      top: 50%;
-      -ms-transform: skewX(45deg);
-      -webkit-transform: skewX(45deg);
-      transform: skewY(45deg);
-    }    
+    &.in {
+      background-image: 
+      linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+      url('../img/indonesia-small.jpg');  
+    }
+    &.tr {
+      background-image: 
+      linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+      url('../img/turkey-small.jpg');  
+    }
+    &.gr {
+      background-image: 
+      linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+      url('../img/greece-small.jpg');  
+    }
+
+    @media only screen and (min-width: $screen-sm) {
+      width: 48%;
+      margin-right: 2%; 
+
+      &::before, &::after {
+        content:'';
+        position: absolute;
+        right: 0;
+        height: 65%;
+        padding-left:30px;
+        background: $grey-bg;
+      }
+      &::before {
+        top: -7%;
+        -ms-transform-origin: 100% 100%;
+        -webkit-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+        -ms-transform: skewY(45deg);
+        -webkit-transform: skewY(45deg);
+        transform: skewY(45deg);
+      }
+      &::after {
+        top: 65%;
+        -ms-transform-origin: 0 100%;
+        -webkit-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+        -ms-transform: skewY(-45deg);
+        -webkit-transform: skewY(-45deg);
+        transform: skewY(-45deg);
+      }    
+      &.reverse {
+        margin-left: 2%;
+        margin-right: 0;
+      }
+      &.reverse::before, &.reverse::after {
+        left: 0;
+        right: auto;
+        padding-left:30px;
+      }
+      &.reverse::before {
+        top: -30%;
+        -ms-transform: skewY(-45deg);
+        -webkit-transform: skewY(-45deg);
+        transform: skewY(-45deg);
+      }
+      &.reverse::after {
+        top: 45%;
+        -ms-transform: skewX(45deg);
+        -webkit-transform: skewX(45deg);
+        transform: skewY(45deg);
+      }  
+    }  
   }
 
-  a:hover .country-block {
-    background: 
-    linear-gradient(
-      rgba($blue-base, .8), 
-      rgba($blue-base, .8)
-    ),
-    url('http://www.chehobo.com/Assets/Upload/japan.jpg'); 
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover; 
-    color: $yellow-base;   
+  a:hover, a:focus {
+    text-decoration: none;
+  }
+
+  a:hover .country-block {    
+    color: $yellow-base;  
+    background-size: 110%;      
+
+    &.jp {
+      background-image: 
+      linear-gradient(rgba($blue-base, .7), rgba($blue-base, .7)),
+      url('../img/japan-small.jpg');      
+    }
+    &.vt {
+      background-image: 
+      linear-gradient(rgba($blue-base, .7), rgba($blue-base, .7)),
+      url('../img/vietnam-small.jpg');    
+    }
+    &.cb {
+      background-image: 
+      linear-gradient(rgba($blue-base, .7), rgba($blue-base, .7)),
+      url('../img/cambodia-small.jpg');  
+    }
+    &.th {
+      background-image: 
+      linear-gradient(rgba($blue-base, .7), rgba($blue-base, .7)),
+      url('../img/thailand-small.jpg');
+    }
+    &.ml {
+      background-image: 
+      linear-gradient(rgba($blue-base, .7), rgba($blue-base, .7)),
+      url('../img/malaysia-small.jpg');
+    }
+    &.in {
+      background-image: 
+      linear-gradient(rgba($blue-base, .7), rgba($blue-base, .7)),
+      url('../img/indonesia-small.jpg');
+    }
+    &.tr {
+      background-image: 
+      linear-gradient(rgba($blue-base, .7), rgba($blue-base, .7)),
+      url('../img/turkey-small.jpg');
+    }
+    &.gr {
+      background-image: 
+      linear-gradient(rgba($blue-base, .7), rgba($blue-base, .7)),
+      url('../img/greece-small.jpg');
+    }
   }
 
   .date-block {
     span {
       font-family: $font-family-serif;
-      background: #fff;
-      padding: 10px 30px;
+      background-color: $white;
+      padding: 10px 30px 10px 50px;
       border: 2px solid $grey-circle;
       display: inline-block;
-      margin-top: 50px;    
-    }
-    &::before {
-      content:'';
-      position: absolute;
-      top: 60px;
-      left: -10px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 4px solid $grey-circle;
-      background: $grey-bg;
-      box-shadow: 0 0 0 5px $grey-bg;
-      z-index: 10;
+      margin-top: 15px;    
+      @media only screen and (min-width: $screen-sm) {
+        margin-top: 50px;  
+      }
     }
 
-    &::after {
-      content:'';
-      position: absolute;
-      top: 70px;
-      left: 0;
-      width: 50%;
-      height: 3px;
-      background: $grey-line;
-      z-index: -1;
-    }
-    &.reverse::before {
-      right: -10px;
-      left: auto;
-    }
+    @media only screen and (min-width: $screen-sm) {
+      &::before {
+        content:'';
+        position: absolute;
+        top: 60px;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 4px solid $grey-circle;
+        background: $grey-bg;
+        box-shadow: 0 0 0 5px $grey-bg;
+        z-index: 10;
+      }
+      &::after {
+        content:'';
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 50%;
+        height: 3px;
+        background: $grey-line;
+        z-index: -1;
+      }
+      &.reverse::before {
+        right: -10px;
+        left: auto;
+      }
 
-    &.reverse::after {
-      right: 0;
-      left: auto;
+      &.reverse::after {
+        right: 0;
+        left: auto;
+      }
     }
   }
+}
+
+.country-banner {
+  position: relative;
+  text-align: center;
+  &.japan {
+    background-image: 
+    linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+    url('../img/japan-banner.jpg'); 
+    background-position: 100% 0; 
+  }  
+  &.vietnam {
+    background-image: 
+    linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+    url('../img/vietnam-banner.jpg');     
+  }  
+  &.cambodia {
+    background-image: 
+    linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+    url('../img/cambodia-banner.jpg');     
+  }  
+  &.thailand {
+    background-image: 
+    linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+    url('../img/thailand-banner.jpg');  
+    background-position: center 60%;    
+  }  
+  &.malaysia {
+    background-image: 
+    linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+    url('../img/malaysia-banner.jpg');    
+    background-position: 45% 0;
+  }  
+  &.indonesia {
+    background-image: 
+    linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+    url('../img/indonesia-banner.jpg');    
+    background-position: center 60%;
+  } 
+  &.turkey {
+    background-image: 
+    linear-gradient(rgba($grey-text, .6), rgba($grey-text, .6)),
+    url('../img/turkey-banner.jpg');  
+    background-position: center 60%;  
+  }  
+  background-size: cover;
+  padding: 130px 0 100px;
+  h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  h2 {
+    margin: 0 0 30px;
+  }
+  .btn {
+    margin-top: 20px;
+    @media only screen and (min-width: $screen-sm) {
+      margin-top: 30px;
+    }
+    @media only screen and (min-width: $screen-lg) {
+      margin-top: 40px;
+    }
+  }
+}
+
+.country-info {
+  padding: 60px 0;
+  img {
+    width: 80%;    
+    margin: 0 auto;
+    border: 1px solid $grey-line;
+    @media only screen and (min-width: $screen-xs) {
+      width: 60%;
+    }
+    @media only screen and (min-width: $screen-sm) {
+      width: 100%;
+    }
+  }
+  .info {
+    padding: 40px 20px;
+    @media only screen and (min-width: $screen-sm) {
+      padding: 0 15px;   
+    }
+    ul {
+      margin-left: 10%;
+        @media only screen and (min-width: $screen-xs) {
+          margin-left: 20%;
+        }
+      li {
+        padding-left: 4rem;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        background-size: 30px 20px;
+      }
+    @media only screen and (min-width: $screen-sm) {
+      margin-left: 0;      
+    }
+    }
+  }  
+}
+
+.photos {
+  padding: 80px 0;
 }
 
 footer {
@@ -432,4 +664,157 @@ footer {
     margin: 0;
   }
 }
+.map-page footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
+/* ICONS */
+
+.icon {
+  display: inline-block;
+}
+
+.icon-travel {
+  width: 100px;
+  height: 40px;
+  margin-top: 10px;
+
+  @media only screen and (min-width: $screen-sm) {
+    width: 150px;
+    height: 50px;
+    margin-top: 13px;
+  }
+}
+
+.icon-globe {
+  width: 70px;
+  height: 70px;
+  display: block;
+  margin: 17px auto 0;
+
+  @media only screen and (min-width: $screen-sm) {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto 0;
+  }
+  @media only screen and (min-width: $screen-lg) {
+    width: 150px;
+    height: 150px;
+    margin: 30px auto 0;
+  }
+}
+
+.icon-daycount, .icon-watch {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  bottom: 0;    
+  left: 0;
+
+  @media only screen and (min-width: $screen-lg) {
+    width: 30px;
+    height: 30px;    
+  }
+}
+
+.icon-calendar {
+  background-size: 18%;
+  padding-left: 50px;
+  background-position: 12px 0;
+}
+
+.icon-japan, .icon-cambodia, .icon-thailand, .icon-malaysia, .icon-indonesia, .icon-turkey, .icon-vietnam {
+  width: 65px;
+  height: 65px;
+  display: block;
+  margin: 17px auto 0;
+
+  @media only screen and (min-width: $screen-sm) {
+    width: 80px;
+    height: 80px;
+    margin: 20px auto 0;
+  }
+  @media only screen and (min-width: $screen-lg) {
+    width: 100px;
+    height: 100px;
+    margin: 30px auto 0;
+  }
+}
+
+
+
+/* GALLERYYYYYYYYYYY */
+
+.my-gallery {
+  width: 100%;
+  float: left;
+}
+.my-gallery img {
+  width: 100%;
+  height: auto;
+}
+.my-gallery figure {
+  display: block;
+  float: left;
+  padding: 3px;
+  width: 33.333%;
+  @media only screen and (min-width: $screen-sm) {
+    width: 25%;
+  }
+  @media only screen and (min-width: $screen-lg) {
+    width: 25%;
+  }
+}
+.my-gallery figcaption {
+  display: none;
+}
+
+
+
+/* MAPPPPPPPPP */
+
+.map-page, .map-page body, .map-page main, .map-page #map {
+  height: 100%;
+  width: 100%;
+}
+
+.leaflet-top {
+  top: 65px;
+  @media only screen and (min-width: $screen-sm) {
+    top: 90px;
+  }  
+}
+@media only screen and (min-width: $screen-sm) {
+  .leaflet-left {
+    left: 15px;
+  }
+}
+
+.leaflet-bottom, .leaflet-right {
+  bottom: 60px;
+}
+
+/* PRELOADER */
+
+.preloader{
+    position: fixed;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    z-index: 99999;
+}
+
+.preloader .preloader-gif{
+    display: block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -40px 0 0 -40px;   
+}

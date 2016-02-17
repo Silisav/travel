@@ -4,6 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/img/favicon/manifest.json">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#0d586e">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Travel">
+    <meta name="application-name" content="Travel">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- grunticon -->
+    <link rel="stylesheet" href="img/icons/icons.data.svg.css" media="all">
+    <script src="js/grunticon.loader.js"></script> 
+    <noscript><link href="img/icons/icons.fallback.css" rel="stylesheet"></noscript>
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
 
@@ -22,13 +50,14 @@
             <div class="container">
                 <h1>Follow our journey</h1>
                 <h2>Around Asia</h2>
+                <span class="icon icon-globe"></span>
                 <div class="row">
-                    <div class="col-xs-3"></div>
-                    <div class="col-xs-3"><p><span>4</span> months</p></div>
-                    <div class="col-xs-3"><p><span>8</span> countries</p></div>      
-                    <div class="col-xs-3"></div>          
+                    <div class="col-xs-2 col-sm-3"></div>
+                    <div class="col-xs-4 col-sm-3"><p class="numbers-count"><span>4</span> months</p></div>
+                    <div class="col-xs-4 col-sm-3"><p class="numbers-count"><span>7</span> countries</p></div>      
+                    <div class="col-xs-2 col-sm-3"></div>          
                 </div>
-                <span class="counter days">Day 12</span>
+                <span class="counter days"><span class="icon icon-daycount"></span>Day 12</span>
             </div>
         </section>
 
@@ -42,7 +71,7 @@
             <div class="container">                
                 <div class="row">
                     <div class="col-sm-12">
-                        <a href="#" class="btn btn-default">View map</a>
+                        <a href="map.html" class="btn btn-default">View map</a>
                     </div>                    
                 </div>
             </div>
@@ -57,46 +86,75 @@
         <section class="timeline">
             <div class="container">                
                 <div class="row">
-                    <a class="" href="#">
-                        <div class="country-block col-sm-6">
+                    <a href="japan.html">
+                        <div class="country-block jp col-sm-6">
                             Japan
                         </div>
                     </a>
                     <div class="date-block col-sm-6">
-                        <span>11 April - 28 April</span>
+                        <span class="icon icon-calendar">11 April - 28 April</span>
                     </div>                    
                 </div>
-                <div class="row">                    
-                    <div class="date-block reverse col-sm-6">
-                        <span>11 April - 28 April</span>
-                    </div>       
-                    <a class="" href="#">
-                        <div class="country-block reverse col-sm-6">
+                <div class="row">
+                    <a href="vietnam.html">
+                        <div class="country-block vt reverse col-sm-6 col-sm-push-6">
                             Vietnam
                         </div>
-                    </a>             
+                    </a>                        
+                    <div class="date-block reverse col-sm-6 col-sm-pull-6">
+                        <span class="icon icon-calendar">11 April - 28 April</span>
+                    </div>                                    
                 </div>
                 <div class="row">
-                    <a class="" href="#">
-                        <div class="country-block col-sm-6">
+                    <a href="cambodia.html">
+                        <div class="country-block cb col-sm-6">
                             Cambodia
                         </div>
                     </a>
                     <div class="date-block col-sm-6">
-                        <span>11 April - 28 April</span>
+                        <span class="icon icon-calendar">11 April - 28 April</span>
                     </div>                    
                 </div>
-                <div class="row">                    
-                    <div class="date-block reverse col-sm-6">
-                        <span>11 April - 28 April</span>
-                    </div>       
-                    <a class="" href="#">
-                        <div class="country-block reverse col-sm-6">
+                <div class="row">   
+                    <a href="thailand.html">
+                        <div class="country-block th reverse col-sm-6 col-sm-push-6">
                             Thailand
                         </div>
-                    </a>             
+                    </a>                  
+                    <div class="date-block reverse col-sm-6 col-sm-pull-6">
+                        <span class="icon icon-calendar">11 April - 28 April</span>
+                    </div>                                       
                 </div>
-                
+                <div class="row">
+                    <a href="malaysia.html">
+                        <div class="country-block ml col-sm-6">
+                            Malaysia
+                        </div>
+                    </a>
+                    <div class="date-block col-sm-6">
+                        <span class="icon icon-calendar">11 April - 28 April</span>
+                    </div>                    
+                </div>
+                <div class="row">  
+                    <a href="indonesia.html">
+                        <div class="country-block in reverse col-sm-6 col-sm-push-6">
+                            Indonesia
+                        </div>
+                    </a>                   
+                    <div class="date-block reverse col-sm-6 col-sm-pull-6">
+                        <span class="icon icon-calendar">11 April - 28 April</span>
+                    </div>                                       
+                </div>
+                <div class="row">
+                    <a href="turkey.html">
+                        <div class="country-block tr col-sm-6">
+                            Turkey
+                        </div>
+                    </a>
+                    <div class="date-block col-sm-6">
+                        <span class="icon icon-calendar">11 April - 28 April</span>
+                    </div>                    
+                </div>                
             </div>
         </section>
 

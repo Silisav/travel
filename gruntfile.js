@@ -51,19 +51,37 @@ module.exports = function(grunt) {
 		      files: [{
 		        expand: true,
 		        cwd: 'src/',
-		        src: ['**/*.{png,jpg,gif}'],
+		        src: ['**/*.{png,jpg,jpeg,gif}'],
 		        dest: 'dist/'
 		      }]
 		    }
 		},
 
 		copy: {
-		  files: {
-		  	cwd: 'src',  // set working folder / root to copy
-		    src: 'index.html',	// copy all html files
-		    dest: 'dist',	// destination folder
-		    expand: true
-		  },
+		    main: {
+		        files: [
+		            // includes files within path
+		            {
+		                expand: true,
+		                cwd: 'src',
+		                src: 'img/icons/*.css',
+		                dest: 'dist/'
+		            },
+		            {
+		                expand: true,
+		                cwd: 'src',
+		                src: 'img/favicon/*',
+		                dest: 'dist/'
+		            },
+		            // makes all src relative to cwd
+		            {
+		                expand: true,
+		                cwd: 'src',
+		                src: ['index.html', 'map.html', 'japan.html', 'vietnam.html', 'cambodia.html', 'thailand.html', 'malaysia.html', 'indonesia.html', 'turkey.html'],
+		                dest: 'dist'
+		            },
+		        ],
+		    },
 		},
 
 		// Empty out the contents of dist for a fresh build
@@ -74,7 +92,15 @@ module.exports = function(grunt) {
 		processhtml: {
 			dist: {
 			  files: {
-			    'dist/index.html': ['src/index.html']
+			    'dist/index.html': ['src/index.html'],
+			    'dist/map.html': ['src/map.html'],
+			    'dist/japan.html': ['src/japan.html'],
+			    'dist/vietnam.html': ['src/vietnam.html'],
+			    'dist/cambodia.html': ['src/cambodia.html'],
+			    'dist/thailand.html': ['src/thailand.html'],
+			    'dist/malaysia.html': ['src/malaysia.html'],
+			    'dist/indonesia.html': ['src/indonesia.html'],
+			    'dist/turkey.html': ['src/turkey.html']
 			  }
 			}
 		},
@@ -109,7 +135,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint', 'uglify']
 			},					
 			html: {
-				files: 'src/index.html',
+				files: 'src/*.html',
 				tasks: 'copy'
 			},
 			includes: {

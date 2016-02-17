@@ -17,3 +17,24 @@ jQuery(document).ready(function($){
 	});
 });
 
+$(".view-pics").click(function() {
+    $('html,body').animate({
+        scrollTop: $(".photos").offset().top},
+        'slow');
+    return false;
+});
+
+
+$(document).ready(function(){
+	$("nav a").removeClass('selected');	
+	$("nav a[href='/"+ location.pathname.split("/")[1] +"']").addClass('selected');    
+});
+
+	
+$(document).ready(function () {
+  // preloader
+  $(window).load(function(){
+    $('.preloader').delay(400).fadeOut(500);
+  })
+ 
+});
