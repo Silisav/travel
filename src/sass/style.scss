@@ -744,6 +744,13 @@ footer {
   }
 }
 
+.icon-suitcase, .icon-map, .icon-take-off {
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin: 0 auto 20px;
+}
+
 
 
 /* GALLERYYYYYYYYYYY */
@@ -805,16 +812,18 @@ footer {
     left:0;
     bottom: 0;
     right: 0;
-    background: #fff;
+    background: $blue-base;
     z-index: 99999;
 }
 
 .preloader .preloader-gif{
-    display: block;
-    width: 80px;
-    height: 80px;
+    display: none;
+    width: 120px;
+    height: 120px;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -40px 0 0 -40px;   
+    margin: -60px 0 0 -60px;   
+    color: $yellow-base;
+    text-align: center;
 }

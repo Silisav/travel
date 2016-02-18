@@ -70,7 +70,22 @@ $(document).ready(function(){
 $(document).ready(function () {
   // preloader
   $(window).load(function(){
-    $('.preloader').delay(400).fadeOut(500);
+    $('.preloader').delay(2400).fadeOut(500);
   })
  
-})
+});
+
+$(document).ready(function(){
+	var blocks = $(".preloader-gif");
+    var blockIndex = -1;
+    
+    function showNextBlock() {
+        ++blockIndex;
+        blocks.eq(blockIndex % blocks.length)
+            .fadeIn(400)
+            .delay(400)
+            .fadeOut(400, showNextBlock);
+    }
+    
+    showNextBlock();
+});
