@@ -34,7 +34,7 @@ $(document).ready(function(){
 $(document).ready(function () {
   // preloader
   $(window).load(function(){
-    $('.preloader').delay(2400).fadeOut(500);
+    $('.preloader').delay(400).fadeOut(500);
   })
  
 });
@@ -53,3 +53,27 @@ $(document).ready(function(){
     
     showNextBlock();
 });
+
+function showTheTime() {
+    $('.local-time').each(function() {
+        var timeZone = $(this).data('tz');
+        
+        var now = moment().tz(timeZone).format('HH:mm');
+        $(this).html( now );
+    });
+};
+
+showTheTime(); // for the first load
+setInterval(showTheTime, 250); // update it periodically
+
+
+// Calculate days since April 11th 2016
+var initialDate = new Date(2016, 3, 11); // April 11th 2016
+var now = Date.now();
+var difference = now - initialDate;
+var millisecondsPerDay = 24 * 60 * 60 * 1000;
+var daysSince = Math.floor(difference / millisecondsPerDay);
+
+// Write result to HTML
+$('.daycount').html(daysSince);
+

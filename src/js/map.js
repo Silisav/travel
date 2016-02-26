@@ -35,13 +35,13 @@ function makeMap() {
 	});
 
 	L.marker([56, -3]).bindPopup("Edinburgh").addTo(map);
-	L.marker([35, 139]).bindPopup("Japan").addTo(map);	
-	L.marker([21, 106]).bindPopup("Vietnam").addTo(map);
-	L.marker([11.5, 104]).bindPopup("Cambodia").addTo(map);
-	L.marker([14, 100]).bindPopup("Thailand").addTo(map);
-	L.marker([3.1, 101.7]).bindPopup("Malaysia").addTo(map);
-	L.marker([-6.9, 107.8]).bindPopup("Indonesia").addTo(map);
-	L.marker([41, 29]).bindPopup("Turkey").addTo(map);
+	L.marker([35, 139]).bindPopup("<a href='japan.html'>Japan</a>").addTo(map);	
+	L.marker([21, 106]).bindPopup("<a href='vietnam.html'>Vietnam</a>").addTo(map);
+	L.marker([11.5, 104]).bindPopup("<a href='cambodia.html'>Cambodia</a>").addTo(map);
+	L.marker([14, 100]).bindPopup("<a href='thailand.html'>Thailand</a>").addTo(map);
+	L.marker([3.1, 101.7]).bindPopup("<a href='malaysia.html'>Malaysia</a>").addTo(map);
+	L.marker([-6.9, 107.8]).bindPopup("<a href='indonesia.html'>Indonesia</a>").addTo(map);
+	L.marker([41, 29]).bindPopup("<a href='turkey.html'>Turkey</a>").addTo(map);
 
 	var polyline = L.polyline([
 	    [56, -3],
@@ -52,7 +52,7 @@ function makeMap() {
 	    [3.1, 101.7],
 	    [-6.9, 107.8],
 	    [41, 29],
-	]).addTo(map);
+	], {color: 'red'}).addTo(map);
 
 	map.addLayer(Stamen_Watercolor);
 	map.setView([14, 116], 3);
@@ -70,7 +70,7 @@ $(document).ready(function(){
 $(document).ready(function () {
   // preloader
   $(window).load(function(){
-    $('.preloader').delay(2400).fadeOut(500);
+    $('.preloader').delay(400).fadeOut(500);
   })
  
 });
