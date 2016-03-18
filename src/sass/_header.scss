@@ -91,11 +91,11 @@
 
   }
 
-  .no-touch &:hover .cd-nav-icon::after {
+  .no-touchevents &:hover .cd-nav-icon::after {
     top: 2px;
   } 
 
-  .no-touch &:hover .cd-nav-icon::before {
+  .no-touchevents &:hover .cd-nav-icon::before {
     top: -2px;
   } 
 
@@ -147,8 +147,8 @@
       transform: rotate(45deg);
     }
 
-    .no-touch &:hover .cd-nav-icon::after,
-    .no-touch &:hover .cd-nav-icon::before {
+    .no-touchevents &:hover .cd-nav-icon::after,
+    .no-touchevents &:hover .cd-nav-icon::before {
       top: 0;
     } 
 

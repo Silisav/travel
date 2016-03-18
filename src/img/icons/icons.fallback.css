@@ -1,34 +1,4 @@
 
-.icon-daycount {
-	background-image: url('png/daycount.png');
-	background-repeat: no-repeat;
-}
-
-.icon-globe {
-	background-image: url('png/globe.png');
-	background-repeat: no-repeat;
-}
-
-.icon-indonesia {
-	background-image: url('png/indonesia.png');
-	background-repeat: no-repeat;
-}
-
-.icon-japan {
-	background-image: url('png/japan.png');
-	background-repeat: no-repeat;
-}
-
-.icon-language {
-	background-image: url('png/language.png');
-	background-repeat: no-repeat;
-}
-
-.icon-malaysia {
-	background-image: url('png/malaysia.png');
-	background-repeat: no-repeat;
-}
-
 .icon-map {
 	background-image: url('png/map.png');
 	background-repeat: no-repeat;
@@ -64,13 +34,13 @@
 	background-repeat: no-repeat;
 }
 
-.icon-vietnam {
-	background-image: url('png/vietnam.png');
+.icon-watch {
+	background-image: url('png/watch.png');
 	background-repeat: no-repeat;
 }
 
-.icon-watch {
-	background-image: url('png/watch.png');
+.icon-vietnam {
+	background-image: url('png/vietnam.png');
 	background-repeat: no-repeat;
 }
 
@@ -96,5 +66,35 @@
 
 .icon-currency {
 	background-image: url('png/currency.png');
+	background-repeat: no-repeat;
+}
+
+.icon-daycount {
+	background-image: url('png/daycount.png');
+	background-repeat: no-repeat;
+}
+
+.icon-globe {
+	background-image: url('png/globe.png');
+	background-repeat: no-repeat;
+}
+
+.icon-indonesia {
+	background-image: url('png/indonesia.png');
+	background-repeat: no-repeat;
+}
+
+.icon-japan {
+	background-image: url('png/japan.png');
+	background-repeat: no-repeat;
+}
+
+.icon-language {
+	background-image: url('png/language.png');
+	background-repeat: no-repeat;
+}
+
+.icon-malaysia {
+	background-image: url('png/malaysia.png');
 	background-repeat: no-repeat;
 }

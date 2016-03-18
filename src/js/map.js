@@ -1,21 +1,58 @@
-jQuery(document).ready(function($){
-	var isLateralNavAnimating = false;
-	
-	//open/close lateral navigation
-	$('.cd-nav-trigger').on('click', function(event){
-		event.preventDefault();
-		//stop if nav animation is running 
-		if( !isLateralNavAnimating ) {
-			if($(this).parents('.csstransitions').length > 0 ) isLateralNavAnimating = true; 
-			
-			$('body').toggleClass('navigation-is-open');
-			$('.cd-navigation-wrapper').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-				//animation is over
-				isLateralNavAnimating = false;
-			});
-		}
-	});
+$(document).ready(function() {
+    travel
+        .navigation()
+        .preloader()
 });
+
+var travel = {
+    navigation: function() {
+        var isLateralNavAnimating = false;
+    
+        //open/close lateral navigation
+        $('.cd-nav-trigger').on('click', function(event){
+            event.preventDefault();
+            //stop if nav animation is running 
+            if( !isLateralNavAnimating ) {
+                if($(this).parents('.csstransitions').length > 0 ) isLateralNavAnimating = true; 
+                
+                $('body').toggleClass('navigation-is-open');
+                $('.cd-navigation-wrapper').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+                    //animation is over
+                    isLateralNavAnimating = false;
+                });
+            }
+        });
+
+        //Highlight the active page in navigation
+        $("nav a").removeClass('selected'); 
+        $("nav a[href='/"+ location.pathname.split("/")[1] +"']").addClass('selected'); 
+
+        return this;
+    },
+    preloader: function() {
+        // Fade out and then hide the preloader once the page loads
+        $(window).load(function(){
+            $('.preloader').delay(300).fadeOut(400, function(){
+               $(this).remove();
+            });
+        });
+
+        // Fade in and out the preloader icons
+        var blocks = $(".preloader-gif");
+        var blockIndex = -1;
+
+        function showNextBlock() {
+            ++blockIndex;
+            blocks.eq(blockIndex % blocks.length)
+                .fadeIn(300)
+                .delay(300)
+                .fadeOut(300, showNextBlock);
+        }
+        showNextBlock();
+
+        return this;
+    },
+};
 
 var map;
 
@@ -62,30 +99,4 @@ $(document).ready( function() {
 	makeMap();
 });
 
-$(document).ready(function(){
-	$("nav a").removeClass('selected');	
-	$("nav a[href='/"+ location.pathname.split("/")[1] +"']").addClass('selected');
-});
 
-$(document).ready(function () {
-  // preloader
-  $(window).load(function(){
-    $('.preloader').delay(400).fadeOut(500);
-  })
- 
-});
-
-$(document).ready(function(){
-	var blocks = $(".preloader-gif");
-    var blockIndex = -1;
-    
-    function showNextBlock() {
-        ++blockIndex;
-        blocks.eq(blockIndex % blocks.length)
-            .fadeIn(400)
-            .delay(400)
-            .fadeOut(400, showNextBlock);
-    }
-    
-    showNextBlock();
-});
