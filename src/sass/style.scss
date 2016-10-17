@@ -17,7 +17,7 @@ $grey-circle: #7d7d7d;
 
 $animation-duration: 0.7s;
 
-/* -------------------------------- 
+/* --------------------------------
 
 Primary style
 
@@ -44,23 +44,23 @@ a {
   text-decoration: none;
 }
 
-::-moz-selection { 
+::-moz-selection {
   color: $blue-base;
   background: $yellow-base;
 }
-::selection { 
+::selection {
   color: $blue-base;
   background: $yellow-base;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 Header and nav styles
 -------------------------------- */
 @import 'header';
 
 
-/* -------------------------------- 
-Main Components 
+/* --------------------------------
+Main Components
 -------------------------------- */
 
 main {
@@ -70,10 +70,10 @@ main {
   /* fix bug on iOS */
   /*height: 100vh;
   overflow-y: auto;*/
-  
+
   -webkit-overflow-scrolling: touch;
   background-color: $grey-bg;
-  
+
   /* Force Hardware Acceleration in WebKit */
   -webkit-transform: translatez(0);
   -moz-transform: translatez(0);
@@ -87,15 +87,15 @@ main {
   transition: transform $animation-duration;
   -webkit-transition-timing-function: cubic-bezier(.91,.01,.6,.99);
   -moz-transition-timing-function: cubic-bezier(.91,.01,.6,.99);
-  transition-timing-function: cubic-bezier(.91,.01,.6,.99); 
+  transition-timing-function: cubic-bezier(.91,.01,.6,.99);
 
   h1, h2, h3 {
     text-align: center;
   }
-  
+
   h1, h2 {
     font-family: $font-family-sans-serif;
-    color: $white;    
+    color: $white;
   }
 
   h3, p {
@@ -113,7 +113,7 @@ main {
   h3 {
     font-size: 2.3rem;
     margin: 0;
-  } 
+  }
 
   @media only screen and (min-width: $screen-sm) {
     h1 {
@@ -147,7 +147,7 @@ main {
 .no-js main {
   height: auto;
   overflow: visible;
-}  
+}
 
 /*  ------------------------------- */
 
@@ -160,7 +160,7 @@ main {
   text-transform: uppercase;
   @media only screen and (min-width: $screen-sm) {
     font-size: 2rem;
-  } 
+  }
   @media only screen and (min-width: $screen-lg) {
     bottom: 50px;
     padding-left: 40px;
@@ -208,15 +208,15 @@ main {
     box-shadow: none;
 }
 
-.home-banner {  
+.home-banner {
   position: relative;
   background: rgba($blue-base, .8);
   padding: 75px 0 45px;
     i {
       content: '';
-      background-image: url('../img/banners/homepage-vietnam-mob.jpg');  
+      background-image: url('../img/banners/homepage-vietnam-mob.jpg');
       background-position: 50% 90%;
-      background-size: cover;      
+      background-size: cover;
       position: absolute;
       top: 0;
       left: 0;
@@ -224,14 +224,14 @@ main {
       height: 100%;
       z-index: -1;
       @media only screen and (min-width: $screen-sm) {
-        background-image: url('../img/banners/homepage-vietnam.jpg');  
+        background-image: url('../img/banners/homepage-vietnam.jpg');
       }
     }
     h1 {
       font-family: $font-family-serif;
     }
 
-    h2 {  
+    h2 {
       text-transform: uppercase;
       font-weight: bold;
       color: $yellow-base;
@@ -275,9 +275,9 @@ main {
   position: relative;
     i {
       content: '';
-      background-image: url('../img/banners/gmap-southeast-asia-mob.jpg'); 
+      background-image: url('../img/banners/gmap-southeast-asia-mob.jpg');
       background-size: cover;
-      background-position: 50% 70%;     
+      background-position: 50% 70%;
       position: absolute;
       top: 0;
       left: 0;
@@ -285,7 +285,7 @@ main {
       height: 100%;
       z-index: -1;
       @media only screen and (min-width: $screen-sm) {
-        background-image: url('../img/banners/gmap-southeast-asia.jpg');  
+        background-image: url('../img/banners/gmap-southeast-asia.jpg');
       }
     }
   @media only screen and (min-width: $screen-sm) {
@@ -302,7 +302,7 @@ main {
 
   p {
     margin-bottom: 0;
-  }   
+  }
 }
 
 .white-stripe.arrow {
@@ -326,9 +326,9 @@ main {
 
 .timeline {
   position: relative;
-  padding: 100px 0; 
+  padding: 100px 0;
   text-align: center;
-  
+
   .row {
     margin-bottom: 50px;
     @media only screen and (min-width: $screen-sm) {
@@ -349,21 +349,21 @@ main {
     z-index: -2;
   }
 
-  .country-block {           
+  .country-block {
     padding: 50px 0;
     font-size: 3rem;
     text-transform: uppercase;
-    color: $white;    
+    color: $white;
     background: rgba($grey-text, .6);
     -moz-transition: all .5s;
     -webkit-transition: all .5s;
     transition: all .5s;
 
     i {
-      content: ''; 
+      content: '';
       background-position: center;
-      background-size: 100%;   
-      background-repeat: no-repeat;   
+      background-size: 100%;
+      background-repeat: no-repeat;
       position: absolute;
       top: 0;
       left: 0;
@@ -372,34 +372,35 @@ main {
       z-index: -1;
       -moz-transition: background-size .3s;
       -webkit-transition: background-size .3s;
-      transition: background-size .3s;      
+      transition: background-size .3s;
     }
 
     i.jp {
-      background-image: url('../img/banners/japan-small.jpg');      
+      background-image: url('../img/banners/japan-small.jpg');
     }
     i.vt {
-      background-image: url('../img/banners/vietnam-small.jpg');    
+      background-image: url('../img/banners/vietnam-small.jpg');
     }
     i.cb {
-      background-image: url('../img/banners/cambodia-small.jpg');  
+      background-image: url('../img/banners/cambodia-small.jpg');
     }
     i.th {
-      background-image: url('../img/banners/thailand-small.jpg');  
+      background-image: url('../img/banners/thailand-small.jpg');
     }
     i.ml {
-      background-image: url('../img/banners/malaysia-small.jpg');  
+      background-image: url('../img/banners/malaysia-small.jpg');
     }
     i.in {
-      background-image: url('../img/banners/indonesia-small.jpg');  
+      background-image: url('../img/banners/indonesia-small.jpg');
     }
-    i.tr {
-      background-image: url('../img/banners/turkey-small.jpg');  
+    i.gr {
+      background-image: url('../img/banners/greece-small.jpg');
+      background-position: 50% 35%;
     }
 
     @media only screen and (min-width: $screen-sm) {
       width: 48%;
-      margin-right: 2%; 
+      margin-right: 2%;
 
       &::before, &::after {
         content:'';
@@ -413,7 +414,7 @@ main {
         transform-origin: 100% 0;
       }
       &::before {
-        bottom: 50%;        
+        bottom: 50%;
         -ms-transform: skewY(45deg);
         -webkit-transform: skewY(45deg);
         transform: skewY(45deg);
@@ -423,14 +424,14 @@ main {
         -ms-transform: skewY(-45deg);
         -webkit-transform: skewY(-45deg);
         transform: skewY(-45deg);
-      }    
+      }
       &.reverse {
         margin-left: 2%;
         margin-right: 0;
       }
       &.reverse::before, &.reverse::after {
         left: -1px;
-        right: auto;        
+        right: auto;
         -ms-transform-origin: 0 100%;
         -webkit-transform-origin: 0 100%;
         transform-origin: 0 100%;
@@ -446,20 +447,20 @@ main {
         -ms-transform: skewY(45deg);
         -webkit-transform: skewY(45deg);
         transform: skewY(45deg);
-      }  
-    }  
+      }
+    }
   }
 
   a:hover, a:focus {
     text-decoration: none;
   }
 
-  a:hover .country-block { 
+  a:hover .country-block {
     background: rgba($blue-base, .7);
-    color: $yellow-base;      
+    color: $yellow-base;
     i {
-      background-size: 110%;  
-    }    
+      background-size: 110%;
+    }
   }
 
   .date-block {
@@ -470,9 +471,9 @@ main {
       padding: 10px 30px 10px 55px;
       border: 2px solid $grey-circle;
       display: inline-block;
-      margin-top: 15px;    
+      margin-top: 15px;
       @media only screen and (min-width: $screen-sm) {
-        margin-top: 50px;  
+        margin-top: 50px;
       }
     }
 
@@ -519,8 +520,8 @@ main {
   padding: 130px 0 100px;
   background: rgba($grey-text, .6);
   i {
-    content: ''; 
-    background-size: cover;    
+    content: '';
+    background-size: cover;
     position: absolute;
     top: 0;
     left: 0;
@@ -529,53 +530,53 @@ main {
     z-index: -1;
   }
   i.japan {
-    background-image: url('../img/banners/japan-banner-mob.jpg'); 
-    background-position: 100% 0; 
+    background-image: url('../img/banners/japan-banner-mob.jpg');
+    background-position: 100% 0;
     @media only screen and (min-width: $screen-sm) {
-      background-image: url('../img/banners/japan-banner.jpg'); 
+      background-image: url('../img/banners/japan-banner.jpg');
     }
-  }  
+  }
   i.vietnam {
-    background-image: url('../img/banners/vietnam-banner-mob.jpg'); 
+    background-image: url('../img/banners/vietnam-banner-mob.jpg');
     @media only screen and (min-width: $screen-sm) {
-      background-image: url('../img/banners/vietnam-banner.jpg'); 
-    }    
-  }  
+      background-image: url('../img/banners/vietnam-banner.jpg');
+    }
+  }
   i.cambodia {
-    background-image: url('../img/banners/cambodia-banner-mob.jpg');  
-    background-position: 55% 0;  
+    background-image: url('../img/banners/cambodia-banner-mob.jpg');
+    background-position: 55% 0;
     @media only screen and (min-width: $screen-sm) {
-      background-image: url('../img/banners/cambodia-banner.jpg');     
-    }   
-  }  
+      background-image: url('../img/banners/cambodia-banner.jpg');
+    }
+  }
   i.thailand {
-    background-image: url('../img/banners/thailand-banner-mob.jpg');  
-    background-position: center 60%;  
-    @media only screen and (min-width: $screen-sm) {
-      background-image: url('../img/banners/thailand-banner.jpg');  
-    }    
-  }  
-  i.malaysia {
-    background-image: url('../img/banners/malaysia-banner-mob.jpg');    
-    background-position: 45% 0;
-    @media only screen and (min-width: $screen-sm) {
-      background-image: url('../img/banners/malaysia-banner.jpg');    
-    } 
-  }  
-  i.indonesia {
-    background-image: url('../img/banners/indonesia-banner-mob.jpg');    
+    background-image: url('../img/banners/thailand-banner-mob.jpg');
     background-position: center 60%;
     @media only screen and (min-width: $screen-sm) {
-      background-image: url('../img/banners/indonesia-banner.jpg');   
-    } 
-  } 
-  i.turkey {
-    background-image: url('../img/banners/turkey-banner-mob.jpg');  
-    background-position: center 60%;  
+      background-image: url('../img/banners/thailand-banner.jpg');
+    }
+  }
+  i.malaysia {
+    background-image: url('../img/banners/malaysia-banner-mob.jpg');
+    background-position: 45% 0;
     @media only screen and (min-width: $screen-sm) {
-      background-image: url('../img/banners/turkey-banner.jpg');   
-    } 
-  }  
+      background-image: url('../img/banners/malaysia-banner.jpg');
+    }
+  }
+  i.indonesia {
+    background-image: url('../img/banners/indonesia-banner-mob.jpg');
+    background-position: center 60%;
+    @media only screen and (min-width: $screen-sm) {
+      background-image: url('../img/banners/indonesia-banner.jpg');
+    }
+  }
+  i.greece {
+    background-image: url('../img/banners/greece-banner-mob.jpg');
+    background-position: center 60%;
+    @media only screen and (min-width: $screen-sm) {
+      background-image: url('../img/banners/greece-banner.jpg');
+    }
+  }
 
   h1 {
     text-transform: uppercase;
@@ -598,7 +599,7 @@ main {
 .country-info {
   padding: 60px 0;
   img {
-    width: 80%;    
+    width: 80%;
     margin: 0 auto;
     border: 1px solid $grey-line;
     @media only screen and (min-width: $screen-xs) {
@@ -611,7 +612,7 @@ main {
   .info {
     padding: 40px 20px;
     @media only screen and (min-width: $screen-sm) {
-      padding: 0 15px;   
+      padding: 0 15px;
     }
     ul {
       margin-left: 10%;
@@ -625,10 +626,10 @@ main {
         background-size: 30px 20px;
       }
     @media only screen and (min-width: $screen-sm) {
-      margin-left: 0;      
+      margin-left: 0;
     }
     }
-  }  
+  }
 }
 
 .photos {
@@ -637,12 +638,15 @@ main {
 
 footer {
   background: $blue-base;
-  text-align: center;  
+  text-align: center;
   padding: 20px 0;
-  p {    
+  p {
     font-family: $font-family-sans-serif;
     color: $white;
     margin: 0;
+  }
+  a, a:hover, a:focus {
+    color: $yellow-base;
   }
 }
 .map-page footer {
@@ -693,26 +697,26 @@ footer {
   width: 25px;
   height: 25px;
   position: absolute;
-  bottom: 0;    
+  bottom: 0;
   left: 0;
   @media only screen and (min-width: $screen-sm) {
     bottom: 3px;
   }
   @media only screen and (min-width: $screen-lg) {
     width: 30px;
-    height: 30px;       
+    height: 30px;
   }
 }
 
-.icon-calendar {  
+.icon-calendar {
   height: 35px;
   width: 35px;
   position: absolute;
   top: 2px;
-  left: 15px;    
+  left: 15px;
 }
 
-.icon-japan, .icon-cambodia, .icon-thailand, .icon-malaysia, .icon-indonesia, .icon-turkey, .icon-vietnam {
+.icon-japan, .icon-cambodia, .icon-thailand, .icon-malaysia, .icon-indonesia, .icon-vietnam {
   width: 65px;
   height: 65px;
   display: block;
@@ -776,7 +780,7 @@ footer {
   top: 65px;
   @media only screen and (min-width: $screen-sm) {
     top: 90px;
-  }  
+  }
 }
 @media only screen and (min-width: $screen-sm) {
   .leaflet-left {
@@ -808,7 +812,7 @@ footer {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -60px 0 0 -60px;   
+    margin: -60px 0 0 -60px;
     color: $yellow-base;
     text-align: center;
 }

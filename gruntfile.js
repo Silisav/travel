@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 		},
 
 		sass: {
-			dist: {	// Target 
+			dist: {	// Target
 	            // this is the "dev" Sass config used with "grunt watch" command
 	            options: {
 	                style: 'compressed',
@@ -30,8 +30,8 @@ module.exports = function(grunt) {
 	            },
 	            files: {
 	                'dist/css/style.css': 'src/sass/style.scss'
-	            } 
-	        }           
+	            }
+	        }
         },
 
 		cssmin: {
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
 		            {
 		                expand: true,
 		                cwd: 'src',
-		                src: ['index.html', 'map.html', 'japan.html', 'vietnam.html', 'cambodia.html', 'thailand.html', 'malaysia.html', 'indonesia.html', 'turkey.html'],
+		                src: ['index.html', 'map.html', 'japan.html', 'vietnam.html', 'cambodia.html', 'thailand.html', 'malaysia.html', 'indonesia.html', 'greece.html'],
 		                dest: 'dist'
 		            },
 		        ],
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
 			    'dist/thailand.html': ['src/thailand.html'],
 			    'dist/malaysia.html': ['src/malaysia.html'],
 			    'dist/indonesia.html': ['src/indonesia.html'],
-			    'dist/turkey.html': ['src/turkey.html']
+			    'dist/greece.html': ['src/greece.html']
 			  }
 			}
 		},
@@ -133,7 +133,7 @@ module.exports = function(grunt) {
 			scripts: {
 				files: 'src/**/*.js',
 				tasks: ['jshint', 'uglify']
-			},					
+			},
 			html: {
 				files: 'src/*.html',
 				tasks: 'copy'
@@ -141,7 +141,7 @@ module.exports = function(grunt) {
 			includes: {
 				files: 'src/*.html',
 				tasks: ['processhtml']
-			},	
+			},
 			images: {
 				files: ['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif'],
 				tasks: 'imagemin'
