@@ -73,6 +73,12 @@ module.exports = function(grunt) {
 		                src: 'img/favicon/*',
 		                dest: 'dist/'
 		            },
+								{
+		                expand: true,
+		                cwd: 'src',
+		                src: 'videos/*',
+		                dest: 'dist/'
+		            },
 		            // makes all src relative to cwd
 		            {
 		                expand: true,
