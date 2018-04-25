@@ -25,8 +25,8 @@ module.exports = function(grunt) {
 			dist: {	// Target
 	            // this is the "dev" Sass config used with "grunt watch" command
 	            options: {
-					style: 'compressed',
-					includePaths: [ 'node_modules/bootstrap-sass/assets/stylesheets' ]
+	                style: 'compressed',
+	                loadPath: 'node_modules/bootstrap-sass/assets/stylesheets'
 	            },
 	            files: {
 	                'dist/css/style.css': 'src/sass/style.scss'
@@ -157,7 +157,7 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
