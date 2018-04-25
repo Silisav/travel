@@ -167,4 +167,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-browser-sync');
 
 	grunt.registerTask('default', ['jshint', 'clean:all', 'uglify', 'sass', 'cssmin', 'imagemin', 'copy', 'processhtml', 'browserSync', 'watch']);
+	grunt.registerTask('dist', ['jshint', 'clean:all', 'uglify', 'sass', 'cssmin', 'imagemin', 'copy', 'processhtml']);
 };
