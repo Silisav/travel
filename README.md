@@ -7,6 +7,6 @@ It's using a grunt template to automate a few tasks and a number of plugins and 
 
 It's been tested on most common mobile devices and modern browsers (ie9+).
 
-At some point in the future it will be converted to a wordpress or Bolt cms theme.
+At some point in the future it will be converted to a cms theme.
 
 You can find instructions to get the local server up and running in the readme.txt
