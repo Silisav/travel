@@ -7,4 +7,4 @@ It's using a grunt template to automate tasks and a number of plugins and librar
 
 It's been tested on most common mobile devices and modern browsers (ie9+).
 
-You can find instructions for starting the local server up in the readme.txt
+You can find instructions for starting the local server in the readme.txt
