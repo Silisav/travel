@@ -7,15 +7,16 @@
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-browser-sync": "latest",
-    "grunt-processhtml": "latest",
+    "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "latest",
-    "grunt-contrib-clean": "latest",
-    "grunt-contrib-jshint": "latest",
-    "jshint-stylish": "latest",
+    "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-imagemin": "latest",
-    "grunt-contrib-uglify": "latest",
-    "grunt-sass": "latest",
-    "grunt-contrib-cssmin": "latest",
-    "grunt-contrib-watch": "latest"
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-processhtml": "latest",
+    "grunt-sass": "^3.0.1",
+    "jshint-stylish": "latest",
+    "node-sass": "^4.9.3"
   }
 }

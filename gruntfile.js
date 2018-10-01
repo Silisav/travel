@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+	const sass = require('node-sass');
+	
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
@@ -22,17 +24,19 @@ module.exports = function(grunt) {
 		},
 
 		sass: {
-			dist: {	// Target
-	            // this is the "dev" Sass config used with "grunt watch" command
-	            options: {
-					style: 'compressed',
-					includePaths: [ 'node_modules/bootstrap-sass/assets/stylesheets' ]
-	            },
-	            files: {
-	                'dist/css/style.css': 'src/sass/style.scss'
-	            }
-	        }
-        },
+			// Target
+	    // this is the "dev" Sass config used with "grunt watch" command
+	    options: {
+				implementation: sass,
+				style: 'compressed',
+				includePaths: [ 'node_modules/bootstrap-sass/assets/stylesheets' ]
+	    },
+			dist: {
+				files: {
+	          'dist/css/style.css': 'src/sass/style.scss'
+	      }
+			}	            
+    },
 
 		cssmin: {
 			build: {
