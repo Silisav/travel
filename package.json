@@ -5,7 +5,7 @@
     "bootstrap-sass": "3.3.7"
   },
   "devDependencies": {
-    "grunt": "~0.4.4",
+    "grunt": "latest",
     "grunt-browser-sync": "latest",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "latest",
