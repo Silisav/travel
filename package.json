@@ -2,7 +2,7 @@
   "name": "Travel-photo-journal",
   "version": "0.1.0",
   "dependencies": {
-    "bootstrap-sass": "3.3.6"
+    "bootstrap-sass": "3.3.7"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
