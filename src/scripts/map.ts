@@ -36,13 +36,17 @@ export function renderMap(container: HTMLElement) {
   const map = L.map(container, { minZoom: 1, maxZoom: 16 }).setView([14, 116], 3);
   L.tileLayer(TILES, { attribution: ATTRIBUTION, minZoom: 1, maxZoom: 16 }).addTo(map);
 
-  L.marker(route.home.coords).bindPopup(route.home.name).addTo(map);
+  L.marker(route.home.coords, { alt: route.home.name, title: route.home.name })
+    .bindPopup(route.home.name)
+    .addTo(map);
   for (const stop of route.stops) {
     const link = Object.assign(document.createElement('a'), {
       href: stop.href,
       textContent: stop.name,
     });
-    L.marker(stop.coords).bindPopup(link).addTo(map);
+    L.marker(stop.coords, { alt: `${stop.name} (${stop.dates})`, title: stop.name })
+      .bindPopup(link)
+      .addTo(map);
   }
 
   L.polyline([route.home.coords, ...route.stops.map((s) => s.coords)], {

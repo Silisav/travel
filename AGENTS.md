@@ -8,6 +8,7 @@ Static site built with Astro, hosted on Netlify. The full rebuild plan is in `PL
 - `npm run dev`: local dev server
 - `npm run build`: static build to `dist/`
 - `npm test`: privacy and access tests (needs a build first)
+- `npm run test:e2e`: Playwright browser tests (Chromium + WebKit) against the build: every page, menu, photo viewer, map, accessibility (axe), no-JS
 - `npm run verify`: everything CI runs: type check, lint, format check, build, test
 
 Use the Node version in `.nvmrc` (24 LTS).

@@ -285,3 +285,11 @@ Playwright is the only real test dependency. It is dev-only and ships nothing to
 - **Private photos (phase 7):** published only as resized AVIF/WebP variants under `/private/media/img/`, never as originals, with all metadata (EXIF/GPS) stripped.
 - **Public originals keep their location data (owner's decision).** The GPS check was dropped. The published images have all metadata stripped anyway; only the original files in the public repo carry locations.
 - **Idea, not a task:** the photos' GPS locations could later place individual photos on the map page.
+- **QA (phase 8):** 58 Playwright tests in Chromium (desktop) and WebKit (iPhone) cover every page without errors, axe accessibility, no sideways scrolling, the menu (modal, focus), the photo viewer (open, URL, Back, close, deep links), the map, the clock and no-JS. They run in CI. Lighthouse (mobile) scores: home 97/100/100/100, Japan 99/100/100/100, map 99/96/96/100. The map's deductions come from Leaflet: pins close together at overview zoom, and OSM tiles have no high-DPI version.
+- **Bugs QA found and fixed:**
+  - Back during the photo viewer's opening animation left it open.
+  - Menu focus landed on the logo instead of the close button.
+  - The empty clock showed without JS.
+  - The footer link was told apart by colour only (now a subtle underline).
+  - The map list dates had low contrast.
+  - Map pins were announced as "Marker".

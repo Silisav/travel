@@ -7,7 +7,16 @@ import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores(['dist/', '.astro/', '.netlify/', 'legacy/', 'media/', 'node_modules/']),
+  globalIgnores([
+    'dist/',
+    '.astro/',
+    '.netlify/',
+    'legacy/',
+    'media/',
+    'node_modules/',
+    'test-results/',
+    'playwright-report/',
+  ]),
 
   {
     files: ['**/*.{js,mjs,ts}'],

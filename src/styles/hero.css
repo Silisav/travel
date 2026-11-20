@@ -73,6 +73,11 @@
   margin: 0;
   text-transform: uppercase;
 
+  /* e.g. the local clock until JS has the time (display: flex would override [hidden]) */
+  &[hidden] {
+    display: none;
+  }
+
   & svg {
     inline-size: 25px;
     block-size: 25px;

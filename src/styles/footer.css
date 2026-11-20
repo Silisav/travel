@@ -10,6 +10,9 @@
 
   & a {
     color: var(--color-yellow);
+    text-decoration: underline;
+    text-decoration-color: rgb(223 169 3 / 45%);
+    text-underline-offset: 3px;
   }
 }
 

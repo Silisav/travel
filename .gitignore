@@ -3,6 +3,8 @@ node_modules/
 dist/
 .astro/
 .netlify/
+test-results/
+playwright-report/
 
 
 # OS / editor

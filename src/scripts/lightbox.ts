@@ -114,6 +114,10 @@ async function getLightbox(gallery: HTMLElement): Promise<PhotoSwipeLightbox> {
   });
 
   lightbox.on('change', () => syncUrl(lightbox!.pswp!));
+  // Mark the fully opened state (PhotoSwipe ignores close() while opening): used by the tests.
+  lightbox.on('openingAnimationEnd', () =>
+    lightbox!.pswp?.element?.setAttribute('data-opened', ''),
+  );
   lightbox.on('close', () => {
     if (pushedState) {
       pushedState = false;
@@ -157,13 +161,14 @@ export function initLightbox() {
     open(gallery, [...gallery.querySelectorAll(ITEM)].indexOf(link));
   });
 
-  // Back button closes the open photo.
+  // Back button closes the open photo. PhotoSwipe ignores close() during its opening
+  // animation, so a quick Back waits for that to finish first.
   window.addEventListener('popstate', () => {
     const pswp = lightbox?.pswp;
-    if (pswp && !pswp.isDestroying) {
-      pushedState = false;
-      pswp.close();
-    }
+    if (!pswp || pswp.isDestroying) return;
+    pushedState = false;
+    if (pswp.opener.isOpening) pswp.on('openingAnimationEnd', () => pswp.close());
+    else pswp.close();
   });
 
   // Deep link: /japan/#photo-3 opens that photo.
