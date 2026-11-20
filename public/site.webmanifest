@@ -1,0 +1,9 @@
+{
+  "name": "Follow our journey: Around Asia",
+  "short_name": "Travel",
+  "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }],
+  "theme_color": "#092539",
+  "background_color": "#092539",
+  "display": "standalone",
+  "start_url": "/"
+}

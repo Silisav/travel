@@ -1,5 +1,6 @@
-/* Design tokens ported from legacy/sass/style.scss. Full port happens in phase 3. */
+/* Design tokens, ported from legacy/sass/style.scss (2016). */
 :root {
+  /* Colours */
   --color-blue: #092539;
   --color-yellow: #dfa903;
   --color-olive: #bcbb81;
@@ -9,8 +10,35 @@
   --color-grey-line: #ddd;
   --color-grey-circle: #7d7d7d;
 
-  --font-sans: 'Montserrat', system-ui, sans-serif;
-  --font-serif: 'Libre Baskerville', Georgia, serif;
+  --color-header-bg: rgb(9 37 57 / 80%);
+  --color-overlay: rgb(84 84 84 / 60%);
+  --color-faint-on-dark: rgb(255 255 255 / 30%);
 
+  /* Type: font files and fallbacks come from Astro's Fonts API (astro.config.mjs) */
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-baskerville);
+
+  /* Fluid type scale (old breakpoints 768px / 1200px folded into clamp) */
+  --step-h1: clamp(2.5rem, 1.6rem + 3.8vw, 4.375rem);
+  --step-h2: clamp(1.25rem, 0.9rem + 1.5vw, 2.1875rem);
+  --step-h3: 1.4375rem;
+  --step-lead: clamp(0.9375rem, 0.8rem + 0.6vw, 1.4375rem);
+  --tracking-h2: clamp(4px, 0.15rem + 0.3vw, 7px);
+
+  /* Layout */
+  --header-height: 60px;
+  --container: 1170px;
+  --gutter: 16px;
+
+  /* Motion */
   --duration: 0.7s;
+  --duration-fast: 0.2s;
+  --ease-nav: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+}
+
+@media (width >= 768px) {
+  :root {
+    --header-height: 74px;
+    --gutter: 24px;
+  }
 }

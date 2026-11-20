@@ -1,0 +1,16 @@
+---
+import '../styles/stripe.css';
+
+interface Props {
+  /** Draw the downward arrow notch into the next section. */
+  arrow?: boolean;
+  class?: string;
+}
+const { arrow = false, class: className } = Astro.props;
+---
+
+<section class:list={['stripe', { 'stripe--arrow': arrow }, className]}>
+  <div class="container">
+    <slot />
+  </div>
+</section>

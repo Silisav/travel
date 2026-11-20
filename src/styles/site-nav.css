@@ -1,0 +1,179 @@
+/* Full-screen navigation, as a native modal <dialog>: focus handling, Esc and inertness for free. */
+.site-nav {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow-y: auto;
+  color: var(--color-white);
+  background: var(--color-blue);
+  font-family: var(--font-serif);
+
+  &::backdrop {
+    background: var(--color-blue);
+  }
+
+  @supports (overscroll-behavior: contain) {
+    overscroll-behavior: contain;
+  }
+
+  & a {
+    transition: color var(--duration-fast);
+
+    &:hover,
+    &:focus-visible,
+    &[aria-current='page'] {
+      color: var(--color-yellow);
+    }
+  }
+}
+
+/* Same bar as the header, so the logo and button stay put when the menu opens. */
+.site-nav > .site-header__inner {
+  position: absolute;
+  inset: 0 0 auto;
+}
+
+/* Close button: the menu button in its open state, at the same spot as the trigger. */
+.nav-button--close {
+  transform: rotate(-180deg);
+
+  &::after {
+    border-color: rgb(255 255 255 / 85%);
+    opacity: 1;
+  }
+
+  & .nav-button__icon {
+    &::before,
+    &::after {
+      inline-size: 50%;
+    }
+
+    &::before {
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.site-nav__wrapper {
+  display: grid;
+  align-content: center;
+  gap: 1.25rem;
+  min-block-size: 100%;
+  padding: 70px 15% 20px;
+  text-align: center;
+
+  @media (width >= 768px) {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 30px 5%;
+    text-align: start;
+  }
+
+  @media (width >= 1200px) {
+    padding: 45px 10%;
+  }
+}
+
+.site-nav__primary {
+  padding-block-end: 1em;
+  border-block-end: 1px solid var(--color-faint-on-dark);
+
+  & li {
+    margin-block: 0.5em;
+  }
+
+  & a {
+    font-size: 1.5rem;
+  }
+
+  @media (width >= 768px) {
+    border: 0;
+    justify-self: center;
+  }
+
+  @media (width >= 1200px) {
+    & a {
+      font-size: 2.75rem;
+    }
+  }
+}
+
+.site-nav__destinations {
+  @media (width >= 768px) {
+    justify-self: center;
+  }
+
+  & h2 {
+    display: none;
+    position: relative;
+    margin: 0 0 40px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-faint-on-dark);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: auto auto -20px 0;
+      inline-size: 60px;
+      block-size: 1px;
+      background: currentColor;
+    }
+
+    @media (width >= 1200px) {
+      display: block;
+    }
+  }
+
+  & li {
+    margin-block: 0 1.1em;
+    line-height: 1.2;
+  }
+
+  & a {
+    font-size: 1.125rem;
+
+    @media (width >= 1200px) {
+      font-size: 1.5625rem;
+    }
+  }
+}
+
+/* Slide in from the right, as in 2016. Progressive: no animation where unsupported. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (transition-behavior: allow-discrete) {
+    .site-nav {
+      transition:
+        translate var(--duration) var(--ease-nav),
+        opacity var(--duration) var(--ease-nav),
+        display var(--duration) allow-discrete,
+        overlay var(--duration) allow-discrete;
+      translate: 50% 0;
+      opacity: 0;
+
+      &[open] {
+        translate: 0 0;
+        opacity: 1;
+        transition-duration: calc(var(--duration) - 0.2s);
+      }
+    }
+
+    /* eslint-disable-next-line css/use-baseline -- inside @supports (transition-behavior) */
+    @starting-style {
+      .site-nav[open] {
+        translate: 50% 0;
+        opacity: 0;
+      }
+    }
+  }
+}

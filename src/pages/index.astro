@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Stripe from '../components/Stripe.astro';
 import { tripDays } from '../data/trip';
 
 const countries = (await getCollection('countries')).sort(
@@ -11,13 +12,18 @@ const photoCount = countries.reduce((n, c) => n + c.data.photos.length, 0);
 ---
 
 <Base title="Around Asia">
-  <main class="placeholder">
-    <h1>Follow our journey</h1>
-    <p>Around Asia: the site is being rebuilt.</p>
-    <p class="stats">
-      {tripDays} days · {countries.length} countries · {photoCount} photos
-    </p>
-    <ul>
+  <main>
+    <section class="placeholder">
+      <h1>Follow our journey</h1>
+      <p>Around Asia: the site is being rebuilt.</p>
+      <p class="stats">
+        {tripDays} days · {countries.length} countries · {photoCount} photos
+      </p>
+    </section>
+    <Stripe arrow>
+      <h2>Destinations</h2>
+    </Stripe>
+    <ul class="cards">
       {countries.map((c) => (
         <li>
           <Image src={c.data.card} alt="" width={240} />
@@ -32,16 +38,18 @@ const photoCount = countries.reduce((n, c) => n + c.data.photos.length, 0);
   .placeholder {
     display: grid;
     place-content: center;
-    gap: 1rem;
-    min-block-size: 100dvh;
-    padding: 2rem;
+    gap: 0.5rem;
+    min-block-size: 60dvh;
+    padding: calc(var(--header-height) + 2rem) 2rem 2rem;
     text-align: center;
     background: var(--color-blue);
     color: var(--color-white);
   }
 
   h1 {
+    margin: 0;
     font-family: var(--font-serif);
+    font-size: var(--step-h1);
     font-weight: 400;
   }
 
@@ -51,17 +59,11 @@ const photoCount = countries.reduce((n, c) => n + c.data.photos.length, 0);
     letter-spacing: 0.15em;
   }
 
-  ul {
+  .cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    padding: 0;
-    list-style: none;
-  }
-
-  li {
-    display: grid;
-    gap: 0.25rem;
+    padding: 3rem 1rem;
   }
 </style>

@@ -1,6 +1,9 @@
 ---
+import { Font } from 'astro:assets';
 import '../styles/tokens.css';
 import '../styles/base.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -18,8 +21,21 @@ const { title, description = 'Photo journal of four months travelling around Asi
     <title>{title} | Follow our journey</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="theme-color" content="#092539" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <Font cssVariable="--font-montserrat" preload={[{ subset: 'latin' }]} />
+    <Font
+      cssVariable="--font-baskerville"
+      preload={[{ subset: 'latin', weight: 400, style: 'normal' }]}
+    />
   </head>
   <body>
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>

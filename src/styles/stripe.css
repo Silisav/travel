@@ -1,0 +1,25 @@
+/* White band between sections; with --arrow it points down into the next section. */
+.stripe {
+  position: relative;
+  padding-block: 35px;
+  text-align: center;
+  background: var(--color-white);
+
+  & :where(h2, h3) {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: var(--step-h3);
+    font-weight: 400;
+    color: var(--color-grey-text);
+  }
+}
+
+.stripe--arrow::after {
+  content: '';
+  position: absolute;
+  inset: 100% auto auto 50%;
+  z-index: 1;
+  translate: -50% 0;
+  border-inline: 20px solid transparent;
+  border-block-start: 20px solid var(--color-white);
+}

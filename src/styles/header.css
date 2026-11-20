@@ -1,0 +1,106 @@
+/* Fixed translucent top bar with the logo and the round menu button. */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  min-block-size: var(--header-height);
+  background: var(--color-header-bg);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  block-size: var(--header-height);
+  padding-inline: 5% calc(5% - 10px);
+  max-inline-size: calc(var(--container) + 10%);
+  margin-inline: auto;
+}
+
+.site-header__logo {
+  color: var(--color-white);
+
+  & svg {
+    inline-size: 100px;
+    block-size: 40px;
+
+    @media (width >= 768px) {
+      inline-size: 150px;
+      block-size: 50px;
+    }
+  }
+}
+
+/*
+ * The round hamburger button. The same component, in its "open" state, is the close
+ * button inside the nav dialog, sitting exactly on top of this one.
+ */
+.nav-button {
+  position: relative;
+  inline-size: 54px;
+  block-size: 54px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-white);
+  background: transparent;
+  cursor: pointer;
+  transition: transform calc(var(--duration) - 0.2s);
+
+  /* thin ring, drawn in full on the close button */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 1px solid #656e79;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s 0.3s;
+  }
+}
+
+.nav-button__icon,
+.nav-button__icon::before,
+.nav-button__icon::after {
+  position: absolute;
+  inline-size: 22px;
+  block-size: 2px;
+  background: currentColor;
+}
+
+.nav-button__icon {
+  inset: 50% auto auto 50%;
+  translate: -50% -50%;
+
+  &::before,
+  &::after {
+    content: '';
+    inset: 0 auto auto 0;
+    transition:
+      transform 0.5s,
+      inline-size calc(var(--duration) - 0.2s),
+      top 0.3s;
+  }
+
+  &::before {
+    transform-origin: left top;
+    transform: translateY(-6px);
+  }
+
+  &::after {
+    transform-origin: left bottom;
+    transform: translateY(6px);
+  }
+}
+
+@media (hover: hover) {
+  .nav-button:not(.nav-button--close):hover .nav-button__icon {
+    &::before {
+      top: -2px;
+    }
+
+    &::after {
+      top: 2px;
+    }
+  }
+}
