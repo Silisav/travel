@@ -1,0 +1,59 @@
+---
+/**
+ * Sign-in page for the private side (new in the rebuild, approved by the owner).
+ * Built only from existing 2016 pieces: the blue hero, the serif heading, the outlined button.
+ * The form posts to the login edge function (netlify/edge-functions/login.ts).
+ */
+import Base from '../../layouts/Base.astro';
+import Globe from '../../icons/globe.svg';
+import '../../styles/hero.css';
+import '../../styles/login.css';
+---
+
+<Base title="Private photos" description="Sign in to see the private photos.">
+  <main>
+    <section class="hero hero--blue login">
+      <div class="container">
+        <Globe class="hero__icon hero__icon--globe" aria-hidden="true" />
+        <h1>Private photos</h1>
+        <p class="login__intro">The same journey, with us in the pictures.</p>
+
+        <form class="login__form" method="post" action="/login/">
+          <input type="hidden" name="next" value="/private/" />
+          <label for="password" class="visually-hidden">
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+          />
+          <button type="submit" class="btn">
+            Enter
+          </button>
+        </form>
+
+        <p class="login__error" role="alert" hidden data-error="password">
+          That password didn't work. Please try again.
+        </p>
+        <p class="login__error" role="alert" hidden data-error="link">
+          That link isn't valid anymore. Please ask for a new one.
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  // Show the error the login function redirected with, and keep where the visitor was heading.
+  const params = new URLSearchParams(location.search);
+  document
+    .querySelector(`[data-error="${CSS.escape(params.get('error') ?? '')}"]`)
+    ?.removeAttribute('hidden');
+  const next = params.get('next');
+  const field = document.querySelector<HTMLInputElement>('input[name="next"]');
+  if (next && field) field.value = next;
+</script>

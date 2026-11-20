@@ -7,7 +7,7 @@ Static site built with Astro, hosted on Netlify. The full rebuild plan is in `PL
 
 - `npm run dev`: local dev server
 - `npm run build`: static build to `dist/`
-- `npm test`: privacy and regression tests (needs a build first)
+- `npm test`: privacy and access tests (needs a build first)
 - `npm run verify`: everything CI runs: type check, lint, format check, build, test
 
 Use the Node version in `.nvmrc` (24 LTS).
@@ -33,6 +33,8 @@ Use the Node version in `.nvmrc` (24 LTS).
 - `src/views/`: the page templates (Home, Country, Map), shared by public and private routes. Links must use `basePath(Astro.url)` from `src/lib/site.ts` so private pages link to private pages. A test enforces this.
 - `src/lib/`: `site.ts` (countries, base path, date formatting) and `private-media.ts` (private photos and video, empty without the submodule)
 - `integrations/private-media.mjs`: serves and copies private media to `/private/media/`
+- `netlify/edge-functions/`: `private-gate.ts` (every `/private/*` request needs a valid signed cookie, otherwise a redirect to `/login/`) and `login.ts` (password form, magic links, logout). Shared logic lives in `netlify/shared/auth.ts` and is covered by `tests/private-access.test.ts`. They need `SITE_PASSWORD` and `COOKIE_SECRET` (see `.env.example`).
+- Magic links: `COOKIE_SECRET=… npm run magic-link -- family`
 - `src/layouts/`, `src/components/`: Astro components
 - `src/styles/`: `tokens.css` (design tokens), `base.css`, component CSS
 - `public/`: copied as-is. Includes `_redirects` (old `*.html` → new URLs) and `robots.txt`.

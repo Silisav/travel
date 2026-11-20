@@ -12,3 +12,13 @@
     color: var(--color-yellow);
   }
 }
+
+/* Private pages only: a quiet way out (approved addition) */
+.site-footer__signout {
+  opacity: 0.75;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+  }
+}

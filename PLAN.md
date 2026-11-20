@@ -260,7 +260,7 @@ Playwright is the only real test dependency. It is dev-only and ships nothing to
 - Map: OSM tiles + CSS pastel filter now; Stadia watercolor later
 - Lightbox: PhotoSwipe v5 (pinch-zoom)
 - Repo: stays public; personal media + video in a private submodule repo
-- Login: one shared password + magic links
+- Login: one shared password + magic links. Login page design approved (2016 blue hero + outlined field). Private pages get a small "Sign out" after the footer credit (approved).
 - Public homepage video: generated landscape placeholder; video section optional in data
 - Tests: build leak check, auth unit tests, Playwright leak + smoke + axe
 - Updates: Dependabot monthly grouped; AGENTS.md + CLAUDE.md import

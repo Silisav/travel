@@ -2,4 +2,6 @@
   command = "npm run build"
   publish = "dist"
 # Node version comes from .nvmrc.
-# Edge functions for the /private/ gate are added in a later phase.
+# Edge functions (netlify/edge-functions/) guard /private/ and handle /login/ and /logout/.
+# They need SITE_PASSWORD and COOKIE_SECRET (see .env.example); without them nobody can
+# get into /private/ (fail closed).

@@ -8,8 +8,9 @@ import { join, relative, sep } from 'node:path';
 const DIST = new URL('../dist/', import.meta.url).pathname;
 const PRIVATE_MANIFEST = new URL('../media/private/private.json', import.meta.url).pathname;
 const TEXT_EXT = /\.(html|css|js|mjs|json|xml|txt|svg|webmanifest)$/;
-// Files that may legitimately name /private/ (they disallow or route it, they don't expose it).
-const ALLOWED = new Set(['robots.txt', '_redirects', '_headers']);
+// Files that may legitimately name /private/ (they disallow, route or redirect to it, without
+// exposing anything in it). The login page only uses it as the place to go after signing in.
+const ALLOWED = new Set(['robots.txt', '_redirects', '_headers', join('login', 'index.html')]);
 
 function* walk(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -94,6 +95,7 @@ test(
         return [...html.matchAll(/href="(\/[^"#?]*\/)"/g)]
           .map((match) => match[1])
           .filter((href) => !href.startsWith('/private/'))
+          .filter((href) => href !== '/logout/') // the way out is meant to leave
           .map((href) => `${relative(DIST, path)} → ${href}`);
       });
     assert.deepEqual(
