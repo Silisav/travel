@@ -2,7 +2,8 @@
 .site-header {
   position: fixed;
   inset: 0 0 auto;
-  z-index: 10;
+  /* above Leaflet's panes and controls (up to 1000), as in 2016 */
+  z-index: 1030;
   min-block-size: var(--header-height);
   background: var(--color-header-bg);
 }
@@ -121,6 +122,7 @@
       top 0.3s;
   }
 
+  /* Hover spreads the lines (2016). */
   .site-header .nav-button:hover .nav-button__icon {
     &::before {
       top: -2px;
@@ -130,4 +132,30 @@
       top: 2px;
     }
   }
+}
+
+/*
+ * see SiteNav.astro: the hover look decided at the moment of closing, applied to both copies of
+ * the button so they hand over in the identical state.
+ */
+.site-header .nav-button--spread .nav-button__icon,
+.site-nav:not([open]) .nav-button--spread .nav-button__icon {
+  &::before {
+    top: -2px;
+  }
+
+  &::after {
+    top: 2px;
+  }
+}
+
+/* see SiteNav.astro: hidden while the menu's own copy of this button is showing */
+.nav-button--covered {
+  opacity: 0;
+}
+
+/* see SiteNav.astro: no second hover animation when the menu hands back to this button */
+.nav-button--handover .nav-button__icon::before,
+.nav-button--handover .nav-button__icon::after {
+  transition: none;
 }

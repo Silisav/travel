@@ -6,6 +6,7 @@
 import { Picture, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import '../styles/gallery.css';
+import { isPrivatePath } from '../lib/site';
 
 export type GalleryItem =
   | { kind: 'public'; image: ImageMetadata; alt: string; caption?: string }
@@ -16,6 +17,7 @@ interface Props {
   label: string;
 }
 const { items, label } = Astro.props;
+const isPrivate = isPrivatePath(Astro.url.pathname);
 
 const sizes = '(width >= 1200px) 20vw, (width >= 768px) 25vw, 33vw';
 
@@ -31,7 +33,7 @@ const resolved = await Promise.all(
 );
 ---
 
-<ul class="gallery" aria-label={label}>
+<ul class="gallery" aria-label={label} data-gallery data-private={isPrivate || undefined}>
   {resolved.map((item) => (
     <li>
       <a
@@ -64,3 +66,8 @@ const resolved = await Promise.all(
     </li>
   ))}
 </ul>
+
+<script>
+  import { initLightbox } from '../scripts/lightbox';
+  initLightbox();
+</script>

@@ -1,17 +1,58 @@
+/* Full-window map under the translucent header, footer pinned to the bottom (2016 layout). */
 .map-page {
-  display: grid;
+  position: relative;
   min-block-size: 100dvh;
-  padding-block-start: var(--header-height);
 }
 
 .map {
-  position: relative;
-  min-block-size: 70dvh;
+  position: absolute;
+  inset: 0;
+  display: none;
   background: #e9e4d8;
+
+  &.map--ready {
+    display: block;
+  }
 }
 
+body:has(.map--ready) .site-footer {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 1000;
+}
+
+/* Pastel tiles: only the tile layer is softened, the route and pins keep full colour. */
+.map .leaflet-tile-pane {
+  filter: saturate(0.45) sepia(0.2) brightness(1.06) contrast(0.9);
+}
+
+/* Controls clear the header and the footer, as in 2016 */
+.map .leaflet-top {
+  inset-block-start: 65px;
+
+  @media (width >= 768px) {
+    inset-block-start: 90px;
+  }
+}
+
+.map .leaflet-left {
+  @media (width >= 768px) {
+    inset-inline-start: 15px;
+  }
+}
+
+.map .leaflet-bottom {
+  inset-block-end: 60px;
+}
+
+.map .leaflet-popup-content a {
+  font-family: var(--font-sans);
+  color: var(--color-blue);
+}
+
+/* Route as text: no-JS fallback (visually hidden once the map is ready) */
 .map-fallback {
-  padding-block: 40px;
+  padding-block: calc(var(--header-height) + 40px) 40px;
   text-align: center;
 
   & h1 {
@@ -23,20 +64,17 @@
 
   & ol {
     display: grid;
-    gap: 0;
     justify-content: center;
     padding: 0;
     list-style: none;
   }
 
   & li {
-    position: relative;
     display: grid;
-    padding: 12px 0 12px;
+    padding-block: 12px;
     font-family: var(--font-serif);
     font-size: 1.125rem;
 
-    /* dotted route line between stops */
     &:not(:last-child)::after {
       content: '';
       justify-self: center;

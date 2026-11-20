@@ -2,7 +2,7 @@
  * Full-screen navigation as a native modal <dialog>: focus handling, Esc and inertness for free.
  *
  * 2016 choreography, reproduced: the page slides away to the left and uncovers the menu
- * (here: the dialog reveals itself with clip-path in step with the page), the menu content
+ * (here: the dialog's panel reveals itself with clip-path in step with the page), the menu content
  * drifts in from the right, and the button rotates into a "back" arrow while a ring draws.
  * Without motion support or with reduced motion it simply appears.
  */
@@ -16,18 +16,14 @@
   margin: 0;
   padding: 0;
   border: 0;
-  overflow-y: auto;
+  overflow: visible;
   color: var(--color-white);
-  background: var(--color-blue);
+  background: transparent;
   font-family: var(--font-serif);
 
   /* the page stays visible behind, it's what slides away */
   &::backdrop {
     background: transparent;
-  }
-
-  @supports (overscroll-behavior: contain) {
-    overscroll-behavior: contain;
   }
 
   & a {
@@ -38,6 +34,18 @@
     &[aria-current='page'] {
       color: var(--color-yellow);
     }
+  }
+}
+
+/* The blue menu itself (uncovered in step with the page sliding away) */
+.site-nav__panel {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  background: var(--color-blue);
+
+  @supports (overscroll-behavior: contain) {
+    overscroll-behavior: contain;
   }
 }
 
@@ -173,17 +181,21 @@
       translate: -100% 0;
     }
 
-    /* …and uncovers the menu: its visible edge tracks the page's right edge */
+    /* the dialog stays in the top layer while its panel slides shut */
     .site-nav {
-      clip-path: inset(0 0 0 100%);
       transition:
-        clip-path var(--page-slide),
         display 0.7s allow-discrete,
         overlay 0.7s allow-discrete;
+    }
 
-      &[open] {
-        clip-path: inset(0);
-      }
+    /* …and uncovers the menu panel: its visible edge tracks the page's right edge */
+    .site-nav__panel {
+      clip-path: inset(0 0 0 100%);
+      transition: clip-path var(--page-slide);
+    }
+
+    .site-nav[open] .site-nav__panel {
+      clip-path: inset(0);
     }
 
     /* menu content drifts in from the right, at its own pace */
@@ -199,15 +211,14 @@
 
     /* button: rotate + fold into an arrow; the ring draws after a beat */
     .nav-button--close {
-      transition:
-        rotate 0.5s,
-        background-color 0.5s;
+      transition: rotate 0.5s;
 
       & .nav-button__icon::before,
       & .nav-button__icon::after {
         transition:
           transform 0.5s,
-          inline-size 0.5s;
+          inline-size 0.5s,
+          top 0.3s;
       }
 
       & circle {
@@ -221,7 +232,7 @@
 
     /* eslint-disable css/use-baseline -- all inside @supports (transition-behavior) */
     @starting-style {
-      .site-nav[open] {
+      .site-nav[open] .site-nav__panel {
         clip-path: inset(0 0 0 100%);
       }
 
@@ -231,7 +242,6 @@
 
       .site-nav[open] .nav-button--close {
         rotate: 0deg;
-        background: transparent;
 
         & .nav-button__icon::before,
         & .nav-button__icon::after {
@@ -248,6 +258,17 @@
 
         & circle {
           stroke-dashoffset: 157;
+        }
+      }
+
+      /* opening from a hovered hamburger: start with its lines spread, like the one clicked */
+      .site-nav[open] .nav-button--from-hover .nav-button__icon {
+        &::before {
+          top: -2px;
+        }
+
+        &::after {
+          top: 2px;
         }
       }
     }
