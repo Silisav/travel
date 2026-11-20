@@ -1,7 +1,6 @@
 dist/
 .astro/
 .netlify/
-legacy/
 media/
 package-lock.json
 PLAN.md

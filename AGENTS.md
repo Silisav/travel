@@ -44,7 +44,6 @@ Use the Node version in `.nvmrc` (24 LTS).
 - `media/public/`: public originals (landscapes only), processed by `astro:assets`
 - `media/private/`: **git submodule** (private repo `travel-private`) with personal photos, the video and `private.json`. Private photos must **never** go through `image()`/`astro:assets`, because those emit to the public `/_astro/` folder. They are plain paths, processed into `dist/private/` by our own script.
 - `tests/`: `node:test` suites (no test framework)
-- `legacy/`: the original 2016 site, kept only as a reference while porting. Do not edit; it gets deleted at the end of the rebuild.
 
 ## Adding content
 

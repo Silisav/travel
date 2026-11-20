@@ -11,7 +11,6 @@ export default defineConfig([
     'dist/',
     '.astro/',
     '.netlify/',
-    'legacy/',
     'media/',
     'node_modules/',
     'test-results/',

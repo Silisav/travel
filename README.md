@@ -4,7 +4,9 @@
 
 A photo journal of four months travelling through Japan, Vietnam, Cambodia, Thailand, Malaysia, Indonesia and Greece in 2016.
 
-First built in 2016 with Grunt, Bootstrap 3, jQuery and PhotoSwipe. It's now being rebuilt with Astro and modern, mostly native web platform features: CSS grid and nesting, `<dialog>`, View Transitions, `Intl` and responsive AVIF/WebP images. The original site is in `legacy/` while the rebuild is in progress, and the plan is in [PLAN.md](PLAN.md).
+First built in 2016 with Grunt, Bootstrap 3, jQuery and PhotoSwipe; rebuilt in 2026 with Astro and mostly native web platform features (`<dialog>`, CSS grid and nesting, `Intl`, responsive AVIF/WebP images), keeping the original design. The 2016 code is in the git history; the rebuild plan and decisions are in [PLAN.md](PLAN.md).
+
+Personal photos live in a separate private repo (a submodule) behind a login; adding photos is drag-and-drop, see [AGENTS.md](AGENTS.md#adding-content).
 
 ## Run it
 
