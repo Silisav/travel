@@ -42,7 +42,7 @@ test(
   'public files never mention a private media file name',
   { skip: !existsSync(DIST) || !existsSync(PRIVATE_MANIFEST) ? 'no private manifest' : false },
   () => {
-    /** @type {{ photos?: { src: string }[], video?: { src: string, poster?: string } }} */
+    /** @type {{ photos?: { id: string, src: string }[], video?: { src: string, poster?: string } }} */
     const manifest = JSON.parse(readFileSync(PRIVATE_MANIFEST, 'utf8'));
     const paths = [
       ...(manifest.photos ?? []).map((photo) => photo.src),

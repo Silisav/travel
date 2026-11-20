@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Stripe from '../components/Stripe.astro';
@@ -49,7 +49,13 @@ const months = Math.round(tripDays / 30);
     </Stripe>
 
     <section class="map-cta">
-      <Image src={mapBanner} alt="" widths={[640, 1200]} sizes="100vw" />
+      <Picture
+        formats={['avif', 'webp']}
+        src={mapBanner}
+        alt=""
+        widths={[640, 1200]}
+        sizes="100vw"
+      />
       <a href={`${base}map/`} class="btn">
         View map
       </a>
@@ -67,7 +73,8 @@ const months = Math.round(tripDays / 30);
         {countries.map((c) => (
           <li class="timeline__item">
             <a href={`${base}${c.id}/`} class="timeline__card">
-              <Image
+              <Picture
+                formats={['avif', 'webp']}
                 src={c.data.card}
                 alt=""
                 widths={[400, 600, 800]}
@@ -105,13 +112,14 @@ const months = Math.round(tripDays / 30);
           </p>
         </div>
         {video ? (
-          <video controls preload="none" poster={video.poster} aria-label={video.alt}>
+          <video controls playsinline preload="none" poster={video.poster} aria-label={video.alt}>
             <source src={video.url} type="video/mp4" />
           </video>
         ) : (
           <figure class="slideshow" style={`--count: ${countries.length}`} aria-hidden="true">
             {countries.map((c, i) => (
-              <Image
+              <Picture
+                formats={['avif', 'webp']}
                 src={c.data.photos[c.data.cover - 1].src}
                 alt=""
                 widths={[480, 800]}

@@ -41,6 +41,15 @@ main {
   background: var(--color-grey-bg);
 }
 
+/* <picture> only chooses the format; layout belongs to its <img> (sources take no space). */
+picture {
+  display: contents;
+
+  & source {
+    display: none;
+  }
+}
+
 img,
 svg,
 video {

@@ -163,7 +163,7 @@
     opacity: 0;
   }
 
-  & img:first-child {
+  & > :first-child img {
     opacity: 1;
   }
 
@@ -173,7 +173,7 @@
       animation-delay: calc(var(--i) * 4s);
     }
 
-    & img:first-child {
+    & > :first-child img {
       opacity: 0;
     }
   }

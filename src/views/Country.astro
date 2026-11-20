@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Stripe from '../components/Stripe.astro';
@@ -80,7 +80,8 @@ const items = [...privateItems, ...publicItems];
     </Stripe>
 
     <section class="container country-info" aria-label={`About ${data.name}`}>
-      <Image
+      <Picture
+        formats={['avif', 'webp']}
         src={data.flag}
         alt={`Flag of ${data.name}`}
         widths={[360, 720]}
@@ -117,7 +118,8 @@ const items = [...privateItems, ...publicItems];
           </dd>
         </div>
       </dl>
-      <Image
+      <Picture
+        formats={['avif', 'webp']}
         src={data.map}
         alt={`Map of ${data.name}`}
         widths={[360, 720]}
