@@ -1,0 +1,16 @@
+/* Design tokens ported from legacy/sass/style.scss. Full port happens in phase 3. */
+:root {
+  --color-blue: #092539;
+  --color-yellow: #dfa903;
+  --color-olive: #bcbb81;
+  --color-white: #fff;
+  --color-grey-bg: #f2f2f2;
+  --color-grey-text: #545454;
+  --color-grey-line: #ddd;
+  --color-grey-circle: #7d7d7d;
+
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+
+  --duration: 0.7s;
+}

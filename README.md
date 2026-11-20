@@ -1,10 +1,18 @@
 # Travel photo journal
 
-http://asia.vasilis-tsirimokos.com
+**[asia.vasilis-tsirimokos.com](https://asia.vasilis-tsirimokos.com)**
 
-Photo journal website for my trip in SE Asia.
-It's using a grunt template to automate tasks and a number of plugins and libraries like photoswipe, moment.js, masonry and leaflet.js.
+A photo journal of four months travelling through Japan, Vietnam, Cambodia, Thailand, Malaysia, Indonesia and Greece in 2016.
 
-It's been tested on most common mobile devices and modern browsers (ie9+).
+First built in 2016 with Grunt, Bootstrap 3, jQuery and PhotoSwipe. It's now being rebuilt with Astro and modern, mostly native web platform features: CSS grid and nesting, `<dialog>`, View Transitions, `Intl` and responsive AVIF/WebP images. The original site is in `legacy/` while the rebuild is in progress, and the plan is in [PLAN.md](PLAN.md).
 
-You can find instructions for starting the local server in the readme.txt
+## Run it
+
+Requires Node 24 (see `.nvmrc`).
+
+```bash
+npm install
+npm run dev
+```
+
+`npm run verify` runs the full check suite that CI runs.

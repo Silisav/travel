@@ -1,3 +1,12 @@
-node_modules/*
-dist/*
-.sass-cache/*
+# dependencies & build output
+node_modules/
+dist/
+.astro/
+.netlify/
+
+
+# OS / editor
+.DS_Store
+*.log
+.env
+.env.*

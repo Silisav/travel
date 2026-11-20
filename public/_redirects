@@ -1,0 +1,9 @@
+# Old .html URLs → clean directory URLs
+/map.html  /map/  301
+/japan.html  /japan/  301
+/vietnam.html  /vietnam/  301
+/cambodia.html  /cambodia/  301
+/thailand.html  /thailand/  301
+/malaysia.html  /malaysia/  301
+/indonesia.html  /indonesia/  301
+/greece.html  /greece/  301

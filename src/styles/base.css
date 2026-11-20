@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-grey-text);
+  background: var(--color-white);
+  line-height: 1.5;
+}
+
+img,
+video {
+  max-inline-size: 100%;
+  block-size: auto;
+}
