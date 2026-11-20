@@ -1,7 +1,11 @@
 [build]
   command = "npm run build"
   publish = "dist"
-# Node version comes from .nvmrc.
+
+[build.environment]
+  # Pinned here (not only .nvmrc): the Netlify site still has Node 8 from 2018 in its UI settings.
+  NODE_VERSION = "24"
+
 # Edge functions (netlify/edge-functions/) guard /private/ and handle /login/ and /logout/.
 # They need SITE_PASSWORD and COOKIE_SECRET (see .env.example); without them nobody can
 # get into /private/ (fail closed).
