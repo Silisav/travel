@@ -1,0 +1,277 @@
+/*
+ * Full-screen navigation as a native modal <dialog>: focus handling, Esc and inertness for free.
+ *
+ * 2016 choreography, reproduced: the page slides away to the left and uncovers the menu
+ * (here: the dialog's panel reveals itself with clip-path in step with the page), the menu content
+ * drifts in from the right, and the button rotates into a "back" arrow while a ring draws.
+ * Without motion support or with reduced motion it simply appears.
+ */
+.site-nav {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  color: var(--color-white);
+  background: transparent;
+  font-family: var(--font-serif);
+
+  /* the page stays visible behind, it's what slides away */
+  &::backdrop {
+    background: transparent;
+  }
+
+  & a {
+    transition: color var(--duration-fast);
+
+    &:hover,
+    &:focus-visible,
+    &[aria-current='page'] {
+      color: var(--color-yellow);
+    }
+  }
+}
+
+/* The blue menu itself (uncovered in step with the page sliding away) */
+.site-nav__panel {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  background: var(--color-blue);
+
+  @supports (overscroll-behavior: contain) {
+    overscroll-behavior: contain;
+  }
+}
+
+/* Same bar as the page header, so the logo and the button sit exactly where they were. */
+.site-nav > .site-header__inner {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  margin-inline: auto;
+}
+
+/* Open state of the button: back arrow with a drawn ring. */
+.site-nav[open] .nav-button--close {
+  rotate: -180deg;
+  background: var(--color-blue);
+
+  & .nav-button__icon::before,
+  & .nav-button__icon::after {
+    inline-size: 50%;
+  }
+
+  & .nav-button__icon::before {
+    transform: rotate(-45deg);
+  }
+
+  & .nav-button__icon::after {
+    transform: rotate(45deg);
+  }
+
+  & circle {
+    stroke-dashoffset: 0;
+  }
+}
+
+.site-nav__wrapper {
+  display: grid;
+  align-content: center;
+  gap: 1.25rem;
+  min-block-size: 100%;
+  padding: 70px 15% 20px;
+  text-align: center;
+
+  @media (width >= 768px) {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 30px 5%;
+    text-align: start;
+  }
+
+  @media (width >= 1200px) {
+    padding: 45px 10%;
+  }
+}
+
+.site-nav__primary {
+  padding-block-end: 1em;
+  border-block-end: 1px solid var(--color-faint-on-dark);
+
+  & li {
+    margin-block: 0.5em;
+  }
+
+  & a {
+    font-size: 1.5rem;
+  }
+
+  @media (width >= 768px) {
+    border: 0;
+    justify-self: center;
+  }
+
+  @media (width >= 1200px) {
+    & a {
+      font-size: 2.75rem;
+    }
+  }
+}
+
+.site-nav__destinations {
+  @media (width >= 768px) {
+    justify-self: center;
+  }
+
+  & h2 {
+    display: none;
+    position: relative;
+    margin: 0 0 40px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-faint-on-dark);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: auto auto -20px 0;
+      inline-size: 60px;
+      block-size: 1px;
+      background: currentColor;
+    }
+
+    @media (width >= 1200px) {
+      display: block;
+    }
+  }
+
+  & li {
+    margin-block: 0 1.1em;
+    line-height: 1.2;
+  }
+
+  & a {
+    font-size: 16px;
+
+    @media (width >= 1200px) {
+      font-size: 1.5625rem;
+    }
+  }
+}
+
+/* ---------- Motion (2016 timings) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (transition-behavior: allow-discrete) {
+    :root {
+      --page-slide: 0.7s cubic-bezier(0.91, 0.01, 0.6, 0.99);
+    }
+
+    /* the page slides out to the left… */
+    body > :is(main, .site-footer) {
+      transition: translate var(--page-slide);
+    }
+
+    html:has(.site-nav[open]) body > :is(main, .site-footer) {
+      translate: -100% 0;
+    }
+
+    /* the dialog stays in the top layer while its panel slides shut */
+    .site-nav {
+      transition:
+        display 0.7s allow-discrete,
+        overlay 0.7s allow-discrete;
+    }
+
+    /* …and uncovers the menu panel: its visible edge tracks the page's right edge */
+    .site-nav__panel {
+      clip-path: inset(0 0 0 100%);
+      transition: clip-path var(--page-slide);
+    }
+
+    .site-nav[open] .site-nav__panel {
+      clip-path: inset(0);
+    }
+
+    /* menu content drifts in from the right, at its own pace */
+    .site-nav__wrapper {
+      translate: 50% 0;
+      transition: translate 0.7s cubic-bezier(0.86, 0.01, 0.77, 0.78);
+    }
+
+    .site-nav[open] .site-nav__wrapper {
+      translate: 0 0;
+      transition: translate 0.5s cubic-bezier(0.82, 0.01, 0.77, 0.78);
+    }
+
+    /* button: rotate + fold into an arrow; the ring draws after a beat */
+    .nav-button--close {
+      transition: rotate 0.5s;
+
+      & .nav-button__icon::before,
+      & .nav-button__icon::after {
+        transition:
+          transform 0.5s,
+          inline-size 0.5s,
+          top 0.3s;
+      }
+
+      & circle {
+        transition: stroke-dashoffset 0.4s;
+      }
+    }
+
+    .site-nav[open] .nav-button--close circle {
+      transition: stroke-dashoffset 0.4s 0.3s;
+    }
+
+    /* eslint-disable css/use-baseline -- all inside @supports (transition-behavior) */
+    @starting-style {
+      .site-nav[open] .site-nav__panel {
+        clip-path: inset(0 0 0 100%);
+      }
+
+      .site-nav[open] .site-nav__wrapper {
+        translate: 50% 0;
+      }
+
+      .site-nav[open] .nav-button--close {
+        rotate: 0deg;
+
+        & .nav-button__icon::before,
+        & .nav-button__icon::after {
+          inline-size: 100%;
+        }
+
+        & .nav-button__icon::before {
+          transform: translateY(-6px);
+        }
+
+        & .nav-button__icon::after {
+          transform: translateY(6px);
+        }
+
+        & circle {
+          stroke-dashoffset: 157;
+        }
+      }
+
+      /* opening from a hovered hamburger: start with its lines spread, like the one clicked */
+      .site-nav[open] .nav-button--from-hover .nav-button__icon {
+        &::before {
+          top: -2px;
+        }
+
+        &::after {
+          top: 2px;
+        }
+      }
+    }
+    /* eslint-enable css/use-baseline */
+  }
+}

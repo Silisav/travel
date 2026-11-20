@@ -1,0 +1,78 @@
+---
+/**
+ * The photostream: a masonry-like grid of thumbnails, each a plain link to the full image
+ * (works without JS; the lightbox enhances these links later).
+ */
+import { Picture, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { PrivatePhoto } from '../lib/private-media';
+import '../styles/gallery.css';
+import { isPrivatePath } from '../lib/site';
+
+export type GalleryItem =
+  | { kind: 'public'; image: ImageMetadata; alt: string; caption?: string }
+  | ({ kind: 'private' } & PrivatePhoto);
+
+interface Props {
+  items: GalleryItem[];
+  label: string;
+}
+const { items, label } = Astro.props;
+const isPrivate = isPrivatePath(Astro.url.pathname);
+
+const sizes = '(width >= 1200px) 20vw, (width >= 768px) 25vw, 33vw';
+
+const resolved = await Promise.all(
+  items.map(async (item) => {
+    if (item.kind === 'private') {
+      return { ...item, full: item.full.url, width: item.full.width, height: item.full.height };
+    }
+    // Full-size target for the link / lightbox: same pixels, modern format.
+    const full = await getImage({ src: item.image, format: 'webp', quality: 85 });
+    return { ...item, full: full.src, width: item.image.width, height: item.image.height };
+  }),
+);
+---
+
+<ul class="gallery" aria-label={label} data-gallery data-private={isPrivate || undefined}>
+  {resolved.map((item) => (
+    <li>
+      <a
+        href={item.full}
+        data-pswp-width={item.width}
+        data-pswp-height={item.height}
+        style={`aspect-ratio: ${item.width} / ${item.height}`}
+      >
+        {item.kind === 'public' ? (
+          <Picture
+            src={item.image}
+            alt={item.alt}
+            formats={['avif', 'webp']}
+            widths={[240, 360, 480, 720]}
+            sizes={sizes}
+            loading="lazy"
+          />
+        ) : (
+          <picture>
+            <source type="image/avif" srcset={item.srcset.avif} sizes={sizes} />
+            <source type="image/webp" srcset={item.srcset.webp} sizes={sizes} />
+            <img
+              src={item.src}
+              alt={item.alt}
+              width={item.width}
+              height={item.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        )}
+      </a>
+      {item.caption && <p class="gallery__caption">{item.caption}</p>}
+    </li>
+  ))}
+</ul>
+
+<script>
+  import { initLightbox } from '../scripts/lightbox';
+  initLightbox();
+</script>

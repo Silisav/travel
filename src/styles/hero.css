@@ -1,0 +1,133 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 130px 100px;
+  text-align: center;
+  color: var(--color-white);
+
+  /* the tinted overlay sits between photo and text */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  & h1 {
+    font-size: 40px;
+  }
+
+  & h2 {
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+
+  @media (width >= 768px) {
+    & h1 {
+      font-size: 55px;
+    }
+
+    & h2 {
+      font-size: 25px;
+      letter-spacing: 5px;
+    }
+  }
+
+  @media (width >= 1200px) {
+    & h1 {
+      font-size: 70px;
+    }
+
+    & h2 {
+      font-size: 35px;
+      letter-spacing: 7px;
+    }
+  }
+}
+
+.hero--blue::before {
+  background: rgb(9 37 57 / 80%);
+}
+
+.hero--grey::before {
+  background: var(--color-overlay);
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Bottom-right note in a hero: day count on the homepage, local time on country pages. */
+.hero__corner {
+  position: absolute;
+  inset: auto 5% 20px auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  text-transform: uppercase;
+
+  /* e.g. the local clock until JS has the time (display: flex would override [hidden]) */
+  &[hidden] {
+    display: none;
+  }
+
+  & svg {
+    inline-size: 25px;
+    block-size: 25px;
+  }
+
+  @media (width >= 768px) {
+    font-size: 20px;
+  }
+
+  @media (width >= 1200px) {
+    inset-block-end: 50px;
+    font-size: 25px;
+
+    & svg {
+      inline-size: 30px;
+      block-size: 30px;
+    }
+  }
+}
+
+/* Large outline icon in the hero: country landmarks (65/80/100px) or the globe (70/100/150px) */
+.hero__icon {
+  inline-size: 65px;
+  block-size: 65px;
+  margin: 17px auto 0;
+
+  @media (width >= 768px) {
+    inline-size: 80px;
+    block-size: 80px;
+    margin-block-start: 20px;
+  }
+
+  @media (width >= 1200px) {
+    inline-size: 100px;
+    block-size: 100px;
+    margin-block-start: 30px;
+  }
+}
+
+.hero__icon--globe {
+  inline-size: 70px;
+  block-size: 70px;
+
+  @media (width >= 768px) {
+    inline-size: 100px;
+    block-size: 100px;
+  }
+
+  @media (width >= 1200px) {
+    inline-size: 150px;
+    block-size: 150px;
+  }
+}

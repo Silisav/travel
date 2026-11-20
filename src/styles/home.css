@@ -1,0 +1,198 @@
+.home-hero {
+  padding-block: 75px 45px;
+
+  @media (width >= 768px) {
+    padding-block: 100px 50px;
+  }
+
+  @media (width >= 1200px) {
+    padding-block: 130px 90px;
+  }
+
+  & h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+
+  & h2 {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-yellow);
+  }
+}
+
+.home-hero__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 33.333%);
+  justify-content: center;
+  margin: 0;
+  padding-inline: 15px;
+
+  @media (width >= 768px) {
+    grid-template-columns: repeat(2, 25%);
+  }
+
+  & div {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-block-end: 10px;
+    font-size: 20px;
+    line-height: 1.428571;
+  }
+
+  & dd {
+    margin: 0;
+    font-size: 30px;
+  }
+
+  @media (width >= 768px) {
+    & div {
+      font-size: 25px;
+    }
+
+    & dd {
+      font-size: 40px;
+    }
+  }
+
+  @media (width >= 1200px) {
+    & div {
+      font-size: 30px;
+    }
+
+    & dd {
+      font-size: 50px;
+    }
+  }
+}
+
+.intro {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-style: italic;
+
+  @media (width >= 768px) {
+    font-size: 20px;
+  }
+
+  @media (width >= 1200px) {
+    font-size: 23px;
+  }
+}
+
+/* "View map" call to action over a map picture */
+.map-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 65px;
+
+  @media (width >= 768px) {
+    padding-block: 90px;
+  }
+
+  @media (width >= 1200px) {
+    padding-block: 110px;
+  }
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgb(188 187 129 / 55%);
+  }
+
+  & img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 50% 70%;
+  }
+}
+
+/* "Our journey is over" + video */
+.journey-end {
+  display: grid;
+  gap: 30px;
+  align-items: center;
+  text-align: start;
+
+  @media (width >= 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  & h2 {
+    text-align: center;
+  }
+
+  & h2 {
+    margin: 0;
+  }
+
+  & p {
+    margin: 20px 0;
+    font-family: var(--font-serif);
+  }
+
+  & video,
+  & .slideshow {
+    inline-size: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--color-blue);
+  }
+}
+
+/* Placeholder until the public landscape video exists: a CSS-only crossfade. */
+.slideshow {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+
+  & img {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+
+  & > :first-child img {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    & img {
+      animation: slideshow-fade calc(var(--count) * 4s) infinite;
+      animation-delay: calc(var(--i) * 4s);
+    }
+
+    & > :first-child img {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes slideshow-fade {
+  0% {
+    opacity: 0;
+    scale: 1;
+  }
+
+  4%,
+  16% {
+    opacity: 1;
+  }
+
+  22%,
+  100% {
+    opacity: 0;
+    scale: 1.08;
+  }
+}

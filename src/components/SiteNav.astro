@@ -1,0 +1,114 @@
+---
+import '../styles/site-nav.css';
+import Logo from '../icons/travel.svg';
+import { basePath, getCountries } from '../lib/site';
+
+const countries = await getCountries();
+const base = basePath(Astro.url);
+const path = Astro.url.pathname;
+const current = (href: string) => (path === href ? 'page' : undefined);
+---
+
+<dialog id="site-nav" class="site-nav" closedby="any" aria-label="Site navigation">
+  <div class="container site-header__inner">
+    <div class="site-header__col">
+      <a href={base} class="site-header__logo">
+        <Logo aria-hidden="true" />
+        <span class="visually-hidden">Travel: back to the homepage</span>
+      </a>
+    </div>
+    <div class="site-header__col">
+      <button
+        type="button"
+        class="nav-button nav-button--close"
+        autofocus
+        command="close"
+        commandfor="site-nav"
+      >
+        <span class="visually-hidden">Close menu</span>
+        <span class="nav-button__icon" aria-hidden="true"></span>
+        <svg class="nav-button__ring" viewBox="0 0 54 54" aria-hidden="true">
+          <circle cx="27" cy="27" r="25"></circle>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- The panel is what gets uncovered; the bar above stays visible so the button morphs from frame one. -->
+  <div class="site-nav__panel">
+    <nav class="site-nav__wrapper">
+      <ul class="site-nav__primary">
+        <li>
+          <a href={base} aria-current={current(base)}>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href={`${base}map/`} aria-current={current(`${base}map/`)}>
+            Map
+          </a>
+        </li>
+      </ul>
+      <div class="site-nav__destinations">
+        <h2>Destinations</h2>
+        <ul>
+          {countries.map((c) => (
+            <li>
+              <a href={`${base}${c.id}/`} aria-current={current(`${base}${c.id}/`)}>
+                {c.data.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  </div>
+</dialog>
+
+<script>
+  import { polyfillInvokerCommands } from '../scripts/invoker-commands';
+  polyfillInvokerCommands();
+
+  /*
+   * One visible button at a time. 2016 had a single button that morphed; here the menu has its
+   * own copy sitting exactly on top of the header's. While the menu is showing (including its
+   * closing animation), the header button is hidden, so the two never overlap. It only uses
+   * opacity: the dialog returns focus to it on close.
+   */
+  const nav = document.getElementById('site-nav') as HTMLDialogElement | null;
+  const trigger = document.querySelector<HTMLElement>('.site-header .nav-button');
+  const closeButton = nav?.querySelector('.nav-button--close');
+
+  trigger?.addEventListener('click', () => {
+    // Start the morph from the hovered look of the button just clicked.
+    closeButton?.classList.toggle('nav-button--from-hover', trigger.matches(':hover'));
+    trigger.classList.add('nav-button--covered');
+  });
+
+  nav?.addEventListener('close', async () => {
+    if (!trigger || !closeButton) return;
+
+    // Decide the hover look once, at the click: the browser may move :hover around while the
+    // closing menu and the hidden header button sit on top of each other.
+    const spread = closeButton.matches(':hover') || trigger.matches(':hover');
+    closeButton.classList.toggle('nav-button--spread', spread);
+
+    // When the button has finished turning back into a hamburger, put the identical header
+    // button in place underneath (no animation of its own); the menu then leaves on top of it.
+    await Promise.allSettled(closeButton.getAnimations({ subtree: true }).map((a) => a.finished));
+    if (nav.open) return; // reopened meanwhile
+    trigger.classList.add('nav-button--handover');
+    trigger.classList.toggle('nav-button--spread', spread);
+    trigger.classList.remove('nav-button--covered');
+
+    await Promise.allSettled(nav.getAnimations({ subtree: true }).map((a) => a.finished));
+    if (nav.open) return;
+    closeButton.classList.remove('nav-button--spread');
+    // From here on the real :hover state takes over again (animating if the pointer has left).
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() =>
+        trigger.classList.remove('nav-button--handover', 'nav-button--spread'),
+      ),
+    );
+  });
+</script>

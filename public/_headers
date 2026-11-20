@@ -1,0 +1,5 @@
+# Private pages must never be cached by shared caches or indexed.
+# (Access control itself is the edge function added with the login, phase 6.)
+/private/*
+  Cache-Control: private, no-store
+  X-Robots-Tag: noindex, nofollow

@@ -1,0 +1,4 @@
+[submodule "media/private"]
+	path = media/private
+	url = git@github.com:Silisav/travel-private.git
+	branch = main

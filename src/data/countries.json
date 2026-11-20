@@ -1,0 +1,558 @@
+[
+  {
+    "id": "japan",
+    "name": "Japan",
+    "nativeName": "日本",
+    "start": "2016-04-11",
+    "end": "2016-04-28",
+    "timeZone": "Asia/Tokyo",
+    "coords": [35, 139],
+    "capital": "Tokyo",
+    "population": "127.3 million",
+    "language": "Japanese",
+    "currency": "Yen",
+    "banner": "../../media/public/banners/japan-banner.jpg",
+    "bannerPosition": "100% 0",
+    "card": "../../media/public/banners/japan-small.jpg",
+    "flag": "../../media/public/flags/japan-flag.png",
+    "map": "../../media/public/maps/japan-map.jpg",
+    "cover": "13.jpg",
+    "photos": [
+      {
+        "file": "1.jpg",
+        "alt": "Wall of decorated sake barrels at a Shinto shrine"
+      },
+      {
+        "file": "2.jpg",
+        "alt": "Busy Tokyo street at night lit by neon signs"
+      },
+      {
+        "file": "3.jpg",
+        "alt": "Tokyo skyline and highway seen from above"
+      },
+      {
+        "file": "4.jpg",
+        "alt": "Cherry blossoms over a temple pond"
+      },
+      {
+        "file": "5.jpg",
+        "alt": "Two-storey wooden temple gate surrounded by pine trees"
+      },
+      {
+        "file": "6.jpg",
+        "alt": "The Great Buddha of Kamakura against a grey sky"
+      },
+      {
+        "file": "7.jpg",
+        "alt": "Castle on a wooded hill above a river bridge"
+      },
+      {
+        "file": "8.jpg",
+        "alt": "Green forested hills with a red pagoda in Kyoto"
+      },
+      {
+        "file": "9.jpg",
+        "alt": "Kiyomizu-dera wooden stage among spring foliage"
+      },
+      {
+        "file": "10.jpg",
+        "alt": "Path through a tall bamboo forest"
+      },
+      {
+        "file": "11.jpg",
+        "alt": "Pond covered with lily pads in a lush Japanese garden"
+      },
+      {
+        "file": "12.jpg",
+        "alt": "Twisted pine tree in a traditional Japanese garden"
+      },
+      {
+        "file": "13.jpg",
+        "alt": "Kinkaku-ji, the Golden Pavilion, reflected in its pond"
+      },
+      {
+        "file": "14.jpg",
+        "alt": "Orange arched bridge over the Seto Inland Sea"
+      },
+      {
+        "file": "15.jpg",
+        "alt": "Small fishing boat moored in a quiet harbour town"
+      }
+    ]
+  },
+  {
+    "id": "vietnam",
+    "name": "Vietnam",
+    "nativeName": "Việt Nam",
+    "start": "2016-04-28",
+    "end": "2016-05-18",
+    "timeZone": "Asia/Ho_Chi_Minh",
+    "coords": [21, 106],
+    "capital": "Hanoi",
+    "population": "89.71 million",
+    "language": "Vietnamese",
+    "currency": "Đồng",
+    "banner": "../../media/public/banners/vietnam-banner.jpg",
+    "bannerPosition": "50% 50%",
+    "card": "../../media/public/banners/vietnam-small.jpg",
+    "flag": "../../media/public/flags/vietnam-flag.png",
+    "map": "../../media/public/maps/vietnam-map.jpg",
+    "cover": "6.jpg",
+    "photos": [
+      {
+        "file": "1.jpg",
+        "alt": "Scooters at a busy crossroads in Hanoi's Old Quarter"
+      },
+      {
+        "file": "2.jpg",
+        "alt": "Turtle Tower on Hoan Kiem Lake framed by trees"
+      },
+      {
+        "file": "3.jpg",
+        "alt": "Narrow courtyard full of plants seen from a rooftop"
+      },
+      {
+        "file": "4.jpg",
+        "alt": "Colourful silk lanterns hanging in a shop doorway"
+      },
+      {
+        "file": "5.jpg",
+        "alt": "Tree-lined Hanoi street with motorbikes"
+      },
+      {
+        "file": "6.jpg",
+        "alt": "Floating fishing village among limestone islands"
+      },
+      {
+        "file": "7.jpg",
+        "alt": "Limestone cliff above a turquoise bay with a small beach"
+      },
+      {
+        "file": "8.jpg",
+        "alt": "Large flock of ducks crossing a village road"
+      },
+      {
+        "file": "9.jpg",
+        "alt": "River winding between karst mountains in Ninh Binh"
+      },
+      {
+        "file": "10.jpg",
+        "alt": "Sunset over rice fields and karst hills"
+      },
+      {
+        "file": "11.jpg",
+        "alt": "Bonsai with pink flowers beside a lotus pond and pavilion"
+      },
+      {
+        "file": "12.jpg",
+        "alt": "Hoi An street at night with glowing lanterns and bicycles"
+      },
+      {
+        "file": "13.jpg",
+        "alt": "Wide sandy beach lined with pine trees"
+      },
+      {
+        "file": "14.jpg",
+        "alt": "Propaganda posters on a building in Ho Chi Minh City"
+      },
+      {
+        "file": "15.jpg",
+        "alt": "Independence Palace in Ho Chi Minh City"
+      }
+    ]
+  },
+  {
+    "id": "cambodia",
+    "name": "Cambodia",
+    "nativeName": "កម្ពុជា",
+    "start": "2016-05-18",
+    "end": "2016-05-24",
+    "timeZone": "Asia/Phnom_Penh",
+    "coords": [11.5, 104],
+    "capital": "Phnom Penh",
+    "population": "15.14 million",
+    "language": "Khmer",
+    "currency": "Riel",
+    "banner": "../../media/public/banners/cambodia-banner.jpg",
+    "bannerPosition": "55% 0",
+    "card": "../../media/public/banners/cambodia-small.jpg",
+    "flag": "../../media/public/flags/cambodia-flag.png",
+    "map": "../../media/public/maps/cambodia-map.jpg",
+    "cover": "8.jpg",
+    "photos": [
+      {
+        "file": "1.jpg",
+        "alt": "Former school building of the Tuol Sleng museum in Phnom Penh"
+      },
+      {
+        "file": "2.jpg",
+        "alt": "Golden throne hall of the Royal Palace in Phnom Penh"
+      },
+      {
+        "file": "3.jpg",
+        "alt": "White stupa in the Royal Palace grounds"
+      },
+      {
+        "file": "4.jpg",
+        "alt": "Independence Monument in Phnom Penh"
+      },
+      {
+        "file": "5.jpg",
+        "alt": "Crowds walking towards Angkor Wat at sunrise"
+      },
+      {
+        "file": "6.jpg",
+        "alt": "Sandstone tower of an Angkor temple"
+      },
+      {
+        "file": "7.jpg",
+        "alt": "Long carved bas-relief gallery at Angkor Wat"
+      },
+      {
+        "file": "8.jpg",
+        "alt": "The face towers of Bayon temple"
+      },
+      {
+        "file": "9.jpg",
+        "alt": "Stone tower carved with a serene face at Bayon"
+      },
+      {
+        "file": "10.jpg",
+        "alt": "Close-up of a giant carved stone face at Bayon"
+      },
+      {
+        "file": "11.jpg",
+        "alt": "Carved apsara dancers on a temple wall"
+      },
+      {
+        "file": "12.jpg",
+        "alt": "Tree roots growing over temple ruins at Ta Prohm"
+      },
+      {
+        "file": "13.jpg",
+        "alt": "Temple doorway swallowed by giant tree roots"
+      },
+      {
+        "file": "14.jpg",
+        "alt": "Carved guardian figure on a weathered temple wall"
+      },
+      {
+        "file": "15.jpg",
+        "alt": "Jungle canopy stretching to Angkor Wat on the horizon"
+      }
+    ]
+  },
+  {
+    "id": "thailand",
+    "name": "Thailand",
+    "nativeName": "ประเทศไทย",
+    "start": "2016-05-24",
+    "end": "2016-06-19",
+    "timeZone": "Asia/Bangkok",
+    "coords": [14, 100],
+    "capital": "Bangkok",
+    "population": "67 million",
+    "language": "Thai",
+    "currency": "Baht",
+    "banner": "../../media/public/banners/thailand-banner.jpg",
+    "bannerPosition": "50% 60%",
+    "card": "../../media/public/banners/thailand-small.jpg",
+    "flag": "../../media/public/flags/thailand-flag.png",
+    "map": "../../media/public/maps/thailand-map.jpg",
+    "cover": "15.jpg",
+    "photos": [
+      {
+        "file": "1.jpg",
+        "alt": "Bangkok rooftops and skyscrapers on a cloudy day"
+      },
+      {
+        "file": "2.jpg",
+        "alt": "Mother-of-pearl soles of the Reclining Buddha at Wat Pho"
+      },
+      {
+        "file": "3.jpg",
+        "alt": "Bangkok skyline at night"
+      },
+      {
+        "file": "4.jpg",
+        "alt": "Victory Monument roundabout and the Bangkok skyline"
+      },
+      {
+        "file": "5.jpg",
+        "alt": "Buddha head entwined in banyan tree roots in Ayutthaya"
+      },
+      {
+        "file": "6.jpg",
+        "alt": "Swimmers in a turquoise quarry lake near Chiang Mai"
+      },
+      {
+        "file": "7.jpg",
+        "alt": "Beach with granite boulders and a wooden hut"
+      },
+      {
+        "file": "8.jpg",
+        "alt": "Sunset over a bay with rocks and a stilt house"
+      },
+      {
+        "file": "9.jpg",
+        "alt": "Emerald lagoon surrounded by jungle cliffs"
+      },
+      {
+        "file": "10.jpg",
+        "alt": "Turquoise bay framed by palms and limestone islands"
+      },
+      {
+        "file": "11.jpg",
+        "alt": "Palm trees silhouetted on a beach at dusk"
+      },
+      {
+        "file": "12.jpg",
+        "alt": "Island-dotted sea seen from a viewpoint in Ang Thong"
+      },
+      {
+        "file": "13.jpg",
+        "alt": "Person fishing from a rock at the water's edge"
+      },
+      {
+        "file": "14.jpg",
+        "alt": "Limestone cliff rising over a sandy beach in Krabi"
+      },
+      {
+        "file": "15.jpg",
+        "alt": "Longtail boats beside a limestone tower on Phra Nang beach"
+      }
+    ]
+  },
+  {
+    "id": "malaysia",
+    "name": "Malaysia",
+    "nativeName": "Malaysia",
+    "start": "2016-06-19",
+    "end": "2016-07-03",
+    "timeZone": "Asia/Kuala_Lumpur",
+    "coords": [3.1, 101.7],
+    "capital": "Kuala Lumpur",
+    "population": "29.72 million",
+    "language": "Malay",
+    "currency": "Ringgit",
+    "banner": "../../media/public/banners/malaysia-banner.jpg",
+    "bannerPosition": "45% 0",
+    "card": "../../media/public/banners/malaysia-small.jpg",
+    "flag": "../../media/public/flags/malaysia-flag.png",
+    "map": "../../media/public/maps/malaysia-map.jpg",
+    "cover": "6.jpg",
+    "photos": [
+      {
+        "file": "1.jpg",
+        "alt": "Colourful fruit and vegetable stalls in a covered market"
+      },
+      {
+        "file": "2.jpg",
+        "alt": "Shop full of printed fabrics and scarves"
+      },
+      {
+        "file": "3.jpg",
+        "alt": "Small boat on a rocky cove with clear blue water"
+      },
+      {
+        "file": "4.jpg",
+        "alt": "Palm trees leaning over a tropical bay"
+      },
+      {
+        "file": "5.jpg",
+        "alt": "Quiet beach curving towards a jungle headland"
+      },
+      {
+        "file": "6.jpg",
+        "alt": "Leaning palm on a white sand beach"
+      },
+      {
+        "file": "7.jpg",
+        "alt": "Row of colourful beach chalets beneath palm trees"
+      },
+      {
+        "file": "8.jpg",
+        "alt": "Palm silhouettes against towering clouds"
+      },
+      {
+        "file": "9.jpg",
+        "alt": "Monkeys sitting on a branch in the rainforest"
+      },
+      {
+        "file": "10.jpg",
+        "alt": "Pale mushrooms growing along a fallen log"
+      },
+      {
+        "file": "11.jpg",
+        "alt": "Mosque with a white minaret in Melaka"
+      },
+      {
+        "file": "12.jpg",
+        "alt": "White cat lounging on a terracotta floor"
+      },
+      {
+        "file": "13.jpg",
+        "alt": "Melaka river lined with painted houses"
+      },
+      {
+        "file": "14.jpg",
+        "alt": "Street food stall under a skyscraper in Kuala Lumpur"
+      },
+      {
+        "file": "15.jpg",
+        "alt": "Petronas Twin Towers seen from directly below"
+      }
+    ]
+  },
+  {
+    "id": "indonesia",
+    "name": "Indonesia",
+    "nativeName": "Indonesia",
+    "start": "2016-07-03",
+    "end": "2016-07-28",
+    "timeZone": "Asia/Jakarta",
+    "coords": [-6.9, 107.8],
+    "capital": "Jakarta",
+    "population": "249.9 million",
+    "language": "Indonesian",
+    "currency": "Rupiah",
+    "banner": "../../media/public/banners/indonesia-banner.jpg",
+    "bannerPosition": "50% 60%",
+    "card": "../../media/public/banners/indonesia-small.jpg",
+    "flag": "../../media/public/flags/indonesia-flag.png",
+    "map": "../../media/public/maps/indonesia-map.jpg",
+    "cover": "3.jpg",
+    "photos": [
+      {
+        "file": "1.jpg",
+        "alt": "Uluwatu temple perched on a sea cliff in Bali"
+      },
+      {
+        "file": "2.jpg",
+        "alt": "Macaque eating on a temple wall above the ocean"
+      },
+      {
+        "file": "3.jpg",
+        "alt": "Jatiluwih rice terraces stretching into the distance"
+      },
+      {
+        "file": "4.jpg",
+        "alt": "Scarecrow standing over a rice paddy"
+      },
+      {
+        "file": "5.jpg",
+        "alt": "Bundles of harvested rice drying in a field"
+      },
+      {
+        "file": "6.jpg",
+        "alt": "Green cliffs dropping to a long empty beach"
+      },
+      {
+        "file": "7.jpg",
+        "alt": "Turquoise bay below a green hill in Lombok"
+      },
+      {
+        "file": "8.jpg",
+        "alt": "Pilgrims bathing in the holy springs of Tirta Empul"
+      },
+      {
+        "file": "9.jpg",
+        "alt": "White tropical flower among dark leaves"
+      },
+      {
+        "file": "10.jpg",
+        "alt": "Tall waterfall in the rainforest"
+      },
+      {
+        "file": "11.jpg",
+        "alt": "Small hut on stilts in calm sea under big clouds"
+      },
+      {
+        "file": "12.jpg",
+        "alt": "Rocky white-sand beach with a mangrove island"
+      },
+      {
+        "file": "13.jpg",
+        "alt": "Low tide over a reef flat at the beach"
+      },
+      {
+        "file": "14.jpg",
+        "alt": "Tangled mangrove roots"
+      },
+      {
+        "file": "15.jpg",
+        "alt": "Stone stupas on the terraces of Borobudur"
+      }
+    ]
+  },
+  {
+    "id": "greece",
+    "name": "Greece",
+    "nativeName": "Ελλάδα",
+    "start": "2016-07-28",
+    "end": "2016-08-18",
+    "timeZone": "Europe/Athens",
+    "coords": [38, 23.7],
+    "capital": "Athens",
+    "population": "11 million",
+    "language": "Greek",
+    "currency": "Euro",
+    "banner": "../../media/public/banners/greece-banner.jpg",
+    "bannerPosition": "50% 60%",
+    "card": "../../media/public/banners/greece-small.jpg",
+    "cardPosition": "50% 35%",
+    "flag": "../../media/public/flags/greece-flag.png",
+    "map": "../../media/public/maps/greece-map.jpg",
+    "cover": "4.jpg",
+    "photos": [
+      {
+        "file": "1.jpg",
+        "alt": "Acropolis Museum glowing at dusk"
+      },
+      {
+        "file": "2.jpg",
+        "alt": "Caryatid statue in the Acropolis Museum"
+      },
+      {
+        "file": "3.jpg",
+        "alt": "Clear blue Aegean bay seen through pine trees"
+      },
+      {
+        "file": "4.jpg",
+        "alt": "Small rocky islet off a pebble beach"
+      },
+      {
+        "file": "5.jpg",
+        "alt": "Forested coastline at dusk"
+      },
+      {
+        "file": "6.jpg",
+        "alt": "Rocky headland over a calm sea at sunset"
+      },
+      {
+        "file": "7.jpg",
+        "alt": "Olive tree in a park in evening light"
+      },
+      {
+        "file": "8.jpg",
+        "alt": "Sunset over a harbour and the Athens coastline"
+      },
+      {
+        "file": "9.jpg",
+        "alt": "Full moon rising over Athens"
+      },
+      {
+        "file": "10.jpg",
+        "alt": "Quiet whitewashed street in Plaka at night"
+      },
+      {
+        "file": "11.jpg",
+        "alt": "The Acropolis lit up at night"
+      },
+      {
+        "file": "12.jpg",
+        "alt": "Athens city lights under the full moon"
+      }
+    ]
+  }
+]

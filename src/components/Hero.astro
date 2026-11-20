@@ -1,0 +1,35 @@
+---
+/**
+ * Full-width hero with a photo behind a colour overlay. The photo is a real <picture>
+ * (not a CSS background) so the browser can discover and prioritise it: it's the LCP.
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import '../styles/hero.css';
+
+interface Props {
+  image: ImageMetadata;
+  position?: string;
+  tone?: 'blue' | 'grey';
+  class?: string;
+}
+const { image, position = '50% 50%', tone = 'grey', class: className } = Astro.props;
+---
+
+<section class:list={['hero', `hero--${tone}`, className]}>
+  <Picture
+    src={image}
+    alt=""
+    class="hero__image"
+    formats={['avif', 'webp']}
+    widths={[640, 960, 1400]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    style={`object-position: ${position}`}
+  />
+  <div class="hero__content container">
+    <slot />
+  </div>
+  <slot name="corner" />
+</section>

@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import { basePath, formatRange, getCountries } from '../lib/site';
+import { trip } from '../data/trip';
+import '../styles/map.css';
+
+const countries = await getCountries();
+const base = basePath(Astro.url);
+
+const route = {
+  home: trip.home,
+  stops: countries.map((c) => ({
+    name: c.data.name,
+    href: `${base}${c.id}/`,
+    coords: c.data.coords,
+    dates: formatRange(c.data.start, c.data.end),
+  })),
+};
+---
+
+<Base title="Map" description="The route of our four months around Asia, on a map.">
+  <main class="map-page">
+    <div id="map" class="map" data-route={JSON.stringify(route)}></div>
+
+    <!-- The route as text: shown without JS, kept for screen readers once the map is up. -->
+    <section class="map-fallback container">
+      <h1>Our route</h1>
+      <ol>
+        <li>
+          <span>{trip.home.name}</span>
+          <small>Start</small>
+        </li>
+        {route.stops.map((stop) => (
+          <li>
+            <a href={stop.href}>{stop.name}</a>
+            <small>{stop.dates}</small>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </main>
+</Base>
+
+<script>
+  const container = document.getElementById('map');
+  if (container) {
+    import('../scripts/map').then(({ renderMap }) => {
+      renderMap(container);
+      document.querySelector('.map-fallback')?.classList.add('visually-hidden');
+    });
+  }
+</script>

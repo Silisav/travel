@@ -1,0 +1,58 @@
+/* Masonry-style columns, 3 → 4 → 5 across as in 2016. CSS columns flow top-to-bottom. */
+.gallery {
+  columns: 3;
+  column-gap: 6px;
+  padding: 0;
+  list-style: none;
+
+  @media (width >= 768px) {
+    columns: 4;
+  }
+
+  @media (width >= 1200px) {
+    columns: 5;
+  }
+
+  & li {
+    break-inside: avoid;
+    margin-block-end: 6px;
+  }
+
+  & a {
+    display: block;
+    overflow: hidden;
+    background: var(--color-grey-line);
+  }
+
+  & img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+}
+
+.gallery__caption {
+  margin: 4px 0 0;
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+}
+
+/* Skip layout/paint work for the off-screen part of long galleries. */
+@supports (content-visibility: auto) {
+  .photos {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1200px;
+  }
+}
+
+/* Lightbox caption (only shown for photos that have one) */
+.pswp__caption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 10px 20px 16px;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--color-white);
+  background: rgb(0 0 0 / 50%);
+}

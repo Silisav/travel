@@ -1,0 +1,151 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Stripe from '../components/Stripe.astro';
+import Globe from '../icons/globe.svg';
+import DayCount from '../icons/daycount.svg';
+import Calendar from '../icons/calendar.svg';
+import homeBanner from '../../media/public/banners/homepage-vietnam.jpg';
+import mapBanner from '../../media/public/banners/gmap-southeast-asia.jpg';
+import { basePath, formatRange, getCountries, isPrivatePath } from '../lib/site';
+import { getPrivateVideo } from '../lib/private-media';
+import { getCover } from '../lib/photos';
+import { tripDays } from '../data/trip';
+import '../styles/home.css';
+import '../styles/timeline.css';
+
+const countries = await getCountries();
+const base = basePath(Astro.url);
+const video = isPrivatePath(Astro.url.pathname) ? getPrivateVideo() : undefined;
+const months = Math.round(tripDays / 30);
+// One of our own photos per country for the placeholder slideshow (never the hero banners).
+const covers = (await Promise.all(countries.map(getCover))).filter((p) => p !== undefined);
+---
+
+<Base title="Around Asia">
+  <main>
+    <Hero image={homeBanner} position="50% 90%" tone="blue" class="home-hero">
+      <h1>Follow our journey</h1>
+      <h2>Around Asia</h2>
+      <Globe class="hero__icon hero__icon--globe" aria-hidden="true" />
+      <dl class="home-hero__stats">
+        <div>
+          <dt>months</dt>
+          <dd>{months}</dd>
+        </div>
+        <div>
+          <dt>countries</dt>
+          <dd>{countries.length}</dd>
+        </div>
+      </dl>
+      <p class="hero__corner" slot="corner">
+        <DayCount aria-hidden="true" />
+        {tripDays} days
+      </p>
+    </Hero>
+
+    <Stripe>
+      <p class="intro" data-today>
+        We are back in Europe!
+      </p>
+    </Stripe>
+
+    <section class="map-cta">
+      <Picture
+        formats={['avif', 'webp']}
+        src={mapBanner}
+        alt=""
+        widths={[640, 1200]}
+        sizes="100vw"
+      />
+      <a href={`${base}map/`} class="btn">
+        View map
+      </a>
+    </section>
+
+    <Stripe arrow>
+      <h2>Destinations</h2>
+    </Stripe>
+
+    <section class="timeline" aria-labelledby="destinations">
+      <h2 id="destinations" class="visually-hidden">
+        Destinations
+      </h2>
+      <ol class="container">
+        {countries.map((c) => (
+          <li class="timeline__item">
+            <a href={`${base}${c.id}/`} class="timeline__card">
+              <Picture
+                formats={['avif', 'webp']}
+                src={c.data.card}
+                alt=""
+                widths={[400, 600, 800]}
+                sizes="(width >= 768px) 48vw, 100vw"
+                style={`object-position: ${c.data.cardPosition}`}
+              />
+              {c.data.name}
+            </a>
+            <div class="timeline__date">
+              <time datetime={c.data.start.toISOString().slice(0, 10)}>
+                <Calendar aria-hidden="true" />
+                {formatRange(c.data.start, c.data.end)}
+              </time>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <Stripe>
+      <div class="journey-end">
+        <div>
+          <h2>Our journey is over!</h2>
+          <p>
+            After {months} months of travelling around Asia, our journey has come to an end. Planes,
+            trains, boats, buses, mini-buses, cars, tuk-tuks, motorbikes, bicycles and a lot of
+            walking took us to some amazing places.
+            {video
+              ? ' One photo per day made this 30 seconds video, which is the best souvenir we brought back!'
+              : ' Here are a few of them.'}
+          </p>
+          <p>
+            <i>“Travel makes one modest. You see what a tiny place you occupy in the world.”</i>
+            <br />– Gustave Flaubert
+          </p>
+        </div>
+        {video ? (
+          <video controls playsinline preload="none" poster={video.poster} aria-label={video.alt}>
+            <source src={video.url} type="video/mp4" />
+          </video>
+        ) : (
+          <figure class="slideshow" style={`--count: ${covers.length}`} aria-hidden="true">
+            {covers.map((cover, i) => (
+              <Picture
+                formats={['avif', 'webp']}
+                src={cover.image}
+                alt=""
+                widths={[480, 800]}
+                sizes="(width >= 768px) 50vw, 100vw"
+                style={`--i: ${i}`}
+              />
+            ))}
+          </figure>
+        )}
+      </div>
+    </Stripe>
+  </main>
+</Base>
+
+<script>
+  // "Today it's Friday 20 November and we are back in Europe!", as on the 2016 site.
+  const intro = document.querySelector('[data-today]');
+  if (intro) {
+    const today = new Intl.DateTimeFormat('en-GB', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+    }).format(new Date());
+    intro.textContent = `Today it's ${today} and we are back in Europe!`;
+  }
+</script>

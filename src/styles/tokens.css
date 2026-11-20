@@ -1,0 +1,34 @@
+/* Design tokens, ported from the 2016 site's Sass (see git history before the rebuild). */
+:root {
+  /* Colours */
+  --color-blue: #092539;
+  --color-yellow: #dfa903;
+  --color-olive: #bcbb81;
+  --color-white: #fff;
+  --color-grey-bg: #f2f2f2;
+  --color-grey-text: #545454;
+  --color-grey-line: #ddd;
+  --color-grey-circle: #7d7d7d;
+
+  --color-header-bg: rgb(9 37 57 / 80%);
+  --color-overlay: rgb(84 84 84 / 60%);
+  --color-faint-on-dark: rgb(255 255 255 / 30%);
+
+  /* Type: font files and fallbacks come from Astro's Fonts API (astro.config.mjs) */
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-baskerville);
+
+  /* Layout */
+  --header-height: 60px;
+
+  /* Motion */
+  --duration: 0.7s;
+  --duration-fast: 0.2s;
+  --ease-nav: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+}
+
+@media (width >= 768px) {
+  :root {
+    --header-height: 74px;
+  }
+}

@@ -1,22 +1,47 @@
 {
-  "name": "Travel-photo-journal",
-  "version": "0.1.0",
-  "dependencies": {
-    "bootstrap-sass": "3.3.7"
+  "name": "asia-travel-journal",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Photo journal of a 2016 trip around Asia: asia.vasilis-tsirimokos.com",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test \"tests/**/*.test.{mjs,ts}\"",
+    "test:e2e": "playwright test",
+    "magic-link": "node scripts/make-magic-link.ts",
+    "verify": "npm run check && npm run lint && npm run format:check && npm run build && npm test"
   },
   "devDependencies": {
-    "grunt": "latest",
-    "grunt-browser-sync": "latest",
-    "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-copy": "latest",
-    "grunt-contrib-cssmin": "^3.0.0",
-    "grunt-contrib-imagemin": "latest",
-    "grunt-contrib-jshint": "^2.0.0",
-    "grunt-contrib-uglify": "^4.0.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-processhtml": "latest",
-    "grunt-sass": "^3.0.1",
-    "jshint-stylish": "latest",
-    "node-sass": "^4.9.3"
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/css": "^2.0.1",
+    "@eslint/js": "^10.0.1",
+    "@netlify/edge-functions": "^4.0.4",
+    "@playwright/test": "^1.65.1",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^24.19.2",
+    "astro": "^7.4.13",
+    "eslint": "^10.15.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "exif-reader": "^2.0.3",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "prettier-plugin-astro": "^1.1.2",
+    "sharp": "^0.35.5",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.73.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "photoswipe": "^5.4.4"
   }
 }

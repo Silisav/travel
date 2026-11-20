@@ -1,0 +1,161 @@
+/* Fixed translucent top bar with the logo and the round menu button. */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  /* above Leaflet's panes and controls (up to 1000), as in 2016 */
+  z-index: 1030;
+  min-block-size: var(--header-height);
+  background: var(--color-header-bg);
+}
+
+/* Same grid as 2016 (Bootstrap container > row > 2 columns) so logo and button land on the same pixels. */
+.site-header__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-block-size: var(--header-height);
+  padding-inline: 0;
+}
+
+.site-header__col {
+  position: relative;
+  padding-inline: 15px;
+}
+
+.site-header__logo {
+  display: inline-block;
+  margin-block-start: 10px;
+  color: var(--color-white);
+
+  @media (width >= 768px) {
+    margin-block-start: 13px;
+  }
+
+  & svg {
+    inline-size: 100px;
+    block-size: 40px;
+
+    @media (width >= 768px) {
+      inline-size: 150px;
+      block-size: 50px;
+    }
+  }
+}
+
+/*
+ * The round hamburger button (2016 design). Inside the open menu, the same component
+ * morphs into a "back" arrow: rotated, lines folded, ring drawn (see site-nav.css).
+ */
+.nav-button {
+  position: absolute;
+  inset: 5px 5% auto auto;
+  inline-size: 54px;
+  block-size: 54px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-white);
+  background: transparent;
+  cursor: pointer;
+
+  @media (width >= 768px) {
+    inset-block-start: 10px;
+  }
+
+  @media (width >= 1200px) {
+    inset-inline-end: 0;
+  }
+}
+
+.nav-button__ring {
+  position: absolute;
+  inset: 0;
+  inline-size: 54px;
+  block-size: 54px;
+  pointer-events: none;
+
+  & circle {
+    fill: none;
+    stroke: #656e79;
+    stroke-width: 1;
+    stroke-dasharray: 157 157;
+    stroke-dashoffset: 157;
+  }
+}
+
+.nav-button__icon,
+.nav-button__icon::before,
+.nav-button__icon::after {
+  position: absolute;
+  inline-size: 22px;
+  block-size: 2px;
+  background: currentColor;
+}
+
+.nav-button__icon {
+  inset: 50% auto auto 50%;
+  translate: -50% -50%;
+
+  &::before,
+  &::after {
+    content: '';
+    inset: 0 auto auto 0;
+    inline-size: 100%;
+  }
+
+  &::before {
+    transform-origin: left top;
+    transform: translateY(-6px);
+  }
+
+  &::after {
+    transform-origin: left bottom;
+    transform: translateY(6px);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .nav-button .nav-button__icon::before,
+  .nav-button .nav-button__icon::after {
+    transition:
+      transform 0.5s,
+      inline-size 0.5s,
+      top 0.3s;
+  }
+
+  /* Hover spreads the lines (2016). */
+  .site-header .nav-button:hover .nav-button__icon {
+    &::before {
+      top: -2px;
+    }
+
+    &::after {
+      top: 2px;
+    }
+  }
+}
+
+/*
+ * see SiteNav.astro: the hover look decided at the moment of closing, applied to both copies of
+ * the button so they hand over in the identical state.
+ */
+.site-header .nav-button--spread .nav-button__icon,
+.site-nav:not([open]) .nav-button--spread .nav-button__icon {
+  &::before {
+    top: -2px;
+  }
+
+  &::after {
+    top: 2px;
+  }
+}
+
+/* see SiteNav.astro: hidden while the menu's own copy of this button is showing */
+.nav-button--covered {
+  opacity: 0;
+}
+
+/* see SiteNav.astro: no second hover animation when the menu hands back to this button */
+.nav-button--handover .nav-button__icon::before,
+.nav-button--handover .nav-button__icon::after {
+  transition: none;
+}

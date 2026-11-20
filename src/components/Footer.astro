@@ -1,0 +1,20 @@
+---
+import '../styles/footer.css';
+import { isPrivatePath } from '../lib/site';
+
+const isPrivate = isPrivatePath(Astro.url.pathname);
+---
+
+<footer class="site-footer">
+  <p class="container">
+    Designed &amp; coded by <a href="https://www.vasilis-tsirimokos.com">Vasilis Tsirimokos</a>
+    {isPrivate && (
+      <>
+        <span aria-hidden="true"> · </span>
+        <a href="/logout/" class="site-footer__signout">
+          Sign out
+        </a>
+      </>
+    )}
+  </p>
+</footer>

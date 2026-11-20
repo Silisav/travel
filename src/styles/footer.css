@@ -1,0 +1,27 @@
+.site-footer {
+  padding-block: 20px;
+  text-align: center;
+  color: var(--color-white);
+  background: var(--color-blue);
+
+  & p {
+    margin-block: 0;
+  }
+
+  & a {
+    color: var(--color-yellow);
+    text-decoration: underline;
+    text-decoration-color: rgb(223 169 3 / 45%);
+    text-underline-offset: 3px;
+  }
+}
+
+/* Private pages only: a quiet way out (approved addition) */
+.site-footer__signout {
+  opacity: 0.75;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+  }
+}
