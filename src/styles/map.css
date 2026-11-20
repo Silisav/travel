@@ -1,0 +1,66 @@
+.map-page {
+  display: grid;
+  min-block-size: 100dvh;
+  padding-block-start: var(--header-height);
+}
+
+.map {
+  position: relative;
+  min-block-size: 70dvh;
+  background: #e9e4d8;
+}
+
+.map-fallback {
+  padding-block: 40px;
+  text-align: center;
+
+  & h1 {
+    margin: 0 0 24px;
+    font-family: var(--font-serif);
+    font-size: 23px;
+    font-weight: 400;
+  }
+
+  & ol {
+    display: grid;
+    gap: 0;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+  }
+
+  & li {
+    position: relative;
+    display: grid;
+    padding: 12px 0 12px;
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+
+    /* dotted route line between stops */
+    &:not(:last-child)::after {
+      content: '';
+      justify-self: center;
+      inline-size: 0;
+      block-size: 18px;
+      margin-block-start: 10px;
+      border-inline-start: 3px dotted var(--color-yellow);
+    }
+  }
+
+  & a {
+    color: var(--color-blue);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-yellow);
+    }
+  }
+
+  & small {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-grey-circle);
+  }
+}

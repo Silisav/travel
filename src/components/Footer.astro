@@ -1,25 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
 import '../styles/footer.css';
-
-const countries = (await getCollection('countries')).sort(
-  (a, b) => a.data.start.getTime() - b.data.start.getTime(),
-);
 ---
 
 <footer class="site-footer">
-  <nav class="container site-footer__nav" aria-label="Destinations">
-    <ul>
-      <li>
-        <a href="/map/">Map</a>
-      </li>
-      {countries.map((c) => (
-        <li>
-          <a href={`/${c.id}/`}>{c.data.name}</a>
-        </li>
-      ))}
-    </ul>
-  </nav>
   <p class="container">
     Designed &amp; coded by <a href="https://www.vasilis-tsirimokos.com">Vasilis Tsirimokos</a>
   </p>

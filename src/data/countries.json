@@ -12,9 +12,11 @@
     "language": "Japanese",
     "currency": "Yen",
     "banner": "../../media/public/banners/japan-banner.jpg",
+    "bannerPosition": "100% 0",
     "card": "../../media/public/banners/japan-small.jpg",
     "flag": "../../media/public/flags/japan-flag.png",
     "map": "../../media/public/maps/japan-map.jpg",
+    "cover": 13,
     "photos": [
       {
         "src": "../../media/public/photos/japan/1.jpg",
@@ -91,9 +93,11 @@
     "language": "Vietnamese",
     "currency": "Đồng",
     "banner": "../../media/public/banners/vietnam-banner.jpg",
+    "bannerPosition": "50% 50%",
     "card": "../../media/public/banners/vietnam-small.jpg",
     "flag": "../../media/public/flags/vietnam-flag.png",
     "map": "../../media/public/maps/vietnam-map.jpg",
+    "cover": 6,
     "photos": [
       {
         "src": "../../media/public/photos/vietnam/1.jpg",
@@ -170,9 +174,11 @@
     "language": "Khmer",
     "currency": "Riel",
     "banner": "../../media/public/banners/cambodia-banner.jpg",
+    "bannerPosition": "55% 0",
     "card": "../../media/public/banners/cambodia-small.jpg",
     "flag": "../../media/public/flags/cambodia-flag.png",
     "map": "../../media/public/maps/cambodia-map.jpg",
+    "cover": 8,
     "photos": [
       {
         "src": "../../media/public/photos/cambodia/1.jpg",
@@ -249,9 +255,11 @@
     "language": "Thai",
     "currency": "Baht",
     "banner": "../../media/public/banners/thailand-banner.jpg",
+    "bannerPosition": "50% 60%",
     "card": "../../media/public/banners/thailand-small.jpg",
     "flag": "../../media/public/flags/thailand-flag.png",
     "map": "../../media/public/maps/thailand-map.jpg",
+    "cover": 15,
     "photos": [
       {
         "src": "../../media/public/photos/thailand/1.jpg",
@@ -261,7 +269,10 @@
         "src": "../../media/public/photos/thailand/2.jpg",
         "alt": "Mother-of-pearl soles of the Reclining Buddha at Wat Pho"
       },
-      { "src": "../../media/public/photos/thailand/3.jpg", "alt": "Bangkok skyline at night" },
+      {
+        "src": "../../media/public/photos/thailand/3.jpg",
+        "alt": "Bangkok skyline at night"
+      },
       {
         "src": "../../media/public/photos/thailand/4.jpg",
         "alt": "Victory Monument roundabout and the Bangkok skyline"
@@ -325,9 +336,11 @@
     "language": "Malay",
     "currency": "Ringgit",
     "banner": "../../media/public/banners/malaysia-banner.jpg",
+    "bannerPosition": "45% 0",
     "card": "../../media/public/banners/malaysia-small.jpg",
     "flag": "../../media/public/flags/malaysia-flag.png",
     "map": "../../media/public/maps/malaysia-map.jpg",
+    "cover": 6,
     "photos": [
       {
         "src": "../../media/public/photos/malaysia/1.jpg",
@@ -404,9 +417,11 @@
     "language": "Indonesian",
     "currency": "Rupiah",
     "banner": "../../media/public/banners/indonesia-banner.jpg",
+    "bannerPosition": "50% 60%",
     "card": "../../media/public/banners/indonesia-small.jpg",
     "flag": "../../media/public/flags/indonesia-flag.png",
     "map": "../../media/public/maps/indonesia-map.jpg",
+    "cover": 3,
     "photos": [
       {
         "src": "../../media/public/photos/indonesia/1.jpg",
@@ -460,7 +475,10 @@
         "src": "../../media/public/photos/indonesia/13.jpg",
         "alt": "Low tide over a reef flat at the beach"
       },
-      { "src": "../../media/public/photos/indonesia/14.jpg", "alt": "Tangled mangrove roots" },
+      {
+        "src": "../../media/public/photos/indonesia/14.jpg",
+        "alt": "Tangled mangrove roots"
+      },
       {
         "src": "../../media/public/photos/indonesia/15.jpg",
         "alt": "Stone stupas on the terraces of Borobudur"
@@ -480,9 +498,12 @@
     "language": "Greek",
     "currency": "Euro",
     "banner": "../../media/public/banners/greece-banner.jpg",
+    "bannerPosition": "50% 60%",
     "card": "../../media/public/banners/greece-small.jpg",
+    "cardPosition": "50% 35%",
     "flag": "../../media/public/flags/greece-flag.png",
     "map": "../../media/public/maps/greece-map.jpg",
+    "cover": 4,
     "photos": [
       {
         "src": "../../media/public/photos/greece/1.jpg",
@@ -500,7 +521,10 @@
         "src": "../../media/public/photos/greece/4.jpg",
         "alt": "Small rocky islet off a pebble beach"
       },
-      { "src": "../../media/public/photos/greece/5.jpg", "alt": "Forested coastline at dusk" },
+      {
+        "src": "../../media/public/photos/greece/5.jpg",
+        "alt": "Forested coastline at dusk"
+      },
       {
         "src": "../../media/public/photos/greece/6.jpg",
         "alt": "Rocky headland over a calm sea at sunset"
@@ -513,12 +537,18 @@
         "src": "../../media/public/photos/greece/8.jpg",
         "alt": "Sunset over a harbour and the Athens coastline"
       },
-      { "src": "../../media/public/photos/greece/9.jpg", "alt": "Full moon rising over Athens" },
+      {
+        "src": "../../media/public/photos/greece/9.jpg",
+        "alt": "Full moon rising over Athens"
+      },
       {
         "src": "../../media/public/photos/greece/10.jpg",
         "alt": "Quiet whitewashed street in Plaka at night"
       },
-      { "src": "../../media/public/photos/greece/11.jpg", "alt": "The Acropolis lit up at night" },
+      {
+        "src": "../../media/public/photos/greece/11.jpg",
+        "alt": "The Acropolis lit up at night"
+      },
       {
         "src": "../../media/public/photos/greece/12.jpg",
         "alt": "Athens city lights under the full moon"

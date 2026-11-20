@@ -81,3 +81,25 @@ test(
     );
   },
 );
+
+test(
+  'private pages only link to other private pages',
+  { skip: !existsSync(join(DIST, 'private')) ? 'no private build' : false },
+  () => {
+    const offenders = [...walk(join(DIST, 'private'))]
+      .filter((path) => path.endsWith('.html'))
+      .flatMap((path) => {
+        const html = readFileSync(path, 'utf8');
+        // page links: internal hrefs ending in "/" (assets like /_astro/x.webp are fine)
+        return [...html.matchAll(/href="(\/[^"#?]*\/)"/g)]
+          .map((match) => match[1])
+          .filter((href) => !href.startsWith('/private/'))
+          .map((href) => `${relative(DIST, path)} → ${href}`);
+      });
+    assert.deepEqual(
+      offenders,
+      [],
+      `private pages link out to public pages:\n${offenders.join('\n')}`,
+    );
+  },
+);

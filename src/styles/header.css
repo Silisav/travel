@@ -7,18 +7,27 @@
   background: var(--color-header-bg);
 }
 
+/* Same grid as 2016 (Bootstrap container > row > 2 columns) so logo and button land on the same pixels. */
 .site-header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  block-size: var(--header-height);
-  padding-inline: 5% calc(5% - 10px);
-  max-inline-size: calc(var(--container) + 10%);
-  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-block-size: var(--header-height);
+  padding-inline: 0;
+}
+
+.site-header__col {
+  position: relative;
+  padding-inline: 15px;
 }
 
 .site-header__logo {
+  display: inline-block;
+  margin-block-start: 10px;
   color: var(--color-white);
+
+  @media (width >= 768px) {
+    margin-block-start: 13px;
+  }
 
   & svg {
     inline-size: 100px;
@@ -32,11 +41,12 @@
 }
 
 /*
- * The round hamburger button. The same component, in its "open" state, is the close
- * button inside the nav dialog, sitting exactly on top of this one.
+ * The round hamburger button (2016 design). Inside the open menu, the same component
+ * morphs into a "back" arrow: rotated, lines folded, ring drawn (see site-nav.css).
  */
 .nav-button {
-  position: relative;
+  position: absolute;
+  inset: 5px 5% auto auto;
   inline-size: 54px;
   block-size: 54px;
   padding: 0;
@@ -45,17 +55,29 @@
   color: var(--color-white);
   background: transparent;
   cursor: pointer;
-  transition: transform calc(var(--duration) - 0.2s);
 
-  /* thin ring, drawn in full on the close button */
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    border: 1px solid #656e79;
-    border-radius: 50%;
-    opacity: 0;
-    transition: opacity 0.4s 0.3s;
+  @media (width >= 768px) {
+    inset-block-start: 10px;
+  }
+
+  @media (width >= 1200px) {
+    inset-inline-end: 0;
+  }
+}
+
+.nav-button__ring {
+  position: absolute;
+  inset: 0;
+  inline-size: 54px;
+  block-size: 54px;
+  pointer-events: none;
+
+  & circle {
+    fill: none;
+    stroke: #656e79;
+    stroke-width: 1;
+    stroke-dasharray: 157 157;
+    stroke-dashoffset: 157;
   }
 }
 
@@ -76,10 +98,7 @@
   &::after {
     content: '';
     inset: 0 auto auto 0;
-    transition:
-      transform 0.5s,
-      inline-size calc(var(--duration) - 0.2s),
-      top 0.3s;
+    inline-size: 100%;
   }
 
   &::before {
@@ -93,8 +112,16 @@
   }
 }
 
-@media (hover: hover) {
-  .nav-button:not(.nav-button--close):hover .nav-button__icon {
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .nav-button .nav-button__icon::before,
+  .nav-button .nav-button__icon::after {
+    transition:
+      transform 0.5s,
+      inline-size 0.5s,
+      top 0.3s;
+  }
+
+  .site-header .nav-button:hover .nav-button__icon {
     &::before {
       top: -2px;
     }

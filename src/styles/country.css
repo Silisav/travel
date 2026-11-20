@@ -1,0 +1,90 @@
+.country-hero {
+  & h1 {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  & h2 {
+    margin: 0 0 30px;
+    font-weight: 400;
+  }
+
+  & .btn {
+    margin-block-start: 20px;
+
+    @media (width >= 768px) {
+      margin-block-start: 30px;
+    }
+
+    @media (width >= 1200px) {
+      margin-block-start: 40px;
+    }
+  }
+}
+
+/* Flag | facts | map, three equal columns as in 2016 */
+.country-info {
+  display: grid;
+  gap: 40px 30px;
+  align-items: start;
+  padding-block: 60px;
+
+  @media (width >= 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  & img {
+    inline-size: 80%;
+    margin-inline: auto;
+    border: 1px solid var(--color-grey-line);
+
+    @media (width >= 480px) {
+      inline-size: 60%;
+    }
+
+    @media (width >= 768px) {
+      inline-size: 100%;
+    }
+  }
+
+  & dl {
+    margin: 0 0 0 10%;
+    font-family: var(--font-serif);
+    font-size: 15px;
+
+    @media (width >= 480px) {
+      margin-inline-start: 20%;
+    }
+
+    @media (width >= 768px) {
+      margin-inline-start: 0;
+    }
+  }
+
+  & dl div {
+    position: relative;
+    margin-block-end: 20px;
+    padding-inline-start: 40px;
+  }
+
+  & dl svg {
+    position: absolute;
+    inset: 0 auto auto 0;
+    inline-size: 30px;
+    block-size: 20px;
+    color: var(--color-blue);
+  }
+
+  & :where(dt, dd) {
+    display: inline;
+    margin: 0;
+  }
+
+  & dt {
+    margin-inline-end: 0.3em;
+  }
+}
+
+.photos {
+  padding-block: 80px;
+}

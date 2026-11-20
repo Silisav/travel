@@ -2,24 +2,34 @@
 import '../styles/header.css';
 import Logo from '../icons/travel.svg';
 import SiteNav from './SiteNav.astro';
+import { basePath } from '../lib/site';
+
+const base = basePath(Astro.url);
 ---
 
 <header class="site-header">
-  <div class="site-header__inner">
-    <a href="/" class="site-header__logo">
-      <Logo aria-hidden="true" />
-      <span class="visually-hidden">Travel: back to the homepage</span>
-    </a>
-    <button
-      type="button"
-      class="nav-button"
-      command="show-modal"
-      commandfor="site-nav"
-      aria-haspopup="dialog"
-    >
-      <span class="visually-hidden">Menu</span>
-      <span class="nav-button__icon" aria-hidden="true"></span>
-    </button>
+  <div class="container site-header__inner">
+    <div class="site-header__col">
+      <a href={base} class="site-header__logo">
+        <Logo aria-hidden="true" />
+        <span class="visually-hidden">Travel: back to the homepage</span>
+      </a>
+    </div>
+    <div class="site-header__col">
+      <button
+        type="button"
+        class="nav-button"
+        command="show-modal"
+        commandfor="site-nav"
+        aria-haspopup="dialog"
+      >
+        <span class="visually-hidden">Menu</span>
+        <span class="nav-button__icon" aria-hidden="true"></span>
+        <svg class="nav-button__ring" viewBox="0 0 54 54" aria-hidden="true">
+          <circle cx="27" cy="27" r="25"></circle>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 

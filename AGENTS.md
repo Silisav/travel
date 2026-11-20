@@ -29,7 +29,10 @@ Use the Node version in `.nvmrc` (24 LTS).
 
 ## Layout
 
-- `src/pages/`: routes, with clean URLs (`/japan/`)
+- `src/pages/`: routes, with clean URLs (`/japan/`). `src/pages/private/[...path].astro` mirrors every page under `/private/`, and is only built when the submodule exists.
+- `src/views/`: the page templates (Home, Country, Map), shared by public and private routes. Links must use `basePath(Astro.url)` from `src/lib/site.ts` so private pages link to private pages. A test enforces this.
+- `src/lib/`: `site.ts` (countries, base path, date formatting) and `private-media.ts` (private photos and video, empty without the submodule)
+- `integrations/private-media.mjs`: serves and copies private media to `/private/media/`
 - `src/layouts/`, `src/components/`: Astro components
 - `src/styles/`: `tokens.css` (design tokens), `base.css`, component CSS
 - `public/`: copied as-is. Includes `_redirects` (old `*.html` → new URLs) and `robots.txt`.

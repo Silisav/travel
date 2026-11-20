@@ -1,41 +1,47 @@
 ---
-import { getCollection } from 'astro:content';
 import '../styles/site-nav.css';
 import Logo from '../icons/travel.svg';
+import { basePath, getCountries } from '../lib/site';
 
-const countries = (await getCollection('countries')).sort(
-  (a, b) => a.data.start.getTime() - b.data.start.getTime(),
-);
+const countries = await getCountries();
+const base = basePath(Astro.url);
 const path = Astro.url.pathname;
 const current = (href: string) => (path === href ? 'page' : undefined);
 ---
 
 <dialog id="site-nav" class="site-nav" closedby="any" aria-label="Site navigation">
-  <div class="site-header__inner">
-    <a href="/" class="site-header__logo">
-      <Logo aria-hidden="true" />
-      <span class="visually-hidden">Travel: back to the homepage</span>
-    </a>
-    <button
-      type="button"
-      class="nav-button nav-button--close"
-      command="close"
-      commandfor="site-nav"
-    >
-      <span class="visually-hidden">Close menu</span>
-      <span class="nav-button__icon" aria-hidden="true"></span>
-    </button>
+  <div class="container site-header__inner">
+    <div class="site-header__col">
+      <a href={base} class="site-header__logo">
+        <Logo aria-hidden="true" />
+        <span class="visually-hidden">Travel: back to the homepage</span>
+      </a>
+    </div>
+    <div class="site-header__col">
+      <button
+        type="button"
+        class="nav-button nav-button--close"
+        command="close"
+        commandfor="site-nav"
+      >
+        <span class="visually-hidden">Close menu</span>
+        <span class="nav-button__icon" aria-hidden="true"></span>
+        <svg class="nav-button__ring" viewBox="0 0 54 54" aria-hidden="true">
+          <circle cx="27" cy="27" r="25"></circle>
+        </svg>
+      </button>
+    </div>
   </div>
 
   <nav class="site-nav__wrapper">
     <ul class="site-nav__primary">
       <li>
-        <a href="/" aria-current={current('/')}>
+        <a href={base} aria-current={current(base)}>
           Home
         </a>
       </li>
       <li>
-        <a href="/map/" aria-current={current('/map/')}>
+        <a href={`${base}map/`} aria-current={current(`${base}map/`)}>
           Map
         </a>
       </li>
@@ -45,7 +51,7 @@ const current = (href: string) => (path === href ? 'page' : undefined);
       <ul>
         {countries.map((c) => (
           <li>
-            <a href={`/${c.id}/`} aria-current={current(`/${c.id}/`)}>
+            <a href={`${base}${c.id}/`} aria-current={current(`${base}${c.id}/`)}>
               {c.data.name}
             </a>
           </li>

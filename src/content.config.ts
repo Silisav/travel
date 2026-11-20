@@ -36,12 +36,18 @@ const countries = defineCollection({
         language: z.string(),
         currency: z.string(),
         banner: ctx.image(),
+        /** object-position for the hero crop, mainly for narrow screens */
+        bannerPosition: z.string().default('50% 50%'),
         card: ctx.image(),
+        cardPosition: z.string().default('50% 50%'),
         flag: ctx.image(),
         map: ctx.image(),
+        /** 1-based number of one of our own landscape photos, used where a single photo stands for the country */
+        cover: z.number().int().min(1).default(1),
         photos: z.array(photo(ctx)).min(1),
       })
-      .refine((c) => c.end >= c.start, 'end must not be before start'),
+      .refine((c) => c.end >= c.start, 'end must not be before start')
+      .refine((c) => c.cover <= c.photos.length, 'cover must point at an existing photo'),
 });
 
 /**

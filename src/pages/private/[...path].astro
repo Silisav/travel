@@ -1,0 +1,34 @@
+---
+/**
+ * The private mirror of the site: same templates, plus personal photos and the video.
+ * Built only when the private submodule is present; served behind the /private/ gate.
+ */
+import type { GetStaticPaths } from 'astro';
+import Home from '../../views/Home.astro';
+import Country from '../../views/Country.astro';
+import MapView from '../../views/Map.astro';
+import { hasPrivateMedia } from '../../content.config';
+import { getCountries, type Country as CountryEntry } from '../../lib/site';
+
+export const getStaticPaths = (async () => {
+  if (!hasPrivateMedia) return [];
+  const countries = await getCountries();
+  return [
+    { params: { path: undefined }, props: { view: 'home' as const } },
+    { params: { path: 'map' }, props: { view: 'map' as const } },
+    ...countries.map((country) => ({
+      params: { path: country.id },
+      props: { view: 'country' as const, country },
+    })),
+  ];
+}) satisfies GetStaticPaths;
+
+const { view, country } = Astro.props as {
+  view: 'home' | 'map' | 'country';
+  country?: CountryEntry;
+};
+---
+
+{view === 'home' && <Home />}
+{view === 'map' && <MapView />}
+{view === 'country' && country && <Country country={country} />}

@@ -1,4 +1,11 @@
-/* Full-screen navigation, as a native modal <dialog>: focus handling, Esc and inertness for free. */
+/*
+ * Full-screen navigation as a native modal <dialog>: focus handling, Esc and inertness for free.
+ *
+ * 2016 choreography, reproduced: the page slides away to the left and uncovers the menu
+ * (here: the dialog reveals itself with clip-path in step with the page), the menu content
+ * drifts in from the right, and the button rotates into a "back" arrow while a ring draws.
+ * Without motion support or with reduced motion it simply appears.
+ */
 .site-nav {
   position: fixed;
   inset: 0;
@@ -14,8 +21,9 @@
   background: var(--color-blue);
   font-family: var(--font-serif);
 
+  /* the page stays visible behind, it's what slides away */
   &::backdrop {
-    background: var(--color-blue);
+    background: transparent;
   }
 
   @supports (overscroll-behavior: contain) {
@@ -33,34 +41,34 @@
   }
 }
 
-/* Same bar as the header, so the logo and button stay put when the menu opens. */
+/* Same bar as the page header, so the logo and the button sit exactly where they were. */
 .site-nav > .site-header__inner {
   position: absolute;
   inset: 0 0 auto;
+  z-index: 1;
+  margin-inline: auto;
 }
 
-/* Close button: the menu button in its open state, at the same spot as the trigger. */
-.nav-button--close {
-  transform: rotate(-180deg);
+/* Open state of the button: back arrow with a drawn ring. */
+.site-nav[open] .nav-button--close {
+  rotate: -180deg;
+  background: var(--color-blue);
 
-  &::after {
-    border-color: rgb(255 255 255 / 85%);
-    opacity: 1;
+  & .nav-button__icon::before,
+  & .nav-button__icon::after {
+    inline-size: 50%;
   }
 
-  & .nav-button__icon {
-    &::before,
-    &::after {
-      inline-size: 50%;
-    }
+  & .nav-button__icon::before {
+    transform: rotate(-45deg);
+  }
 
-    &::before {
-      transform: rotate(-45deg);
-    }
+  & .nav-button__icon::after {
+    transform: rotate(45deg);
+  }
 
-    &::after {
-      transform: rotate(45deg);
-    }
+  & circle {
+    stroke-dashoffset: 0;
   }
 }
 
@@ -141,7 +149,7 @@
   }
 
   & a {
-    font-size: 1.125rem;
+    font-size: 16px;
 
     @media (width >= 1200px) {
       font-size: 1.5625rem;
@@ -149,31 +157,100 @@
   }
 }
 
-/* Slide in from the right, as in 2016. Progressive: no animation where unsupported. */
+/* ---------- Motion (2016 timings) ---------- */
 @media (prefers-reduced-motion: no-preference) {
   @supports (transition-behavior: allow-discrete) {
+    :root {
+      --page-slide: 0.7s cubic-bezier(0.91, 0.01, 0.6, 0.99);
+    }
+
+    /* the page slides out to the left… */
+    body > :is(main, .site-footer) {
+      transition: translate var(--page-slide);
+    }
+
+    html:has(.site-nav[open]) body > :is(main, .site-footer) {
+      translate: -100% 0;
+    }
+
+    /* …and uncovers the menu: its visible edge tracks the page's right edge */
     .site-nav {
+      clip-path: inset(0 0 0 100%);
       transition:
-        translate var(--duration) var(--ease-nav),
-        opacity var(--duration) var(--ease-nav),
-        display var(--duration) allow-discrete,
-        overlay var(--duration) allow-discrete;
-      translate: 50% 0;
-      opacity: 0;
+        clip-path var(--page-slide),
+        display 0.7s allow-discrete,
+        overlay 0.7s allow-discrete;
 
       &[open] {
-        translate: 0 0;
-        opacity: 1;
-        transition-duration: calc(var(--duration) - 0.2s);
+        clip-path: inset(0);
       }
     }
 
-    /* eslint-disable-next-line css/use-baseline -- inside @supports (transition-behavior) */
-    @starting-style {
-      .site-nav[open] {
-        translate: 50% 0;
-        opacity: 0;
+    /* menu content drifts in from the right, at its own pace */
+    .site-nav__wrapper {
+      translate: 50% 0;
+      transition: translate 0.7s cubic-bezier(0.86, 0.01, 0.77, 0.78);
+    }
+
+    .site-nav[open] .site-nav__wrapper {
+      translate: 0 0;
+      transition: translate 0.5s cubic-bezier(0.82, 0.01, 0.77, 0.78);
+    }
+
+    /* button: rotate + fold into an arrow; the ring draws after a beat */
+    .nav-button--close {
+      transition:
+        rotate 0.5s,
+        background-color 0.5s;
+
+      & .nav-button__icon::before,
+      & .nav-button__icon::after {
+        transition:
+          transform 0.5s,
+          inline-size 0.5s;
+      }
+
+      & circle {
+        transition: stroke-dashoffset 0.4s;
       }
     }
+
+    .site-nav[open] .nav-button--close circle {
+      transition: stroke-dashoffset 0.4s 0.3s;
+    }
+
+    /* eslint-disable css/use-baseline -- all inside @supports (transition-behavior) */
+    @starting-style {
+      .site-nav[open] {
+        clip-path: inset(0 0 0 100%);
+      }
+
+      .site-nav[open] .site-nav__wrapper {
+        translate: 50% 0;
+      }
+
+      .site-nav[open] .nav-button--close {
+        rotate: 0deg;
+        background: transparent;
+
+        & .nav-button__icon::before,
+        & .nav-button__icon::after {
+          inline-size: 100%;
+        }
+
+        & .nav-button__icon::before {
+          transform: translateY(-6px);
+        }
+
+        & .nav-button__icon::after {
+          transform: translateY(6px);
+        }
+
+        & circle {
+          stroke-dashoffset: 157;
+        }
+      }
+    }
+    /* eslint-enable css/use-baseline */
   }
 }

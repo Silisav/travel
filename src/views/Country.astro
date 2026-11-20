@@ -1,0 +1,138 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Stripe from '../components/Stripe.astro';
+import Gallery, { type GalleryItem } from '../components/Gallery.astro';
+import LocalClock from '../components/LocalClock.astro';
+import Capital from '../icons/capital.svg';
+import Population from '../icons/population.svg';
+import Language from '../icons/language.svg';
+import Currency from '../icons/currency.svg';
+import Calendar from '../icons/calendar.svg';
+import Japan from '../icons/japan.svg';
+import Vietnam from '../icons/vietnam.svg';
+import Cambodia from '../icons/cambodia.svg';
+import Thailand from '../icons/thailand.svg';
+import Malaysia from '../icons/malaysia.svg';
+import Indonesia from '../icons/indonesia.svg';
+import { formatRange, isPrivatePath, type Country } from '../lib/site';
+import { getPrivatePhotos } from '../lib/private-media';
+import '../styles/country.css';
+
+interface Props {
+  country: Country;
+}
+const { country } = Astro.props;
+const { id, data } = country;
+
+const landmarks = {
+  japan: Japan,
+  vietnam: Vietnam,
+  cambodia: Cambodia,
+  thailand: Thailand,
+  malaysia: Malaysia,
+  indonesia: Indonesia,
+} as const;
+const Landmark = landmarks[id as keyof typeof landmarks];
+
+// Language of the native name, so screen readers and fonts treat it correctly.
+const nativeLang = {
+  japan: 'ja',
+  vietnam: 'vi',
+  cambodia: 'km',
+  thailand: 'th',
+  malaysia: 'ms',
+  indonesia: 'id',
+  greece: 'el',
+}[id];
+
+const publicItems: GalleryItem[] = data.photos.map((p) => ({
+  kind: 'public',
+  image: p.src,
+  alt: p.alt,
+  caption: p.caption,
+}));
+const privateItems: GalleryItem[] = isPrivatePath(Astro.url.pathname)
+  ? (await getPrivatePhotos(id)).map((p) => ({ kind: 'private', ...p }))
+  : [];
+// Personal photos first: they're the reason to be on the private side.
+const items = [...privateItems, ...publicItems];
+---
+
+<Base
+  title={data.name}
+  description={`Photos and notes from ${data.name}, ${formatRange(data.start, data.end)} 2016.`}
+>
+  <main>
+    <Hero image={data.banner} position={data.bannerPosition} class="country-hero">
+      {Landmark && <Landmark class="hero__icon" aria-hidden="true" />}
+      <h1>{data.name}</h1>
+      <h2 lang={nativeLang}>{data.nativeName}</h2>
+      <a href="#photos" class="btn">
+        View photos
+      </a>
+      <LocalClock slot="corner" timeZone={data.timeZone} label={data.name} />
+    </Hero>
+
+    <Stripe arrow>
+      <h2>Country info</h2>
+    </Stripe>
+
+    <section class="container country-info" aria-label={`About ${data.name}`}>
+      <Image
+        src={data.flag}
+        alt={`Flag of ${data.name}`}
+        widths={[360, 720]}
+        sizes="(width >= 768px) 30vw, 360px"
+      />
+      <dl>
+        <div>
+          <Capital aria-hidden="true" />
+          <dt>Capital:</dt>
+          <dd>{data.capital}</dd>
+        </div>
+        <div>
+          <Population aria-hidden="true" />
+          <dt>Population:</dt>
+          <dd>{data.population}</dd>
+        </div>
+        <div>
+          <Language aria-hidden="true" />
+          <dt>Language:</dt>
+          <dd>{data.language}</dd>
+        </div>
+        <div>
+          <Currency aria-hidden="true" />
+          <dt>Currency:</dt>
+          <dd>{data.currency}</dd>
+        </div>
+        <div>
+          <Calendar aria-hidden="true" />
+          <dt class="visually-hidden">We were there:</dt>
+          <dd>
+            <time datetime={data.start.toISOString().slice(0, 10)}>
+              {formatRange(data.start, data.end)}
+            </time>
+          </dd>
+        </div>
+      </dl>
+      <Image
+        src={data.map}
+        alt={`Map of ${data.name}`}
+        widths={[360, 720]}
+        sizes="(width >= 768px) 30vw, 360px"
+      />
+    </section>
+
+    <Stripe arrow>
+      <h2 id="photos">Photostream</h2>
+    </Stripe>
+
+    <section class="photos" aria-labelledby="photos">
+      <div class="container">
+        <Gallery items={items} label={`Photos from ${data.name}`} />
+      </div>
+    </section>
+  </main>
+</Base>

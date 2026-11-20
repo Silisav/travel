@@ -24,12 +24,21 @@ html {
 body {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.875rem;
+  line-height: 1.428571;
   color: var(--color-grey-text);
-  background: var(--color-grey-bg);
+  /*
+   * Behind the page is the menu's blue (as in 2016, the grey belongs to <main>):
+   * when the page slides away to open the menu, any frame where the two animations
+   * aren't perfectly in step shows blue, never a light gap.
+   */
+  background: var(--color-blue);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  background: var(--color-grey-bg);
 }
 
 img,
@@ -51,6 +60,16 @@ ul {
   list-style: none;
 }
 
+/* 2016 typography: headings tight, paragraphs with Bootstrap's bottom margin */
+:where(h1, h2, h3) {
+  margin: 20px 0 10px;
+  line-height: 1.1;
+}
+
+:where(p) {
+  margin: 0 0 10px;
+}
+
 @supports selector(::selection) {
   ::selection {
     color: var(--color-blue);
@@ -66,8 +85,21 @@ ul {
 /* Shared helpers */
 
 .container {
-  inline-size: min(100% - 2 * var(--gutter), var(--container));
+  inline-size: 100%;
   margin-inline: auto;
+  padding-inline: 15px;
+
+  @media (width >= 768px) {
+    max-inline-size: 750px;
+  }
+
+  @media (width >= 992px) {
+    max-inline-size: 970px;
+  }
+
+  @media (width >= 1200px) {
+    max-inline-size: 1170px;
+  }
 }
 
 .visually-hidden:not(:focus, :active) {

@@ -1,0 +1,15 @@
+---
+import Country from '../../views/Country.astro';
+import { getCountries } from '../../lib/site';
+
+export async function getStaticPaths() {
+  return (await getCountries()).map((country) => ({
+    params: { country: country.id },
+    props: { country },
+  }));
+}
+
+const { country } = Astro.props;
+---
+
+<Country country={country} />

@@ -166,7 +166,7 @@ Fixes:
 3. "Day 3875" becomes a fixed "130 days".
 4. Reword "Today it's … and we're back in Europe" (keep it as a nostalgic line, or drop it).
 5. Fix typos ("Curreny").
-6. Add prev/next country links.
+6. ~~Add prev/next country links~~: tried and removed. It isn't in the 2016 design and didn't look right. Revisit only with a proper design.
 7. Write real alt text per photo.
 8. Accessibility: real `<button>`s, contrast on the gold, `prefers-reduced-motion`.
 9. Per-page title/description/Open Graph image, `sitemap.xml`.
@@ -272,6 +272,7 @@ Playwright is the only real test dependency. It is dev-only and ships nothing to
 ## Findings from phase 2 (Nov 2026)
 
 - **`video.jpg` (the video poster) showed both faces.** It was in the public repo next to the video, and both now live in the private repo. The rest of the 102 photos, 25 banners, 7 maps and 7 flags were checked visually: no faces of the owners. Two photos show a stranger from behind at a distance (`thailand/13`, `indonesia/4`). The owner confirmed neither is them, so both stay public.
+- **Images not taken by the owners** (confirmed): the country hero banners, which also appear as the homepage timeline cards. Never use them where the owners' own photos are expected (videos, slideshows, the photo grid). The placeholder slideshow uses one of the owners' photos per country (`cover` in `countries.json`).
 - **Possible copyright issues to fix before relaunch:**
   - Several banners look like stock/wallpaper photos found online (for example the Thailand longtail boat, the Malaysia Petronas skyline and the Japan Fuji/pagoda shot).
   - The country maps and `gmap-southeast-asia` are Google Maps screenshots.
