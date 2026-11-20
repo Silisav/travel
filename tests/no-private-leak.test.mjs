@@ -41,23 +41,25 @@ test('public files never reference /private/', { skip: !existsSync(DIST) }, () =
 test(
   'public files never mention a private media file name',
   { skip: !existsSync(DIST) || !existsSync(PRIVATE_MANIFEST) ? 'no private manifest' : false },
-  () => {
-    /** @type {{ photos?: { id: string, src: string }[], video?: { src: string, poster?: string } }} */
-    const manifest = JSON.parse(readFileSync(PRIVATE_MANIFEST, 'utf8'));
-    const paths = [
-      ...(manifest.photos ?? []).map((photo) => photo.src),
-      manifest.video?.src,
-      manifest.video?.poster,
-    ].filter((path) => typeof path === 'string');
-    // Base names without extension: emitted assets get a hash and a new extension.
-    const names = paths
-      .map((path) =>
+  async () => {
+    // The same discovery the build uses: every file in photos/<country>/ plus the video.
+    const { readManifest, readPrivatePhotos } = await import('../integrations/private-images.mjs');
+    const photos = await readPrivatePhotos();
+    const { video } = readManifest();
+    const paths = [...photos.map((photo) => photo.src), video?.src, video?.poster].filter(
+      (path) => typeof path === 'string',
+    );
+    // Base names without extension (emitted assets get a hash and a new extension),
+    // plus the ids the resized variants are named after (e.g. japan-fushimi-jpg-480.avif).
+    const names = [
+      ...paths.map((path) =>
         path
           .split('/')
           .pop()
           ?.replace(/\.[^.]+$/, ''),
-      )
-      .filter((name) => typeof name === 'string' && name.length > 3);
+      ),
+      ...photos.map((photo) => photo.id),
+    ].filter((name) => typeof name === 'string' && name.length > 3);
 
     const inText = publicTextFiles().flatMap((rel) => {
       const text = readFileSync(join(DIST, rel), 'utf8');

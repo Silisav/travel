@@ -4,13 +4,13 @@
  * Files are served from /private/media/… (see integrations/private-media.mjs),
  * behind the /private/ access gate.
  */
-import { existsSync, readFileSync } from 'node:fs';
-import { getCollection } from 'astro:content';
 import {
   IMG_URL,
   THUMB_WIDTHS,
   fullSize,
   orientedSize,
+  readManifest,
+  readPrivatePhotos,
   variantFile,
 } from '../../integrations/private-images.mjs';
 import { hasPrivateMedia } from '../content.config';
@@ -41,51 +41,34 @@ const toUrl = (src: string) => `/private/media/${src}`;
 const imgUrl = (id: string, width: number | 'full', format: string) =>
   `${IMG_URL}${variantFile(id, width, format)}`;
 
-type PrivateEntry = {
-  id: string;
-  data: { src: string; alt: string; caption?: string; country: string };
-};
-
 export async function getPrivatePhotos(country: string): Promise<PrivatePhoto[]> {
-  if (!hasPrivateMedia || !readManifest().photos?.length) return [];
-  // The collection only exists when the submodule does, so it isn't in the static types.
-  const all = (await (getCollection as (name: string) => Promise<PrivateEntry[]>)(
-    'privatePhotos',
-  )) as PrivateEntry[];
+  if (!hasPrivateMedia) return [];
+  const entries = (await readPrivatePhotos()).filter((p) => p.country === country);
 
   return Promise.all(
-    all
-      .filter((entry) => entry.data.country === country)
-      .map(async ({ id, data }) => {
-        const size = await orientedSize(`${ROOT}/${data.src}`);
-        const widths = THUMB_WIDTHS.filter((w) => w <= size.width).concat(
-          size.width < THUMB_WIDTHS[0] ? [THUMB_WIDTHS[0]] : [],
-        );
-        const srcset = (format: string) =>
-          widths.map((w) => `${imgUrl(id, w, format)} ${Math.min(w, size.width)}w`).join(', ');
-        return {
-          id,
-          alt: data.alt,
-          caption: data.caption,
-          srcset: { avif: srcset('avif'), webp: srcset('webp') },
-          src: imgUrl(id, widths.at(-1) ?? THUMB_WIDTHS[0], 'webp'),
-          width: size.width,
-          height: size.height,
-          full: { url: imgUrl(id, 'full', 'webp'), ...fullSize(size) },
-        };
-      }),
+    entries.map(async ({ id, src, alt, caption }) => {
+      const size = await orientedSize(`${ROOT}/${src}`);
+      const widths = THUMB_WIDTHS.filter((w) => w <= size.width).concat(
+        size.width < THUMB_WIDTHS[0] ? [THUMB_WIDTHS[0]] : [],
+      );
+      const srcset = (format: string) =>
+        widths.map((w) => `${imgUrl(id, w, format)} ${Math.min(w, size.width)}w`).join(', ');
+      return {
+        id,
+        alt,
+        caption,
+        srcset: { avif: srcset('avif'), webp: srcset('webp') },
+        src: imgUrl(id, widths.at(-1) ?? THUMB_WIDTHS[0], 'webp'),
+        width: size.width,
+        height: size.height,
+        full: { url: imgUrl(id, 'full', 'webp'), ...fullSize(size) },
+      };
+    }),
   );
 }
 
-function readManifest(): {
-  photos?: unknown[];
-  video?: { src: string; poster?: string; alt: string };
-} {
-  const manifest = `${ROOT}/private.json`;
-  return existsSync(manifest) ? JSON.parse(readFileSync(manifest, 'utf8')) : {};
-}
-
 export function getPrivateVideo(): PrivateVideo | undefined {
+  if (!hasPrivateMedia) return undefined;
   const { video } = readManifest();
   if (!video) return undefined;
   return {

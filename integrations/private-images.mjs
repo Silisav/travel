@@ -7,25 +7,75 @@
  */
 import { existsSync, readFileSync } from 'node:fs';
 import sharp from 'sharp';
+import { checkOverrides, defaultAlt, listPhotoFiles, orderPhotos } from './photos.mjs';
 
 export const ROOT = 'media/private';
 export const IMG_URL = '/private/media/img/';
 export const THUMB_WIDTHS = [240, 360, 480, 720];
 export const FULL_MAX = 2400;
 export const FORMATS = /** @type {const} */ (['avif', 'webp']);
-const ID = /^[a-z0-9-]{1,64}$/;
+/** @typedef {{ id: string, src: string, alt: string, caption?: string, country: string }} PrivatePhotoEntry */
+/** @typedef {{ src: string, poster?: string, alt: string }} PrivateVideoEntry */
 
-/** @typedef {{ id: string, src: string, alt: string, caption?: string, country: string }} ManifestPhoto */
-
-/** @returns {{ photos: ManifestPhoto[], video?: { src: string, poster?: string, alt: string } }} */
+/**
+ * private.json: everything in it is optional.
+ * - photos: extras for photos in photos/<country>/, keyed by "<country>/<file>", e.g.
+ *   { "file": "japan/fushimi.jpg", "alt": "Us at Fushimi Inari", "caption": "…", "order": 1 }
+ * - video: the trip video on the private homepage
+ * @returns {{ photos: (import('./photos.mjs').PhotoOverride)[], video?: PrivateVideoEntry }}
+ */
 export function readManifest() {
   const file = `${ROOT}/private.json`;
   if (!existsSync(file)) return { photos: [] };
-  const manifest = JSON.parse(readFileSync(file, 'utf8'));
-  for (const photo of manifest.photos ?? []) {
-    if (!ID.test(photo.id)) throw new Error(`private.json: id "${photo.id}" must match ${ID}`);
+  return { photos: [], ...JSON.parse(readFileSync(file, 'utf8')) };
+}
+
+/** URL-safe, stable id from "<country>/<file>" (variant files are named after it). */
+const toId = (/** @type {string} */ country, /** @type {string} */ file) =>
+  `${country}-${file}`
+    .normalize('NFKD')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 80);
+
+/**
+ * Every personal photo: whatever is in photos/<country>/, ordered and described like the
+ * public ones (integrations/photos.mjs), with optional extras from private.json.
+ * @returns {Promise<PrivatePhotoEntry[]>}
+ */
+export async function readPrivatePhotos() {
+  if (!existsSync(ROOT)) return [];
+  const files = listPhotoFiles(`${ROOT}/photos`);
+  const overrides = new Map(readManifest().photos.map((o) => [o.file, o]));
+  checkOverrides(
+    'private.json',
+    overrides.keys(),
+    files.map((f) => ({ ...f, file: `${f.country}/${f.file}` })),
+  );
+
+  /** @type {PrivatePhotoEntry[]} */
+  const photos = [];
+  for (const country of new Set(files.map((f) => f.country))) {
+    const inCountry = files.filter((f) => f.country === country);
+    const local = new Map(
+      inCountry.flatMap((f) => {
+        const o = overrides.get(`${country}/${f.file}`);
+        return o ? [[f.file, o]] : [];
+      }),
+    );
+    for (const f of await orderPhotos(inCountry, local)) {
+      const o = local.get(f.file);
+      photos.push({
+        id: toId(country, f.file),
+        country,
+        src: `photos/${country}/${f.file}`,
+        alt: o?.alt ?? defaultAlt(country),
+        caption: o?.caption,
+      });
+    }
   }
-  return { photos: [], ...manifest };
+  return photos;
 }
 
 /** @param {string} id @param {number | 'full'} width @param {string} format */
@@ -62,7 +112,7 @@ export function renderVariant(src, width, format) {
 }
 
 /** Every file to publish for one photo: thumbnails in both formats + the full-size WebP. */
-export function variantsOf(/** @type {ManifestPhoto} */ photo) {
+export function variantsOf(/** @type {PrivatePhotoEntry} */ photo) {
   return [
     ...THUMB_WIDTHS.flatMap((width) =>
       FORMATS.map((format) => ({ file: variantFile(photo.id, width, format), width, format })),

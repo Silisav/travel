@@ -48,8 +48,23 @@ Use the Node version in `.nvmrc` (24 LTS).
 
 ## Adding content
 
-- **Public photo:** drop the original in `media/public/photos/<country>/`, then add `{ "src", "alt" }` to that country in `countries.json`. Landscapes only: no recognisable faces of the site owners.
-- **Personal photo:** add it in the private repo (see its README), never here.
+**Photos are just files.** Drop them into a country folder and they appear on that country's page. Nothing else is required:
+
+- **Public** (landscapes, no people): `media/public/photos/<country>/`
+- **Personal**: `photos/<country>/` in the private repo (`media/private/`)
+
+Country folders: `japan`, `vietnam`, `cambodia`, `thailand`, `malaysia`, `indonesia`, `greece`. File names don't matter.
+
+- **Formats:** JPEG, PNG, WebP, AVIF, TIFF or GIF. HEIC and RAW files stop the build with a message to export them as JPEG first. Around 2,400–3,000 px on the long side is plenty.
+- **Order:** by date taken (camera data), then by file name. Photos without a date come after dated ones.
+- **Description:** "Photo from <Country>" and no caption, until you add extras.
+- **Optional extras**, to describe or reorder a photo:
+  - Public, in `src/data/countries.json` under the country's `photos`: `{ "file": "IMG_1234.jpg", "alt": "…", "caption": "…", "order": 1 }`. `cover` (a file name) picks the photo used in the homepage slideshow.
+  - Personal, in the private repo's `private.json` under `photos`: `{ "file": "japan/IMG_1234.jpg", "alt": "…", "caption": "…", "order": 1 }`.
+  - Lower `order` comes first; everything without one follows by date. An extra naming a file that doesn't exist stops the build (typo guard).
+- **After adding personal photos:** push the private repo, then update the submodule pointer in this repo (`git add media/private` + commit + push), or Netlify keeps building the previous set.
+
+The logic lives in `integrations/photos.mjs` (shared), `src/lib/photos.ts` (public) and `integrations/private-images.mjs` (private).
 
 ## Conventions
 

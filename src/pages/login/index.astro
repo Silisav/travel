@@ -23,14 +23,31 @@ import '../../styles/login.css';
           <label for="password" class="visually-hidden">
             Password
           </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Password"
-            autocomplete="current-password"
-            required
-          />
+          <span class="login__field">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              autocomplete="current-password"
+              required
+            />
+            <!-- show/hide toggle; needs JS, so it stays hidden until the script runs -->
+            <button
+              type="button"
+              class="login__reveal"
+              aria-controls="password"
+              aria-pressed="false"
+              aria-label="Show password"
+              hidden
+            >
+              <svg class="login__eye" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+                <path class="login__eye-slash" d="M4 4l16 16"></path>
+              </svg>
+            </button>
+          </span>
           <button type="submit" class="btn">
             Enter
           </button>
@@ -56,4 +73,18 @@ import '../../styles/login.css';
   const next = params.get('next');
   const field = document.querySelector<HTMLInputElement>('input[name="next"]');
   if (next && field) field.value = next;
+
+  // Show/hide password: switch the field between password and text.
+  const password = document.querySelector<HTMLInputElement>('#password');
+  const reveal = document.querySelector<HTMLButtonElement>('.login__reveal');
+  if (password && reveal) {
+    reveal.hidden = false;
+    reveal.addEventListener('click', () => {
+      const show = password.type === 'password';
+      password.type = show ? 'text' : 'password';
+      reveal.setAttribute('aria-pressed', String(show));
+      reveal.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      password.focus();
+    });
+  }
 </script>

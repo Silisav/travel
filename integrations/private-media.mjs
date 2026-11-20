@@ -10,7 +10,7 @@ import { cp, mkdir, stat, writeFile } from 'node:fs/promises';
 import { createReadStream, existsSync } from 'node:fs';
 import { extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ROOT, readManifest, renderVariant, variantsOf } from './private-images.mjs';
+import { ROOT, readPrivatePhotos, renderVariant, variantsOf } from './private-images.mjs';
 
 const TYPES = {
   '.webp': 'image/webp',
@@ -35,7 +35,7 @@ export default function privateMedia() {
           try {
             if (rel.startsWith(`img${sep}`)) {
               const name = rel.slice(4);
-              for (const photo of readManifest().photos) {
+              for (const photo of await readPrivatePhotos()) {
                 const variant = variantsOf(photo).find((v) => v.file === name);
                 if (!variant) continue;
                 const body = await renderVariant(
@@ -69,7 +69,7 @@ export default function privateMedia() {
         }
         const out = join(fileURLToPath(dir), 'private', 'media');
 
-        const { photos } = readManifest();
+        const photos = await readPrivatePhotos();
         await mkdir(join(out, 'img'), { recursive: true });
         for (const photo of photos) {
           for (const variant of variantsOf(photo)) {

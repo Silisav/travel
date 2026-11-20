@@ -293,3 +293,5 @@ Playwright is the only real test dependency. It is dev-only and ships nothing to
   - The footer link was told apart by colour only (now a subtle underline).
   - The map list dates had low contrast.
   - Map pins were announced as "Marker".
+- **Photos are drop-in (owner's request):** any image in `<root>/<country>/` appears automatically. Order is optional `order`, then date taken, then file name. The default description is "Photo from <Country>". `countries.json` / `private.json` only hold optional extras (the 102 existing descriptions are kept that way). HEIC/RAW stop the build with an "export as JPEG" message.
+- **Login:** show/hide eye on the password field (owner's request).

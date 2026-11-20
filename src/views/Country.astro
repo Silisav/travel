@@ -18,6 +18,7 @@ import Malaysia from '../icons/malaysia.svg';
 import Indonesia from '../icons/indonesia.svg';
 import { formatRange, isPrivatePath, type Country } from '../lib/site';
 import { getPrivatePhotos } from '../lib/private-media';
+import { getPhotos } from '../lib/photos';
 import '../styles/country.css';
 
 interface Props {
@@ -47,9 +48,9 @@ const nativeLang = {
   greece: 'el',
 }[id];
 
-const publicItems: GalleryItem[] = data.photos.map((p) => ({
+const publicItems: GalleryItem[] = (await getPhotos(country)).map((p) => ({
   kind: 'public',
-  image: p.src,
+  image: p.image,
   alt: p.alt,
   caption: p.caption,
 }));

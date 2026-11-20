@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs';
-import { defineCollection, type SchemaContext } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { file } from 'astro/loaders';
 import { z } from 'astro/zod';
 
@@ -13,12 +13,18 @@ const timeZone = z.string().refine((tz) => {
   }
 }, 'Unknown IANA time zone');
 
-const photo = ({ image }: SchemaContext) =>
-  z.object({
-    src: image(),
-    alt: z.string().min(8, 'Write real alt text describing the photo'),
-    caption: z.string().optional(),
-  });
+/**
+ * Optional extras for a photo that's in the country's folder (see integrations/photos.mjs).
+ * Photos appear without any of this; list one here only to describe or reorder it.
+ */
+const photoOverride = z.object({
+  /** file name inside media/public/photos/<country>/ */
+  file: z.string(),
+  alt: z.string().min(1).optional(),
+  caption: z.string().optional(),
+  /** lower comes first; photos without one follow in date-taken order */
+  order: z.number().optional(),
+});
 
 const countries = defineCollection({
   loader: file('src/data/countries.json'),
@@ -42,46 +48,19 @@ const countries = defineCollection({
         cardPosition: z.string().default('50% 50%'),
         flag: ctx.image(),
         map: ctx.image(),
-        /** 1-based number of one of our own landscape photos, used where a single photo stands for the country */
-        cover: z.number().int().min(1).default(1),
-        photos: z.array(photo(ctx)).min(1),
+        /** file name of one of our own landscape photos standing for the country; default: the first */
+        cover: z.string().optional(),
+        photos: z.array(photoOverride).default([]),
       })
-      .refine((c) => c.end >= c.start, 'end must not be before start')
-      .refine((c) => c.cover <= c.photos.length, 'cover must point at an existing photo'),
+      .refine((c) => c.end >= c.start, 'end must not be before start'),
 });
 
 /**
- * Personal photos (faces) live only in the private submodule at media/private/.
- * Without it (forks, CI, public clones) this collection is simply absent and the
- * build produces the public site only: fail closed.
+ * Personal photos (faces) live only in the private submodule at media/private/; they're found
+ * by integrations/private-images.mjs, not through a content collection (whose image() would
+ * publish them in the public /_astro/ folder). Without the submodule (forks, CI, public clones)
+ * the build produces the public site only: fail closed.
  */
-const PRIVATE_MANIFEST = 'media/private/private.json';
-export const hasPrivateMedia = existsSync(PRIVATE_MANIFEST);
+export const hasPrivateMedia = existsSync('media/private/private.json');
 
-const privatePhotos = defineCollection({
-  loader: file(PRIVATE_MANIFEST, {
-    parser: (text) => (JSON.parse(text) as { photos: Record<string, unknown>[] }).photos,
-  }),
-  // NEVER use image() here: Astro emits every image() asset into the public /_astro/
-  // folder, outside the /private/ gate. Private photos are plain paths, resolved
-  // against media/private/ and processed into dist/private/ by our own image script.
-  schema: () =>
-    z.object({
-      src: z
-        .string()
-        .refine((p) => existsSync(`media/private/${p}`), 'File not found in media/private/'),
-      alt: z.string().min(8, 'Write real alt text describing the photo'),
-      caption: z.string().optional(),
-      country: z.enum([
-        'japan',
-        'vietnam',
-        'cambodia',
-        'thailand',
-        'malaysia',
-        'indonesia',
-        'greece',
-      ]),
-    }),
-});
-
-export const collections = hasPrivateMedia ? { countries, privatePhotos } : { countries };
+export const collections = { countries };
