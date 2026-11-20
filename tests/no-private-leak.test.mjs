@@ -41,21 +41,39 @@ test(
   'public files never mention a private media file name',
   { skip: !existsSync(DIST) || !existsSync(PRIVATE_MANIFEST) ? 'no private manifest' : false },
   () => {
-    /** @type {{ photos?: { file: string }[], video?: { file: string } }} */
+    /** @type {{ photos?: { src: string }[], video?: { src: string, poster?: string } }} */
     const manifest = JSON.parse(readFileSync(PRIVATE_MANIFEST, 'utf8'));
-    const names = [...(manifest.photos ?? []), ...(manifest.video ? [manifest.video] : [])]
-      .map((item) =>
-        item.file
+    const paths = [
+      ...(manifest.photos ?? []).map((photo) => photo.src),
+      manifest.video?.src,
+      manifest.video?.poster,
+    ].filter((path) => typeof path === 'string');
+    // Base names without extension: emitted assets get a hash and a new extension.
+    const names = paths
+      .map((path) =>
+        path
           .split('/')
           .pop()
           ?.replace(/\.[^.]+$/, ''),
       )
       .filter((name) => typeof name === 'string' && name.length > 3);
 
-    const offenders = publicTextFiles().flatMap((rel) => {
+    const inText = publicTextFiles().flatMap((rel) => {
       const text = readFileSync(join(DIST, rel), 'utf8');
       return names.filter((name) => text.includes(name)).map((name) => `${rel} → ${name}`);
     });
+    // Emitted assets keep their base name (e.g. _astro/IMG_1234.a1b2c3.webp), so also
+    // catch private images that slipped into the public asset pipeline.
+    const asFiles = [...walk(DIST)]
+      .map((path) => relative(DIST, path))
+      .filter((rel) => !rel.startsWith(`private${sep}`))
+      .flatMap((rel) => {
+        const base = rel.split(sep).pop() ?? '';
+        return names
+          .filter((name) => base.startsWith(`${name}.`))
+          .map((name) => `${rel} ← ${name}`);
+      });
+    const offenders = [...inText, ...asFiles];
     assert.deepEqual(
       offenders,
       [],

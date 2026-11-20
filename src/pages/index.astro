@@ -1,11 +1,30 @@
 ---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import { tripDays } from '../data/trip';
+
+const countries = (await getCollection('countries')).sort(
+  (a, b) => a.data.start.getTime() - b.data.start.getTime(),
+);
+const photoCount = countries.reduce((n, c) => n + c.data.photos.length, 0);
 ---
 
 <Base title="Around Asia">
   <main class="placeholder">
     <h1>Follow our journey</h1>
     <p>Around Asia: the site is being rebuilt.</p>
+    <p class="stats">
+      {tripDays} days · {countries.length} countries · {photoCount} photos
+    </p>
+    <ul>
+      {countries.map((c) => (
+        <li>
+          <Image src={c.data.card} alt="" width={240} />
+          <span>{c.data.name}</span>
+        </li>
+      ))}
+    </ul>
   </main>
 </Base>
 
@@ -13,7 +32,9 @@ import Base from '../layouts/Base.astro';
   .placeholder {
     display: grid;
     place-content: center;
+    gap: 1rem;
     min-block-size: 100dvh;
+    padding: 2rem;
     text-align: center;
     background: var(--color-blue);
     color: var(--color-white);
@@ -28,5 +49,19 @@ import Base from '../layouts/Base.astro';
     color: var(--color-yellow);
     text-transform: uppercase;
     letter-spacing: 0.15em;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: grid;
+    gap: 0.25rem;
   }
 </style>

@@ -268,3 +268,15 @@ Playwright is the only real test dependency. It is dev-only and ships nothing to
 ## Open questions
 
 - Purge `daily.mp4` from public git history (keeps all commits/dates, changes hashes)? Decide before or after launch.
+
+## Findings from phase 2 (Nov 2026)
+
+- **`video.jpg` (the video poster) showed both faces.** It was in the public repo next to the video, and both now live in the private repo. The rest of the 102 photos, 25 banners, 7 maps and 7 flags were checked visually: no faces of the owners. Two photos show a person from behind at a distance (`thailand/13` fishing, `indonesia/4` scarecrow figure). These need the owner's confirmation.
+- **Possible copyright issues to fix before relaunch:**
+  - Several banners look like stock/wallpaper photos found online (for example the Thailand longtail boat, the Malaysia Petronas skyline and the Japan Fuji/pagoda shot).
+  - The country maps and `gmap-southeast-asia` are Google Maps screenshots.
+  - Plan: replace banners with the owners' own photos, and replace the maps with OSM-based renders (attribution included).
+- **Photo originals are only 1200 px on the long side.** Pinch-zoom needs higher-resolution originals. If they still exist, re-export at about 2400–3000 px into `media/public/photos/`.
+- **Time zones fixed:** Vietnam, Cambodia and Thailand were all set to `Asia/Jakarta`. The offset was the same (UTC+7), but the zones were wrong. They're now `Asia/Ho_Chi_Minh`, `Asia/Phnom_Penh` and `Asia/Bangkok`.
+- **Astro's `image()` emits every referenced image into the public `/_astro/` folder.** So private photos use plain paths and our own pipeline. The leak test now also fails if a private file name shows up as a public asset.
+- **Private repo is live:** `Silisav/travel-private` (private, confirmed 404 for anonymous visitors), mounted at `media/private/`. `.gitmodules` uses `git@github.com:Silisav/…` so Netlify can fetch it with a deploy key (phase 9). Locally, this repo's git config maps that address to the `github-personal` SSH alias.

@@ -33,8 +33,17 @@ Use the Node version in `.nvmrc` (24 LTS).
 - `src/layouts/`, `src/components/`: Astro components
 - `src/styles/`: `tokens.css` (design tokens), `base.css`, component CSS
 - `public/`: copied as-is. Includes `_redirects` (old `*.html` → new URLs) and `robots.txt`.
+- `src/data/countries.json`: all country content and public photos, validated by the schema in `src/content.config.ts`
+- `src/data/trip.ts`: trip-wide facts (dates, home city)
+- `media/public/`: public originals (landscapes only), processed by `astro:assets`
+- `media/private/`: **git submodule** (private repo `travel-private`) with personal photos, the video and `private.json`. Private photos must **never** go through `image()`/`astro:assets`, because those emit to the public `/_astro/` folder. They are plain paths, processed into `dist/private/` by our own script.
 - `tests/`: `node:test` suites (no test framework)
 - `legacy/`: the original 2016 site, kept only as a reference while porting. Do not edit; it gets deleted at the end of the rebuild.
+
+## Adding content
+
+- **Public photo:** drop the original in `media/public/photos/<country>/`, then add `{ "src", "alt" }` to that country in `countries.json`. Landscapes only: no recognisable faces of the site owners.
+- **Personal photo:** add it in the private repo (see its README), never here.
 
 ## Conventions
 
